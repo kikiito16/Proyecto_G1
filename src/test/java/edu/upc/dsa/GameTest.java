@@ -38,7 +38,7 @@ public class GameTest {
         String psw = "kikito";
         gm.logIn(usuario,psw);
 
-        gm.signUp(2, "Enric", "kikito",3.0);
+        //gm.signUp(2, "Enric", "kikito",3.0);
 
     }
 

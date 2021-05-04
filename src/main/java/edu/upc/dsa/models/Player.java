@@ -4,42 +4,49 @@ package edu.upc.dsa.models;
 import java.util.List;
 
 public class Player {
-    private int id_player;
-    private String name_p;
-    private String psw;
+    private int idPlayer;
+    private String username;
+    private String password;
     private double money;
-    private List<Object> lista_objetos;
-    private List<Game> lista_games;
+    private List<Object> objectsList;
+    private List<Game> gamesList;
 
-    public Player(int id_p, String name_p, String psw, double money) {
-        this.setId_player(id_p);
-        this.setName_p(name_p);
-        this.setPsw(psw);
+    public Player(int idPlayer, String username, String password, double money) {
+        this.setIdPlayer(idPlayer);
+        this.setUsername(username);
+        this.setPassword(password);
         this.setMoney(money);
     }
 
-    public int getId_player() {
-        return id_player;
+    public Player(String username, String password, int idPlayer) {
+        this.setUsername(username);
+        this.setPassword(password);
+        this.idPlayer = idPlayer;
+
     }
 
-    public void setId_player(int id_player) {
-        this.id_player = id_player;
+    public int getIdPlayer() {
+        return idPlayer;
     }
 
-    public String getName_p() {
-        return name_p;
+    public void setIdPlayer(int idPlayer) {
+        this.idPlayer = idPlayer;
     }
 
-    public void setName_p(String name_p) {
-        this.name_p = name_p;
+    public String getUsername() {
+        return username;
     }
 
-    public String getPsw() {
-        return psw;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setPsw(String psw) {
-        this.psw = psw;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public double getMoney() {
@@ -50,23 +57,23 @@ public class Player {
         this.money = money;
     }
 
-    public List<Object> getLista_objetos() {
-        return lista_objetos;
+    public List<Object> getObjectsList() {
+        return objectsList;
     }
 
-    public void setLista_objetos(List<Object> lista_objetos) {
-        this.lista_objetos = lista_objetos;
+    public void setObjectsList(List<Object> objectsList) {
+        this.objectsList = objectsList;
     }
 
-    public List<Game> getLista_games() {
-        return lista_games;
+    public List<Game> getGamesList() {
+        return gamesList;
     }
 
-    public void setLista_games(List<Game> lista_games) {
-        this.lista_games = lista_games;
+    public void setGamesList(List<Game> gamesList) {
+        this.gamesList = gamesList;
     }
 
     public String toString() {
-        return id_player + ", " + name_p;
+        return idPlayer + ", " + username;
     }
 }

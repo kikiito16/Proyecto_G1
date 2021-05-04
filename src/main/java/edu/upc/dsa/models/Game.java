@@ -1,4 +1,5 @@
 package edu.upc.dsa.models;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
@@ -7,6 +8,14 @@ public class Game {
     private String victory;
     private double duration;
     private List<Map> mapsList;
+
+    public Game(int idGame, int idPlayer) {
+        this.idGame = idGame;
+        this.idPlayer = idPlayer;
+        this.victory = "false";
+        this.duration = 0;
+        this.mapsList = new LinkedList<>();
+    }
 
     public int getIdGame() {
         return idGame;

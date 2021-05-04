@@ -1,15 +1,18 @@
 package edu.upc.dsa.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Store {
-    private List<Object> lista_objetos;
+    private List<Object> objectsList;
 
-    public List<Object> getLista_objetos() {
-        return lista_objetos;
+    public Store() { this.objectsList = new LinkedList<>(); }
+
+    public List<Object> getObjectsList() {
+        return objectsList;
     }
 
-    public void setLista_objetos(List<Object> lista_objetos) {
-        this.lista_objetos = lista_objetos;
+    public void setObjectsList(List<Object> objectsList) {
+        this.objectsList = objectsList;
     }
 }

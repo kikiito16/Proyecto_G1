@@ -8,34 +8,32 @@ import edu.upc.dsa.models.Player;
 import java.util.List;
 
 public interface GameInterface {
-    public String logIn  (String usuario_log, String psw_log);
-    public Player signUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
-    public Player getUser (String name_player);
-   // public void deletePlayer (String name_del, String psw_del );
-    public Player changeName (String name_ch, String psw_ch);
-    public Player log_Out (String name_out);
+    public int logIn  (String username, String password);
+    public Player signUp (String username, String password);  //inicializar listas o pasarlas?
+    public Player getUser (String username);
+    //public Player changeName (String username, String password);
+    public int log_Out (String username);
 
-    public Object buyObject (String obj_buy);
-    public Object addObject (String obj_add);
-    public Object useObject (String obj_use);
+    public Object buyObject (String object);
+    public Object addObject (String object);
+    public Object useObject (String object);
     public List<Object> getAllObjects ();
     public List<Object> getUserObjects (String name);
 
-    public Game addGame (String player, Game partida);
-    public Game getGame (int id_game);
+    public Game addGame (String player, Game game);
+    public Game getGame (int idGame);
     public List<Game> getAllGames ();
     public List<Game> getGamesByUser (String user);
 
-    public Map getMap (int id_map);
+    public Map getMap (int idMap);
 
-    public List<String> addConnected (String usu_con);
-
+    public List<String> addConnected (String user);
 
     public void addPlayer(Player player);
 
     public void clear();
 
-    public void deletePlayer(Player player_del);
+    public int deletePlayer(Player player);
 
-    public Player setUser(String name_player);
+    public Player setUser(int idUser, String name, String password, int money);
 }

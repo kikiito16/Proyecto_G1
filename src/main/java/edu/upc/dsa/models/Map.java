@@ -1,15 +1,15 @@
 package edu.upc.dsa.models;
 
 public class Map {
-    private int id_mapa;
+    private int idMap;
     private double cells;   //double, string, int???
 
-    public int getId_mapa() {
-        return id_mapa;
+    public int getIdMap() {
+        return idMap;
     }
 
-    public void setId_mapa(int id_mapa) {
-        this.id_mapa = id_mapa;
+    public void setIdMap(int idMap) {
+        this.idMap = idMap;
     }
 
     public double getCells() {
