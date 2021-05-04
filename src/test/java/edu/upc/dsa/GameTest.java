@@ -33,6 +33,13 @@ public class GameTest {
 
     @Test
     public void test1() {
+        Player p3 = new Player(2, "Enric", "kikito",3.0);
+        String usuario= "Enric";
+        String psw = "kikito";
+        gm.LogIn(usuario,psw);
+
+        gm.SignUp(2, "Enric", "kikito",3.0);
+
 
     }
 }

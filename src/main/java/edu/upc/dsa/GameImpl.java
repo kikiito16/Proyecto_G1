@@ -20,6 +20,8 @@ public class GameImpl implements GameInterface{
 
 
     private GameImpl() {
+        this.lista_conectados= new LinkedList<>();
+        this.lista_jugadores= new LinkedList<>();
         this.lista_objetos=new LinkedList<>();
         this.lista_partidas= new LinkedList<>();
         this.lista_mapas=new LinkedList<>();
@@ -44,9 +46,7 @@ public class GameImpl implements GameInterface{
     public String LogIn(String usuario_log, String psw_log) {
         int error=0;
         String mensaje="Inicio de sesión correcto";
-        for (int i=0;i<lista_jugadores.size();i++)
-        {
-            for (int j=0;j<lista_jugadores.size();j++)
+        for (int j=0;j<lista_jugadores.size();j++)
             {
                 if (usuario_log.equals(lista_jugadores.get(j).getName_p()) && psw_log.equals(lista_jugadores.get(j).getPsw()) ) {
                     //this.lista_conectados.add(usuario_log);
@@ -54,7 +54,6 @@ public class GameImpl implements GameInterface{
                     error=1;
                 }
             }
-        }
         if (error==1)
             return mensaje;
         else
@@ -62,28 +61,26 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public String SignUp(int id_sign, String usuario_sign, String psw_sign, double money_sign) {
+    public Player SignUp(int id_sign, String usuario_sign, String psw_sign, double money_sign) {
         int error=0;
         String mensaje="Registro completado";
-        for (int i=0;i<lista_jugadores.size();i++)
-        {
             for (int j=0;j<lista_jugadores.size();j++)
             {
                 if (usuario_sign.equals(lista_jugadores.get(j).getName_p())) {
+                    logger.info("Este usuario ya existe.");
                     mensaje="Este usuario ya existe";
                     error=1;
                 }
             }
-        }
 
         if (error==1)
-            return mensaje;
+            return null;
         else {
             Player p= new Player(id_sign,usuario_sign,psw_sign,money_sign);
             newPlayer(p);
             addConectado(usuario_sign);
             logger.info("registro completado como:" + p);
-            return mensaje;
+            return p;
         }
 
     }
@@ -161,7 +158,7 @@ public class GameImpl implements GameInterface{
     @Override
     public List<String> addConectado(String usu_con) {
         this.lista_conectados.add(usu_con);
-        logger.info("Estos son los usuarios conectados: ");
+        logger.info("Estos son los usuarios conectados: " + this.lista_conectados);
         return this.lista_conectados;
     }
 

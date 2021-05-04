@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface GameInterface {
     public String LogIn  (String usuario_log, String psw_log);
-    public String SignUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
+    public Player SignUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
     public Player GetUser (String name_player);
     public Player DeletePlayer (String name_del, String psw_del );
     public Player ChangeName (String name_ch, String psw_ch);

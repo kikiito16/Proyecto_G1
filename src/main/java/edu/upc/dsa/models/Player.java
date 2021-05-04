@@ -65,4 +65,8 @@ public class Player {
     public void setLista_games(List<Game> lista_games) {
         this.lista_games = lista_games;
     }
+
+    public String toString() {
+        return id_player + ", " + name_p;
+    }
 }
