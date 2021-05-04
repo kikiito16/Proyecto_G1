@@ -11,7 +11,7 @@ public interface GameInterface {
     public String LogIn  (String usuario_log, String psw_log);
     public Player SignUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
     public Player GetUser (String name_player);
-    public Player DeletePlayer (String name_del, String psw_del );
+   // public void DeletePlayer (String name_del, String psw_del );
     public Player ChangeName (String name_ch, String psw_ch);
     public Player Log_Out (String name_out);
 
@@ -35,4 +35,5 @@ public interface GameInterface {
 
     public void clear();
 
+    public void DeletePlayer(Player player_del);
 }

@@ -40,6 +40,11 @@ public class GameTest {
 
         gm.SignUp(2, "Enric", "kikito",3.0);
 
+    }
 
+    @Test
+    public void test2() {
+        Player p4 = new Player(1, "Marc", "cucu",3.0);
+        gm.DeletePlayer(p4);
     }
 }

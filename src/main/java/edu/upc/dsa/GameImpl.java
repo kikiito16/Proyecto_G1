@@ -49,7 +49,7 @@ public class GameImpl implements GameInterface{
         for (int j=0;j<lista_jugadores.size();j++)
             {
                 if (usuario_log.equals(lista_jugadores.get(j).getName_p()) && psw_log.equals(lista_jugadores.get(j).getPsw()) ) {
-                    //this.lista_conectados.add(usuario_log);
+                    logger.info("Inicio de sesion correcto.");
                     addConectado(usuario_log);
                     error=1;
                 }
@@ -91,8 +91,27 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public Player DeletePlayer(String name_del, String psw_del) {
-        return null;
+    public void DeletePlayer(Player p_del) {
+        int error=0;
+        for (int j=0;j<lista_jugadores.size();j++)
+        {
+            if (p_del.getName_p().equals(lista_jugadores.get(j).getName_p())) {
+                logger.info("El usuario " + p_del.getName_p()+ " va a ser eliminado.");
+                this.lista_jugadores.remove(j);
+                this.lista_conectados.remove(j);
+                hmPlayers.remove(j);
+                logger.info("Esta es la lista jugadores ahora: " + this.lista_jugadores);
+                logger.info("Esta es la lista conectados ahora: " + this.lista_conectados);
+                logger.info("Este es el hash map ahora: " + this.hmPlayers);
+                error=1;
+            }
+        }
+        if (error==0)
+        {
+            logger.info("No se ha podido encontrar este usuario");
+        }
+        else
+            logger.info("El usuario " + p_del.getName_p() + " ha sido eliminado.");;
     }
 
     @Override
@@ -177,4 +196,6 @@ public class GameImpl implements GameInterface{
         lista_objetos.clear();
         lista_mapas.clear();
     }
+
+    //public void DeletePlayer()
 }
