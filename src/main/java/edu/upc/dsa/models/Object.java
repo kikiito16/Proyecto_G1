@@ -1,17 +1,17 @@
 package edu.upc.dsa.models;
 
 public class Object {
-    private int id_object;
+    private String id_object;
     private int id_owner;
     private int number;
     private double costBuy;
     private double costSell;
 
-    public int getId_object() {
+    public String getId_object() {
         return id_object;
     }
 
-    public void setId_object(int id_object) {
+    public void setId_object(String id_object) {
         this.id_object = id_object;
     }
 
