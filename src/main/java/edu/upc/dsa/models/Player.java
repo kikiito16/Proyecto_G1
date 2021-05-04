@@ -11,6 +11,13 @@ public class Player {
     private List<Object> lista_objetos;
     private List<Game> lista_games;
 
+    public Player(int id_p, String name_p, String psw, double money) {
+        this.setId_player(id_p);
+        this.setName_p(name_p);
+        this.setPsw(psw);
+        this.setMoney(money);
+    }
+
     public int getId_player() {
         return id_player;
     }

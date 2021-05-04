@@ -8,9 +8,8 @@ import edu.upc.dsa.models.Player;
 import java.util.List;
 
 public interface GameInterface {
-    public Player NewPlayer (int id_p, String name_p, String psw, double money);  //Es necesario pasar las listas vacias o se pueden inicializar solas vacias?
-    public Player LogIn  (String usuario_log, String psw_log);
-    public Player SignUp (String usuario_sign, String psw_sign);
+    public String LogIn  (String usuario_log, String psw_log);
+    public String SignUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
     public Player GetUser (String name_player);
     public Player DeletePlayer (String name_del, String psw_del );
     public Player ChangeName (String name_ch, String psw_ch);
@@ -28,4 +27,12 @@ public interface GameInterface {
     public List<Game> GetGamesByUser (String user);
 
     public Map GetMap (int id_map);
+
+    public List<String> addConectado (String usu_con);
+
+
+    public void addJugador(Player player);
+
+    public void clear();
+
 }
