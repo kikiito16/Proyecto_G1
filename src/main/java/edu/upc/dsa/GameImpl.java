@@ -43,14 +43,14 @@ public class GameImpl implements GameInterface{
 
 
     @Override
-    public String LogIn(String usuario_log, String psw_log) {
+    public String logIn(String usuario_log, String psw_log) {
         int error=0;
         String mensaje="Inicio de sesión correcto";
         for (int j=0;j<lista_jugadores.size();j++)
             {
                 if (usuario_log.equals(lista_jugadores.get(j).getName_p()) && psw_log.equals(lista_jugadores.get(j).getPsw()) ) {
                     logger.info("Inicio de sesion correcto.");
-                    addConectado(usuario_log);
+                    addConnected(usuario_log);
                     error=1;
                 }
             }
@@ -61,7 +61,7 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public Player SignUp(int id_sign, String usuario_sign, String psw_sign, double money_sign) {
+    public Player signUp(int id_sign, String usuario_sign, String psw_sign, double money_sign) {
         int error=0;
         String mensaje="Registro completado";
             for (int j=0;j<lista_jugadores.size();j++)
@@ -78,7 +78,7 @@ public class GameImpl implements GameInterface{
         else {
             Player p= new Player(id_sign,usuario_sign,psw_sign,money_sign);
             newPlayer(p);
-            addConectado(usuario_sign);
+            addConnected(usuario_sign);
             logger.info("registro completado como:" + p);
             return p;
         }
@@ -86,12 +86,17 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public Player GetUser(String name_player) {
+    public Player getUser(String name_player) {
         return null;
     }
 
     @Override
-    public void DeletePlayer(Player p_del) {
+    public Player setUser(String name_player) {
+        return null;
+    }
+
+    @Override
+    public void deletePlayer(Player p_del) {
         int error=0;
         for (int j=0;j<lista_jugadores.size();j++)
         {
@@ -115,70 +120,75 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public Player ChangeName(String name_ch, String psw_ch) {
+    public Player changeName(String name_ch, String psw_ch) {
         return null;
     }
 
     @Override
-    public Player Log_Out(String name_out) {
+    public Player log_Out(String name_out) {
         return null;
     }
 
     @Override
-    public Object BuyObject(String obj_buy) {
+    public Object buyObject(String obj_buy) {
         return null;
     }
 
     @Override
-    public Object AddObject(String obj_add) {
+    public Object addObject(String obj_add) {
         return null;
     }
 
     @Override
-    public Object UseObject(String obj_use) {
+    public Object useObject(String obj_use) {
         return null;
     }
 
     @Override
-    public List<Object> GetAllObjects() {
+    public List<Object> getAllObjects() {
         return null;
     }
 
     @Override
-    public List<Object> GetUserObjects(String name) {
+    public List<Object> getUserObjects(String name) {
         return null;
     }
 
     @Override
-    public Game AddGame(String player, Game partida) {
+    public Game addGame(String player, Game partida) {
         return null;
     }
 
     @Override
-    public Game GetGame(int id_game) {
+    public Game getGame(int id_game) {
         return null;
     }
 
     @Override
-    public List<Game> GetAllGames() {
+    public List<Game> getAllGames() {
         return null;
     }
 
     @Override
-    public List<Game> GetGamesByUser(String user) {
+    public List<Game> getGamesByUser(String user) {
         return null;
     }
 
     @Override
-    public Map GetMap(int id_map) {
+    public Map getMap(int id_map) {
         return null;
     }
 
     @Override
-    public List<String> addConectado(String usu_con) {
+    public List<String> addConnected(String usu_con) {
         this.lista_conectados.add(usu_con);
         logger.info("Estos son los usuarios conectados: " + this.lista_conectados);
         return this.lista_conectados;
+    }
+
+    @Override
+    public void addPlayer(Player player) {
+
     }
 
     public void addJugador(Player p)
@@ -197,5 +207,5 @@ public class GameImpl implements GameInterface{
         lista_mapas.clear();
     }
 
-    //public void DeletePlayer()
+    //public void deletePlayer()
 }

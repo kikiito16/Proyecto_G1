@@ -8,32 +8,34 @@ import edu.upc.dsa.models.Player;
 import java.util.List;
 
 public interface GameInterface {
-    public String LogIn  (String usuario_log, String psw_log);
-    public Player SignUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
-    public Player GetUser (String name_player);
-   // public void DeletePlayer (String name_del, String psw_del );
-    public Player ChangeName (String name_ch, String psw_ch);
-    public Player Log_Out (String name_out);
+    public String logIn  (String usuario_log, String psw_log);
+    public Player signUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
+    public Player getUser (String name_player);
+   // public void deletePlayer (String name_del, String psw_del );
+    public Player changeName (String name_ch, String psw_ch);
+    public Player log_Out (String name_out);
 
-    public Object BuyObject (String obj_buy);
-    public Object AddObject (String obj_add);
-    public Object UseObject (String obj_use);
-    public List<Object> GetAllObjects ();
-    public List<Object> GetUserObjects (String name);
+    public Object buyObject (String obj_buy);
+    public Object addObject (String obj_add);
+    public Object useObject (String obj_use);
+    public List<Object> getAllObjects ();
+    public List<Object> getUserObjects (String name);
 
-    public Game AddGame (String player, Game partida);
-    public Game GetGame (int id_game);
-    public List<Game> GetAllGames ();
-    public List<Game> GetGamesByUser (String user);
+    public Game addGame (String player, Game partida);
+    public Game getGame (int id_game);
+    public List<Game> getAllGames ();
+    public List<Game> getGamesByUser (String user);
 
-    public Map GetMap (int id_map);
+    public Map getMap (int id_map);
 
-    public List<String> addConectado (String usu_con);
+    public List<String> addConnected (String usu_con);
 
 
-    public void addJugador(Player player);
+    public void addPlayer(Player player);
 
     public void clear();
 
-    public void DeletePlayer(Player player_del);
+    public void deletePlayer(Player player_del);
+
+    public Player setUser(String name_player);
 }

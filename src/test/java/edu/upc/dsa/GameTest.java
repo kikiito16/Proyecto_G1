@@ -21,8 +21,8 @@ public class GameTest {
         Player p2 = new Player(1, "Marc", "cucu",3.0);
 
 
-        gm.addJugador(p1);
-        gm.addJugador(p2);
+        gm.addPlayer(p1);
+        gm.addPlayer(p2);
 
     }
 
@@ -36,15 +36,15 @@ public class GameTest {
         Player p3 = new Player(2, "Enric", "kikito",3.0);
         String usuario= "Enric";
         String psw = "kikito";
-        gm.LogIn(usuario,psw);
+        gm.logIn(usuario,psw);
 
-        gm.SignUp(2, "Enric", "kikito",3.0);
+        gm.signUp(2, "Enric", "kikito",3.0);
 
     }
 
     @Test
     public void test2() {
         Player p4 = new Player(1, "Marc", "cucu",3.0);
-        gm.DeletePlayer(p4);
+        gm.deletePlayer(p4);
     }
 }

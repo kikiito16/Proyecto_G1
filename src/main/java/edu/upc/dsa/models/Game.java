@@ -2,34 +2,34 @@ package edu.upc.dsa.models;
 import java.util.List;
 
 public class Game {
-    private int id_game;
-    private int id_player;
-    private String Victory;
+    private int idGame;
+    private int idPlayer;
+    private String victory;
     private double duration;
-    private List<Map> lista_mapas;
+    private List<Map> mapsList;
 
-    public int getId_game() {
-        return id_game;
+    public int getIdGame() {
+        return idGame;
     }
 
-    public void setId_game(int id_game) {
-        this.id_game = id_game;
+    public void setIdGame(int idGame) {
+        this.idGame = idGame;
     }
 
-    public int getId_player() {
-        return id_player;
+    public int getIdPlayer() {
+        return idPlayer;
     }
 
-    public void setId_player(int id_player) {
-        this.id_player = id_player;
+    public void setIdPlayer(int idPlayer) {
+        this.idPlayer = idPlayer;
     }
 
     public String getVictory() {
-        return Victory;
+        return victory;
     }
 
     public void setVictory(String victory) {
-        Victory = victory;
+        this.victory = victory;
     }
 
     public double getDuration() {
@@ -40,11 +40,11 @@ public class Game {
         this.duration = duration;
     }
 
-    public List<Map> getLista_mapas() {
-        return lista_mapas;
+    public List<Map> getMapsList() {
+        return mapsList;
     }
 
-    public void setLista_mapas(List<Map> lista_mapas) {
-        this.lista_mapas = lista_mapas;
+    public void setMapsList(List<Map> mapsList) {
+        this.mapsList = mapsList;
     }
 }
