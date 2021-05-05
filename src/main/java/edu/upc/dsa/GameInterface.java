@@ -30,12 +30,13 @@ public interface GameInterface {
     public Map getMap (int idMap);
 
     public List<String> addConnected (String user);
+    public void Disconnect(int pos);
 
     public void addPlayer(Player player);
 
     public void clear();
 
-    public int deletePlayer(Player player);
+    public int deletePlayer(String user, String psw);
     public Player setUser(int idUser, String name, String password, int money);
 
 }

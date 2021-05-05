@@ -11,17 +11,18 @@ public class Player {
     private List<Object> objectsList;
     private List<Game> gamesList;
 
-    public Player(int idPlayer, String username, String password, double money) {
+    /*public Player(int idPlayer, String username, String password, double money) {
         this.setIdPlayer(idPlayer);
         this.setUsername(username);
         this.setPassword(password);
         this.setMoney(money);
-    }
+    }*/
 
     public Player(String username, String password, int idPlayer) {
         this.setUsername(username);
         this.setPassword(password);
-        this.idPlayer = idPlayer;
+        this.setIdPlayer(idPlayer);
+        this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
 
     }
 

@@ -48,7 +48,7 @@ public class GameImpl implements GameInterface{
                 error = 0;
                 found = true;
             }
-            else if (username.equals(playersList.get(i).getUsername())) {
+            else if (username.equals(playersList.get(i).getUsername()) && password!=playersList.get(i).getPassword()) {
                 logger.info("Contraseña incorrecta.");
                 error = -1;
                 found = true;
@@ -69,15 +69,17 @@ public class GameImpl implements GameInterface{
         int i = 0;
         while (!found && i < playersList.size()) {
             if (username.equals(playersList.get(i).getUsername())) {
-                logger.info("Este usuario ya existe.");
                 error = -1;
                 found = true;
             }
             i++;
         }
 
-        if (error == -1)
+        if (error == -1) {
+            logger.info("Este usuario ya existe.");
             return null;
+        }
+
         else {
             int id = getIdPlayer();
             Player p= new Player(username,password, id);
@@ -125,27 +127,29 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public int deletePlayer(Player player) {
+    public int deletePlayer(String user, String psw) {
         int error = -1;
         boolean found = false;
         int i = 0;
+        int pos=0;
         while(!found && i< playersList.size()) {
-            if (player.getUsername().equals(playersList.get(i).getUsername())) {
+            if (user.equals(playersList.get(i).getUsername()) && psw.equals(playersList.get(i).getPassword())) {
                 error = 0;
                 found = true;
+                pos=i;
             }
             i++;
         }
         if (error == -1) logger.info("No se ha podido encontrar este usuario");
         else {
-            logger.info("El usuario " + player.getUsername()+ " va a ser eliminado.");
-            this.playersList.remove(i);
-            this.connectedList.remove(i);
-            hmPlayers.remove(i);
+            logger.info("El usuario " + user+ " va a ser eliminado.");
+            this.playersList.remove(pos);
+            //(this.connectedList.remove(pos);  //Crear busqueda de usuario en conectados
+            hmPlayers.remove(user);
             logger.info("Esta es la lista jugadores ahora: " + this.playersList);
-            logger.info("Esta es la lista conectados ahora: " + this.connectedList);
+            //logger.info("Esta es la lista conectados ahora: " + this.connectedList);
             logger.info("Este es el hash map ahora: " + this.hmPlayers);
-            logger.info("El usuario " + player.getUsername() + " ha sido eliminado.");
+            logger.info("El usuario " + user + " ha sido eliminado.");
         }
         return error;
     }
@@ -154,7 +158,24 @@ public class GameImpl implements GameInterface{
 
     @Override
     public int log_Out(String username) {
-        return 0;
+        int error = -1;
+        int i = 0;
+        boolean found = false;
+        if (connectedList.size()>0) {
+            while (!found && i < connectedList.size()) {
+                if (username.equals(connectedList.get(i))) {
+                    logger.info("Desconexión correcta");
+                    Disconnect(i);
+                    error = 0;
+                    found = true;
+                }
+                i++;
+            }
+        }
+        if (error==-1)
+            logger.info("No se ha podido desconectar al usuario.");
+
+        return error;
     }
 
     @Override
@@ -212,6 +233,11 @@ public class GameImpl implements GameInterface{
         this.connectedList.add(username);
         logger.info("Estos son los usuarios conectados: " + this.connectedList);
         return this.connectedList;
+    }
+    @Override
+    public void Disconnect (int pos) {
+        this.connectedList.remove(pos);
+
     }
 
     @Override
