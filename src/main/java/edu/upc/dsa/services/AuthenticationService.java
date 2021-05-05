@@ -2,6 +2,7 @@ package edu.upc.dsa.services;
 
 import edu.upc.dsa.GameImpl;
 import edu.upc.dsa.GameInterface;
+import edu.upc.dsa.models.Credentials;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -32,9 +33,9 @@ public class AuthenticationService {
     })
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response login(String username, String password) {
+    public Response login(Credentials cred) {
 
-        int res = gameInterface.logIn(username, password);
+        int res = gameInterface.logIn(cred.getUsername(), cred.getPsw());
 
         if(res == 0)
             return Response.status(200).build();
@@ -44,7 +45,7 @@ public class AuthenticationService {
         return Response.status(409).build();
     }
 
-    @POST
+    /*@POST
     @ApiOperation(value = "Sign up", notes = "asdasd")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful"),
@@ -58,6 +59,6 @@ public class AuthenticationService {
             return Response.status(200).build();
 
         return Response.status(404).build();
-    }
+    }*/
 
 }

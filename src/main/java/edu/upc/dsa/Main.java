@@ -41,7 +41,9 @@ public class Main {
         beanConfig.setTermsOfServiceUrl("http://www.example.com/resources/eula");
         beanConfig.setTitle("REST API");
         beanConfig.setVersion("1.0.0");
+        System.out.println(beanConfig);
         beanConfig.setScan(true);
+
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
