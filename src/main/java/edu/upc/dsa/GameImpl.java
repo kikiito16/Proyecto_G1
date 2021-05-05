@@ -43,7 +43,7 @@ public class GameImpl implements GameInterface{
 
 
     @Override
-    public String logIn(String usuario_log, String psw_log) {
+    public int logIn(String usuario_log, String psw_log) {
         int error=0;
         String mensaje="Inicio de sesión correcto";
         for (int j=0;j<lista_jugadores.size();j++)
@@ -55,13 +55,16 @@ public class GameImpl implements GameInterface{
                 }
             }
         if (error==1)
-            return mensaje;
-        else
-            return "Error al iniciar sesion";
+            return error;
+        else {
+            logger.info("Error al iniciar sesión");
+            return error;
+
+        }
     }
 
     @Override
-    public Player signUp(int id_sign, String usuario_sign, String psw_sign, double money_sign) {
+    public int signUp(int id_sign, String usuario_sign, String psw_sign, double money_sign) {
         int error=0;
         String mensaje="Registro completado";
             for (int j=0;j<lista_jugadores.size();j++)
@@ -74,20 +77,30 @@ public class GameImpl implements GameInterface{
             }
 
         if (error==1)
-            return null;
+            return error;
         else {
             Player p= new Player(id_sign,usuario_sign,psw_sign,money_sign);
             newPlayer(p);
             addConnected(usuario_sign);
-            logger.info("registro completado como:" + p);
-            return p;
+            logger.info("Registro completado como:" + p);
+            return error;
         }
 
     }
 
     @Override
     public Player getUser(String name_player) {
-        return null;
+        int posicion=0;
+        for (int j=0;j<lista_jugadores.size();j++)
+        {
+            if (name_player.equals(lista_jugadores.get(j).getName_p())) {
+                posicion=j;
+                logger.info("Usuario encontrado.");
+                //error=1;
+            }
+        }
+
+        return this.lista_jugadores.get(posicion);
     }
 
     @Override
@@ -96,7 +109,7 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public void deletePlayer(Player p_del) {
+    public int deletePlayer(Player p_del) {
         int error=0;
         for (int j=0;j<lista_jugadores.size();j++)
         {
@@ -116,7 +129,9 @@ public class GameImpl implements GameInterface{
             logger.info("No se ha podido encontrar este usuario");
         }
         else
-            logger.info("El usuario " + p_del.getName_p() + " ha sido eliminado.");;
+            logger.info("El usuario " + p_del.getName_p() + " ha sido eliminado.");
+
+        return error;
     }
 
     @Override

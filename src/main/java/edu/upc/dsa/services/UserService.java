@@ -53,9 +53,10 @@ public class UserService {
     @Path("/delete")
     public Response delete(String username, String password) {
 
-        int deleted = gameInterface.deletePlayer(username, password);
+        Player p= gameInterface.getUser(username);
+        int deleted = gameInterface.deletePlayer(p);
 
-        if(deleted == 0)
+        if(deleted == 1)
             return Response.status(200).build();
         else if(deleted == -1)
             return Response.status(409).build();

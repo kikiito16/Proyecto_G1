@@ -8,8 +8,8 @@ import edu.upc.dsa.models.Player;
 import java.util.List;
 
 public interface GameInterface {
-    public String logIn  (String usuario_log, String psw_log);
-    public Player signUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
+    public int logIn  (String usuario_log, String psw_log);
+    public int signUp (int id_sign, String usuario_sign, String psw_sign, double money_sign);  //inicializar listas o pasarlas?
     public Player getUser (String name_player);
    // public void deletePlayer (String name_del, String psw_del );
     public Player changeName (String name_ch, String psw_ch);
@@ -35,7 +35,8 @@ public interface GameInterface {
 
     public void clear();
 
-    public void deletePlayer(Player player_del);
+    public int deletePlayer(Player player_del);
 
     public Player setUser(String name_player);
+
 }

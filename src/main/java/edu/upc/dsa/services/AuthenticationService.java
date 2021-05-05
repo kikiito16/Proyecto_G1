@@ -33,7 +33,7 @@ public class AuthenticationService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(String username, String password) {
 
-        if(gameInterface.logIn(username, password) == 0)
+        if(gameInterface.logIn(username, password) == 1)
             return Response.status(200).build();
 
         return Response.status(404).build();
@@ -49,7 +49,7 @@ public class AuthenticationService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response signup(String username, String password) {
 
-        if(gameInterface.signUp(username, password) == 0)
+        if(gameInterface.signUp(username, password) == 0)  //Falta añadir id y dinero
             return Response.status(200).build();
 
         return Response.status(404).build();
