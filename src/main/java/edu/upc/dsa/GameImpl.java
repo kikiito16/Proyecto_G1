@@ -33,6 +33,9 @@ public class GameImpl implements GameInterface{
         return instance;
     }
 
+    //Devuelve  0  --> inicio correcto
+    //          -1 --> password incorrecto
+    //          -2 --> usuario no encontrado
     @Override
     public int logIn(String username, String password) {
         int error = -1;
@@ -88,16 +91,16 @@ public class GameImpl implements GameInterface{
     public int getIdPlayer() {
         int max = 0;
         for (Player player : playersList) { if (player.getIdPlayer() > max) max = player.getIdPlayer(); }
-        return max;
+        return max+1;
     }
 
     @Override
-    public Player getUser(String name_player) {
+    public Player getUser(String username) {
         Player p = null;
         int i = 0;
         boolean found = false;
         while(!found && i < playersList.size()){
-            if(name_player.equals(playersList.get(i).getUsername())) {
+            if(username.equals(playersList.get(i).getUsername())) {
                 found = true;
                 p = playersList.get(i);
                 i++;
@@ -122,12 +125,12 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public int deletePlayer(Player p_del) {
+    public int deletePlayer(Player player) {
         int error = -1;
         boolean found = false;
         int i = 0;
         while(!found && i< playersList.size()) {
-            if (p_del.getUsername().equals(playersList.get(i).getUsername())) {
+            if (player.getUsername().equals(playersList.get(i).getUsername())) {
                 error = 0;
                 found = true;
             }
@@ -135,22 +138,19 @@ public class GameImpl implements GameInterface{
         }
         if (error == -1) logger.info("No se ha podido encontrar este usuario");
         else {
-            logger.info("El usuario " + p_del.getUsername()+ " va a ser eliminado.");
+            logger.info("El usuario " + player.getUsername()+ " va a ser eliminado.");
             this.playersList.remove(i);
             this.connectedList.remove(i);
             hmPlayers.remove(i);
             logger.info("Esta es la lista jugadores ahora: " + this.playersList);
             logger.info("Esta es la lista conectados ahora: " + this.connectedList);
             logger.info("Este es el hash map ahora: " + this.hmPlayers);
-            logger.info("El usuario " + p_del.getUsername() + " ha sido eliminado.");
+            logger.info("El usuario " + player.getUsername() + " ha sido eliminado.");
         }
         return error;
     }
 
-    /*@Override
-    public Player changeName(String username, String password) {
-        return null;
-    }*/
+
 
     @Override
     public int log_Out(String username) {

@@ -8,6 +8,7 @@ import edu.upc.dsa.models.Player;
 import java.util.List;
 
 public interface GameInterface {
+
     public int logIn  (String username, String password);
     public Player signUp (String username, String password);  //inicializar listas o pasarlas?
     public Player getUser (String username);
@@ -17,6 +18,7 @@ public interface GameInterface {
     public Object buyObject (String object);
     public Object addObject (String object);
     public Object useObject (String object);
+
     public List<Object> getAllObjects ();
     public List<Object> getUserObjects (String name);
 
@@ -34,6 +36,6 @@ public interface GameInterface {
     public void clear();
 
     public int deletePlayer(Player player);
-
     public Player setUser(int idUser, String name, String password, int money);
+
 }
