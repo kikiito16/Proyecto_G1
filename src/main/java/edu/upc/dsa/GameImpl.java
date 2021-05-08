@@ -2,10 +2,9 @@ package edu.upc.dsa;
 
 import java.util.*;
 
-import edu.upc.dsa.models.Game;
+import edu.upc.dsa.models.*;
 import edu.upc.dsa.models.Map;
 import edu.upc.dsa.models.Object;
-import edu.upc.dsa.models.Player;
 import org.apache.log4j.Logger;
 
 public class GameImpl implements GameInterface{
@@ -63,7 +62,8 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public Player signUp(String username, String password) {
+    public int signUp(CompleteCredentials newUsr) {
+        String username= newUsr.getUsername();
         int error = 0;
         boolean found = false;
         int i = 0;
@@ -77,17 +77,16 @@ public class GameImpl implements GameInterface{
 
         if (error == -1) {
             logger.info("Este usuario ya existe.");
-            return null;
+            return -1;
         }
 
         else {
             int id = getIdPlayer();
-            Player p= new Player(username,password, id);
+            Player p= new Player(newUsr, id);
             playersList.add(p);
             addConnected(username);
             logger.info("registro completado como:" + p);
-            return p;
-        }
+            return 0;        }
     }
 
     public int getIdPlayer() {

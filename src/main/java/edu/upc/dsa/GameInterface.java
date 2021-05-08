@@ -1,16 +1,14 @@
 package edu.upc.dsa;
 
-import edu.upc.dsa.models.Game;
-import edu.upc.dsa.models.Map;
+import edu.upc.dsa.models.*;
 import edu.upc.dsa.models.Object;
-import edu.upc.dsa.models.Player;
 
 import java.util.List;
 
 public interface GameInterface {
 
     public int logIn  (String username, String password);
-    public Player signUp (String username, String password);  //inicializar listas o pasarlas?
+    public int signUp (CompleteCredentials newUsr);  //inicializar listas o pasarlas?
     public Player getUser (String username);
     //public Player changeName (String username, String password);
     public int log_Out (String username);
