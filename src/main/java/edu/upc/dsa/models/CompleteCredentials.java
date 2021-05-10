@@ -2,10 +2,9 @@ package edu.upc.dsa.models;
 
 public class CompleteCredentials {
     private String username;
-    private String psw;
-    private String dateBirth;
-    private String sexo;
-    private String mail;
+    private String password;
+    private String fullName;
+    private String email;
 
     public String getUsername() {
         return username;
@@ -15,35 +14,27 @@ public class CompleteCredentials {
         this.username = username;
     }
 
-    public String getPsw() {
-        return psw;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPsw(String psw) {
-        this.psw = psw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getDateBirth() {
-        return dateBirth;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setDateBirth(String dateBirth) {
-        this.dateBirth = dateBirth;
+    public void setFullName(String dateBirth) {
+        this.fullName = dateBirth;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

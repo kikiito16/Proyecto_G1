@@ -10,9 +10,8 @@ public class Player {
     private double money;
     private List<Object> objectsList;
     private List<Game> gamesList;
-    private String dateBirth;
-    private String sexo;
-    private String mail;
+    private String fullName;
+    private String email;
 
     /*public Player(int idPlayer, String username, String password, double money) {
         this.setIdPlayer(idPlayer);
@@ -31,10 +30,9 @@ public class Player {
 
     public Player(CompleteCredentials newUsr, int idPlayer) {
         this.setUsername(newUsr.getUsername());
-        this.setPassword(newUsr.getPsw());
-        this.setSexo(newUsr.getSexo());
-        this.setDateBirth(newUsr.getDateBirth());
-        this.setMail(newUsr.getMail());
+        this.setPassword(newUsr.getPassword());
+        this.setFullName(newUsr.getFullName());
+        this.setEmail(newUsr.getEmail());
         this.setIdPlayer(idPlayer);
         this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
 
@@ -92,27 +90,20 @@ public class Player {
         return idPlayer + ", " + username;
     }
 
-    public String getDateBirth() {
-        return dateBirth;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setDateBirth(String dateBirth) {
-        this.dateBirth = dateBirth;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getSexo() {
-        return sexo;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
