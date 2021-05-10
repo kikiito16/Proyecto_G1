@@ -198,9 +198,7 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public List<Object> getUserObjects(String name) {
-        return null;
-    }
+    public List<Object> getUserObjects(String name) { return null; }
 
     @Override
     public Game addGame(String player, Game partida) {

@@ -13,8 +13,12 @@ public class Player {
     private String dateBirth;
     private String sexo;
     private String mail;
+    private int hp;  //health points
+    private int op;  //ofensive points
+    private int dp;  //defensive points
 
-    /*public Player(int idPlayer, String username, String password, double money) {
+
+/*public Player(int idPlayer, String username, String password, double money) {
         this.setIdPlayer(idPlayer);
         this.setUsername(username);
         this.setPassword(password);
@@ -26,18 +30,9 @@ public class Player {
         this.setPassword(password);
         this.setIdPlayer(idPlayer);
         this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
-
-    }
-
-    public Player(CompleteCredentials newUsr, int idPlayer) {
-        this.setUsername(newUsr.getUsername());
-        this.setPassword(newUsr.getPsw());
-        this.setSexo(newUsr.getSexo());
-        this.setDateBirth(newUsr.getDateBirth());
-        this.setMail(newUsr.getMail());
-        this.setIdPlayer(idPlayer);
-        this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
-
+        this.setHp(100);
+        this.setOp(10);
+        this.setOp(10);
     }
 
     public int getIdPlayer() {
@@ -88,31 +83,16 @@ public class Player {
         this.gamesList = gamesList;
     }
 
+    public int getHp() { return hp; }
+    public void setHp(int hp) { this.hp = hp; }
+
+    public int getOp() { return op; }
+    public void setOp(int op) { this.op = op; }
+
+    public int getDp() { return dp; }
+    public void setDp(int dp) { this.dp = dp; }
+
     public String toString() {
         return idPlayer + ", " + username;
-    }
-
-    public String getDateBirth() {
-        return dateBirth;
-    }
-
-    public void setDateBirth(String dateBirth) {
-        this.dateBirth = dateBirth;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
     }
 }
