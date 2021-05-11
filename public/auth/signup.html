@@ -12,8 +12,10 @@
   <title>Form</title>
 
   <script>
+
     $(document).ready(function(){
-      $("form").on("submit", function(){
+      $("#btn").click(function(){
+        console.log("click");
         var type = $(this).attr("method");
         var url = "http://localhost:8080/dsaApp/auth/signup";
         var CompleteCredentials = {};
@@ -25,9 +27,14 @@
           console.log("Before: ");
           console.log(CompleteCredentials);
 
-        $.post(url, CompleteCredentials, function(data, status){
-          console.log("After: ");
-          console.log(CompleteCredentials);
+        $.ajax(url, {
+          data : JSON.stringify(CompleteCredentials),
+          contentType : 'application/json',
+          type : 'POST',
+          success: function()
+          {
+            console.log("FUNCIONA!!!");
+          }
         });
       });
     });
@@ -56,9 +63,14 @@
         <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
       </div>
 
-      <button type="submit" class="btn btn-default">Submit</button>
-
     </form>
+
+    <button id="btn" class="btn btn-default">Submit</button>
+
+  </div>
+  <br>
+  <div class="container">
+    <a href="login.html">Log In</a>
   </div>
 
 </body>

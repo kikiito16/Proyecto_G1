@@ -36,7 +36,7 @@ public class AuthenticationService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(Credentials cred) {
 
-        int res = gameInterface.logIn(cred.getUsername(), cred.getPsw());
+        int res = gameInterface.logIn(cred.getUsername(), cred.getPassword());
 
         if(res == 0)
             return Response.status(200).build();
@@ -63,20 +63,5 @@ public class AuthenticationService {
             return Response.status(404).build();
     }
 
-    /*@POST
-    @ApiOperation(value = "Sign up", notes = "asdasd")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful"),
-            @ApiResponse(code = 404, message = "Username already exists")
-    })
-    @Path("/signup")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response signup(String username, String password) {
-
-        if(gameInterface.signUp(username, password) != null)
-            return Response.status(200).build();
-
-        return Response.status(404).build();
-    }*/
 
 }
