@@ -91,7 +91,7 @@ public class GameImpl implements GameInterface{
 
     public int getIdPlayer() {
         int max = 0;
-        for (Player player : playersList) { if (player.getIdPlayer() > max) max = player.getIdPlayer(); }
+        for (Player player : playersList) { if (player.getUserId() > max) max = player.getUserId(); }
         return max+1;
     }
 
@@ -116,7 +116,7 @@ public class GameImpl implements GameInterface{
         int i = 0;
         boolean found = false;
         while (!found && i < playersList.size()) {
-            if(idUser == playersList.get(i).getIdPlayer()) {
+            if(idUser == playersList.get(i).getUserId()) {
                 found = true;
                 player = playersList.get(i);
             }

@@ -6,6 +6,14 @@ public class CompleteCredentials {
     private String fullName;
     private String email;
 
+    public CompleteCredentials(String username, String password, String fullName, String email)
+    {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+    }
+
     public String getUsername() {
         return username;
     }

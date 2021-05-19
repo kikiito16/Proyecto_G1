@@ -1,10 +1,11 @@
 package edu.upc.dsa.models;
 //import edu.upc.dsa.models.Object;
 
+import java.sql.DriverManager;
 import java.util.List;
 
 public class Player {
-    private int idPlayer;
+    private int userId;
     private String username;
     private String password;
     private double money;
@@ -20,30 +21,30 @@ public class Player {
         this.setMoney(money);
     }*/
 
-    public Player(String username, String password, int idPlayer) {
+    public Player(String username, String password, int userId) {
         this.setUsername(username);
         this.setPassword(password);
-        this.setIdPlayer(idPlayer);
+        this.setUserId(userId);
         this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
 
     }
 
-    public Player(CompleteCredentials newUsr, int idPlayer) {
+    public Player(CompleteCredentials newUsr, int userId) {
         this.setUsername(newUsr.getUsername());
         this.setPassword(newUsr.getPassword());
         this.setFullName(newUsr.getFullName());
         this.setEmail(newUsr.getEmail());
-        this.setIdPlayer(idPlayer);
+        this.setUserId(userId);
         this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
 
     }
 
-    public int getIdPlayer() {
-        return idPlayer;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setIdPlayer(int idPlayer) {
-        this.idPlayer = idPlayer;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -87,7 +88,7 @@ public class Player {
     }
 
     public String toString() {
-        return idPlayer + ", " + username;
+        return userId + ", " + username;
     }
 
     public String getFullName() {
