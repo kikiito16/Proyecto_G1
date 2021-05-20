@@ -25,6 +25,8 @@ public class GameImpl implements GameInterface{
         this.gamesList = new LinkedList<>();
         this.mapsList =new LinkedList<>();
         this.hmPlayers=new HashMap<>();
+
+        playersList.add(new Player("juan", "1234", 0));
     }
 
     public static GameInterface getInstance(){
@@ -153,10 +155,8 @@ public class GameImpl implements GameInterface{
         return error;
     }
 
-
-
     @Override
-    public int log_Out(String username) {
+    public int logOut(String username) {
         int error = -1;
         int i = 0;
         boolean found = false;
@@ -231,6 +231,7 @@ public class GameImpl implements GameInterface{
         logger.info("Estos son los usuarios conectados: " + this.connectedList);
         return this.connectedList;
     }
+
     @Override
     public void Disconnect (int pos) {
         this.connectedList.remove(pos);

@@ -63,5 +63,23 @@ public class AuthenticationService {
             return Response.status(404).build();
     }
 
+    @POST
+    @ApiOperation(value = "Log Out", notes = "asdasd")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful"),
+            @ApiResponse(code = 404, message = "User not found")
+
+    })
+    @Path("/logout")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response logOut(Credentials cred) {
+
+        int res = gameInterface.logOut(cred.getUsername());
+
+        if(res == 0)
+            return Response.status(200).build();
+        else
+            return Response.status(404).build();
+    }
 
 }

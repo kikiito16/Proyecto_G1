@@ -11,7 +11,7 @@ public interface GameInterface {
     public int signUp (CompleteCredentials newUsr);  //inicializar listas o pasarlas?
     public Player getUser (String username);
     //public Player changeName (String username, String password);
-    public int log_Out (String username);
+    public int logOut(String username);
 
     public Object buyObject (String object);
     public Object addObject (String object);
