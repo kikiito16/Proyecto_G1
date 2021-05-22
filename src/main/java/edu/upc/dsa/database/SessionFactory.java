@@ -19,7 +19,8 @@ public class SessionFactory {
 
         try
         {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "password");
+            //Class.forName("org.mariadb.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/test?user=root&password=021002");
         }
         catch(SQLException e)
         {
@@ -27,6 +28,10 @@ public class SessionFactory {
             System.out.println("SQLState: " + e.getSQLState());
             System.out.println("VendorError: " + e.getErrorCode());
         }
+        //catch (ClassNotFoundException e)
+        //{
+            //System.out.println(e.toString());
+        //}
 
         return conn;
     }
