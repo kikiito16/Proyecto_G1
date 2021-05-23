@@ -12,7 +12,7 @@ public class QueryHelperTest {
     {
         CompleteCredentials completeCredentials = new CompleteCredentials("arnauem", "psw",
                 "Arnau Esteban", "arnau@gmail.com");
-        Assert.assertEquals("INSERT INTO CompleteCredentials (id,username,password,fullName,email) VALUES (?,?,?,?,?);"
+        Assert.assertEquals("INSERT INTO CompleteCredentials (username,password,fullName,email) VALUES (?,?,?,?);"
                 , QueryHelper.createQueryINSERT(completeCredentials));
     }
 }

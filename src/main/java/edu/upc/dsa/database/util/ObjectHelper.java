@@ -23,10 +23,14 @@ public class ObjectHelper {
     public static Object getValue (Object object, String property) {
 
         try {
-            Object value = object.getClass().getDeclaredField(property);
+
+            Field field = object.getClass().getDeclaredField(property);
+            field.setAccessible(true);
+            Object value = field.get(object);
+
             return value;
         }
-        catch(NoSuchFieldException e)
+        catch(NoSuchFieldException | IllegalAccessException e)
         {
             System.out.println(e.getMessage());
             return null;

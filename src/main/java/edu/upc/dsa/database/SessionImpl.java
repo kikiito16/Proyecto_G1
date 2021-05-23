@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class SessionImpl implements Session{
 
-    Connection conn = null;
+    private final Connection conn;
 
     public SessionImpl(Connection conn)
     {
@@ -26,12 +26,15 @@ public class SessionImpl implements Session{
         try
         {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setObject(1, 0);
 
-            int i = 2;
+            int i = 1;
 
-            for(String f: ObjectHelper.getFields(entity))
-                preparedStatement.setObject(i++, ObjectHelper.getValue(entity, f));
+            String[] fields = ObjectHelper.getFields(entity);
+            for(String f: fields)
+            {
+                Object object = ObjectHelper.getValue(entity, f);
+                preparedStatement.setObject(i++, object);
+            }
 
             preparedStatement.executeQuery();
 
@@ -44,7 +47,8 @@ public class SessionImpl implements Session{
     }
 
     @Override
-    public void delete(Object entity) {
+    public void delete(Object object)
+    {
 
     }
 
@@ -55,6 +59,6 @@ public class SessionImpl implements Session{
 
     @Override
     public void close() {
-        conn = null;
+
     }
 }
