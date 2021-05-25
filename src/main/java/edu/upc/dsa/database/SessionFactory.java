@@ -20,7 +20,7 @@ public class SessionFactory {
         try
         {
             //Class.forName("org.mariadb.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/test", "root", "123");
+            conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UPCRush", "root", "123");
         }
         catch(SQLException e)
         {

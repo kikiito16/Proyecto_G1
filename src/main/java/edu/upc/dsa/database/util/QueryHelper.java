@@ -31,4 +31,12 @@ public class QueryHelper {
         return query;
     }
 
+    public static String createQuerySELECT(Class theClass, String field)
+    {
+        String query = "SELECT * from " + theClass.getSimpleName() + " WHERE " + field +
+                "=?;";
+
+        return query;
+    }
+
 }
