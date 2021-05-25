@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public interface Session {
 
-    void create(Object entity);
+    int create(Object entity);
     void delete(Object entity);
     void update(Object entity);
     void close();

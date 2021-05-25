@@ -1,7 +1,7 @@
 package edu.upc.dsa;
 
 import edu.upc.dsa.database.util.QueryHelper;
-import edu.upc.dsa.models.CompleteCredentials;
+import edu.upc.dsa.models.api.CompleteCredentials;
 import org.junit.Assert;
 import org.junit.Test;
 

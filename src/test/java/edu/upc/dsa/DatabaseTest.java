@@ -2,11 +2,10 @@ package edu.upc.dsa;
 
 import edu.upc.dsa.database.UserDAO;
 import edu.upc.dsa.database.UserDAOImpl;
-import edu.upc.dsa.models.CompleteCredentials;
+import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.api.CompleteCredentials;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.EmptyStackException;
 
 public class DatabaseTest {
 
@@ -15,12 +14,15 @@ public class DatabaseTest {
     {
         UserDAO dao = new UserDAOImpl();
 
-        int id = dao.addUser("martaculogordo", "princess", "Marta Fea", "marta@gmail.com");
+        int id = dao.addUser("hola", "contra", "Pepito Luis", "pepe@gmail.com");
 
-        CompleteCredentials cred = dao.getUser(id);
-        Assert.assertEquals("martaculogordo", cred.getUsername());
-        Assert.assertEquals("princess", cred.getPassword());
-        Assert.assertEquals("Marta Fea", cred.getFullName());
-        Assert.assertEquals("marta@gmail.com", cred.getEmail());
+        User user = dao.getUser(id);
+        Assert.assertEquals("hola", user.getUsername());
+        Assert.assertEquals("contra", user.getPassword());
+        Assert.assertEquals("Pepito Luis", user.getFullName());
+        Assert.assertEquals("pepe@gmail.com", user.getEmail());
+
+        int id2 = dao.addUser("hola", "contra2", "Pepito Luis", "pepe@gmail.com");
+        Assert.assertEquals(-1, id2);
     }
 }

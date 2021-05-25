@@ -1,12 +1,10 @@
 package edu.upc.dsa;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.List;
 
-import edu.upc.dsa.models.Player;
+import edu.upc.dsa.models.User;
 
 
 
@@ -17,8 +15,8 @@ public class GameTest {
     public void setUp() throws Exception {
         gm = GameImpl.getInstance();
 
-        Player p1 = new Player( "Enric", "kikito",0);
-        Player p2 = new Player( "Marc", "cucu",1);
+        User p1 = new User( "Enric", "kikito",0);
+        User p2 = new User( "Marc", "cucu",1);
 
 
         gm.addPlayer(p1);
@@ -33,7 +31,7 @@ public class GameTest {
 
     @Test
     public void test1() {
-        Player p3 = new Player( "Enric", "kikito",3);
+        User p3 = new User( "Enric", "kikito",3);
         String usuario= "Enric";
         String psw = "kikito";
         gm.logIn(usuario,psw);

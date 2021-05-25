@@ -2,20 +2,24 @@ package edu.upc.dsa;
 
 import java.util.*;
 
+import edu.upc.dsa.database.UserDAO;
+import edu.upc.dsa.database.UserDAOImpl;
 import edu.upc.dsa.models.*;
 import edu.upc.dsa.models.Map;
 import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.api.CompleteCredentials;
 import org.apache.log4j.Logger;
 
 public class GameImpl implements GameInterface{
     private static GameInterface instance;
     final static Logger logger = Logger.getLogger(GameImpl.class);
-    HashMap<String, Player> hmPlayers;
+    HashMap<String, User> hmPlayers;
     public List<Object> objectsList;
     public List<Game> gamesList;
     public List<Map> mapsList;
-    public List<Player> playersList;
+    public List<User> playersList;
     public List<String> connectedList;
+    private UserDAO dao;
 
 
     private GameImpl() {
@@ -25,6 +29,7 @@ public class GameImpl implements GameInterface{
         this.gamesList = new LinkedList<>();
         this.mapsList =new LinkedList<>();
         this.hmPlayers=new HashMap<>();
+        this.dao = new UserDAOImpl();
     }
 
     public static GameInterface getInstance(){
@@ -33,71 +38,35 @@ public class GameImpl implements GameInterface{
     }
 
     //Devuelve  0  --> inicio correcto
-    //          -1 --> password incorrecto
-    //          -2 --> usuario no encontrado
+    //          -1 --> datos no coinciden
+    //          -2 --> error base de datos
     @Override
     public int logIn(String username, String password) {
-        int error = -1;
-        int i = 0;
-        boolean found = false;
-        while (!found && i < playersList.size()) {
-            if (username.equals(playersList.get(i).getUsername()) && password.equals(playersList.get(i).getPassword())) {
-                logger.info("Inicio de sesion correcto.");
-                addConnected(username);
-                error = 0;
-                found = true;
-            }
-            else if (username.equals(playersList.get(i).getUsername()) && password!=playersList.get(i).getPassword()) {
-                logger.info("Contraseña incorrecta.");
-                error = -1;
-                found = true;
-            }
-            i++;
-        }
-        if(!found) {
-            logger.info("Usuario no encontrado.");
-            return -2;
-        }
-        else return error;
+
+        int res = dao.logIn(username, password);
+
+        return res;
     }
 
+    //-1 --> username already exists
+    //others --> user id
     @Override
-    public int signUp(CompleteCredentials newUsr) {
-        String username= newUsr.getUsername();
-        int error = 0;
-        boolean found = false;
-        int i = 0;
-        while (!found && i < playersList.size()) {
-            if (username.equals(playersList.get(i).getUsername())) {
-                error = -1;
-                found = true;
-            }
-            i++;
-        }
+    public int signUp(CompleteCredentials user) {
 
-        if (error == -1) {
-            logger.info("Este usuario ya existe.");
-            return -1;
-        }
+        int res = dao.addUser(user.getUsername(), user.getPassword(), user.getFullName(), user.getEmail());
 
-        else {
-            int id = getIdPlayer();
-            Player p= new Player(newUsr, id);
-            playersList.add(p);
-            addConnected(username);
-            logger.info("registro completado como:" + p);
-            return 0;        }
+        return res;
     }
 
-    public int getIdPlayer() {
+    /*public int getIdPlayer() {
         int max = 0;
-        for (Player player : playersList) { if (player.getUserId() > max) max = player.getUserId(); }
+        for (User user : playersList) { if (user.getId() > max) max = user.getId(); }
         return max+1;
-    }
+    }*/
 
     @Override
-    public Player getUser(String username) {
-        Player p = null;
+    public User getUser(String username) {
+        User p = null;
         int i = 0;
         boolean found = false;
         while(!found && i < playersList.size()){
@@ -108,21 +77,6 @@ public class GameImpl implements GameInterface{
             }
         }
         return p;
-    }
-
-    @Override
-    public Player setUser(int idUser, String username, String password, int money) {
-        Player player = null;
-        int i = 0;
-        boolean found = false;
-        while (!found && i < playersList.size()) {
-            if(idUser == playersList.get(i).getUserId()) {
-                found = true;
-                player = playersList.get(i);
-            }
-            i++;
-        }
-        return player;
     }
 
     @Override
@@ -153,6 +107,10 @@ public class GameImpl implements GameInterface{
         return error;
     }
 
+    @Override
+    public User setUser(int idUser, String name, String password, int money) {
+        return null;
+    }
 
 
     @Override
@@ -238,7 +196,7 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public void addPlayer(Player p)
+    public void addPlayer(User p)
     {
         hmPlayers.put(p.getUsername(),p);
         this.playersList.add(p);

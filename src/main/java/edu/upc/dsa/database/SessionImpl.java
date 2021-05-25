@@ -2,10 +2,7 @@ package edu.upc.dsa.database;
 
 import edu.upc.dsa.database.util.ObjectHelper;
 import edu.upc.dsa.database.util.QueryHelper;
-import edu.upc.dsa.models.Player;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.HashMap;
 
@@ -18,9 +15,10 @@ public class SessionImpl implements Session{
         this.conn = conn;
     }
 
-
+    //-1 --> username already exists
+    //0 inserted correctly
     @Override
-    public void create(Object entity) {
+    public int create(Object entity) {
         PreparedStatement preparedStatement = null;
 
         String query = QueryHelper.createQueryINSERT(entity);
@@ -34,17 +32,27 @@ public class SessionImpl implements Session{
             String[] fields = ObjectHelper.getFields(entity);
             for(String f: fields)
             {
-                java.lang.Object object = ObjectHelper.getValue(entity, f);
-                preparedStatement.setObject(i++, object);
+                if(f.equals("id"))
+                    preparedStatement.setNull(1, Types.NULL);
+                else {
+                    java.lang.Object object = ObjectHelper.getValue(entity, f);
+                    preparedStatement.setObject(i, object);
+                }
+                i++;
             }
 
             preparedStatement.executeQuery();
 
         }
+        catch (SQLIntegrityConstraintViolationException e)
+        {
+            return -1;
+        }
         catch(SQLException e)
         {
             e.printStackTrace();
         }
+        return 0;
     }
 
     @Override
