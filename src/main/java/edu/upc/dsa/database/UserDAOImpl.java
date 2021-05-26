@@ -46,12 +46,15 @@ public class UserDAOImpl implements UserDAO{
             session = SessionFactory.openSession();
 
             HashMap<String, Object> attributes = session.getBy(User.class, "id", userId);
-            user = new User(
-                    attributes.get("username").toString(),
-                    attributes.get("password").toString(),
-                    attributes.get("fullName").toString(),
-                    attributes.get("email").toString()
-            );
+
+            if(attributes != null)
+                user = new User(
+                        attributes.get("username").toString(),
+                        attributes.get("password").toString(),
+                        attributes.get("fullName").toString(),
+                        attributes.get("email").toString()
+                );
+            else return null;
 
         }
         catch(Exception e)
@@ -90,7 +93,7 @@ public class UserDAOImpl implements UserDAO{
         }
 
         if(attributes == null)
-            return -2;
+            return -1;
 
         if(attributes.get("username").equals(username)
                 && attributes.get("password").equals(password))

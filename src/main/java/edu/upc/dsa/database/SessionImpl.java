@@ -70,6 +70,8 @@ public class SessionImpl implements Session{
 
     }
 
+    //Returns hashmap<String attribute, object value>
+    //null if no results
     @Override
     public HashMap getBy(Class theClass, String attr, Object value) {
 
@@ -83,13 +85,16 @@ public class SessionImpl implements Session{
             preparedStatement.setObject(1, value);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.first();
 
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            if(resultSet.first()) {
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 
-            for(int i = 0; i < resultSetMetaData.getColumnCount(); i++) {
-                attributes.put(resultSetMetaData.getColumnName(i+1), resultSet.getObject(i+1));
+                for (int i = 0; i < resultSetMetaData.getColumnCount(); i++) {
+                    attributes.put(resultSetMetaData.getColumnName(i + 1), resultSet.getObject(i + 1));
+                }
             }
+            else
+                return null;
 
         } catch (SQLException e) {
             e.printStackTrace();

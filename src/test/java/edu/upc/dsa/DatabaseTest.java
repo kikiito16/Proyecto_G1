@@ -17,12 +17,17 @@ public class DatabaseTest {
         int id = dao.addUser("hola", "contra", "Pepito Luis", "pepe@gmail.com");
 
         User user = dao.getUser(id);
-        Assert.assertEquals("hola", user.getUsername());
-        Assert.assertEquals("contra", user.getPassword());
-        Assert.assertEquals("Pepito Luis", user.getFullName());
-        Assert.assertEquals("pepe@gmail.com", user.getEmail());
+        if(user != null) {
+            Assert.assertEquals("hola", user.getUsername());
+            Assert.assertEquals("contra", user.getPassword());
+            Assert.assertEquals("Pepito Luis", user.getFullName());
+            Assert.assertEquals("pepe@gmail.com", user.getEmail());
+        }
 
         int id2 = dao.addUser("hola", "contra2", "Pepito Luis", "pepe@gmail.com");
         Assert.assertEquals(-1, id2);
+
+        int log1 = dao.logIn("noexiste", "holahola");
+        Assert.assertEquals(-1, log1);
     }
 }
