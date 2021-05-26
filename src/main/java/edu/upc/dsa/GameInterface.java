@@ -2,6 +2,7 @@ package edu.upc.dsa;
 
 import edu.upc.dsa.models.*;
 import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.api.CompleteCredentials;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface GameInterface {
 
     public int logIn  (String username, String password);
     public int signUp (CompleteCredentials newUsr);  //inicializar listas o pasarlas?
-    public Player getUser (String username);
+    public User getUser (String username);
     //public Player changeName (String username, String password);
     public int logOut(String username);
 
@@ -30,11 +31,11 @@ public interface GameInterface {
     public List<String> addConnected (String user);
     public void Disconnect(int pos);
 
-    public void addPlayer(Player player);
+    public void addPlayer(User user);
 
     public void clear();
 
     public int deletePlayer(String user, String psw);
-    public Player setUser(int idUser, String name, String password, int money);
+    public User setUser(int idUser, String name, String password, int money);
 
 }

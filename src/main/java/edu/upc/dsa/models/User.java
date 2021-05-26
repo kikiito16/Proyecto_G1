@@ -1,17 +1,18 @@
 package edu.upc.dsa.models;
 //import edu.upc.dsa.models.Object;
 
-import java.util.List;
+import edu.upc.dsa.models.api.CompleteCredentials;
 
-public class Player {
-    private int idPlayer;
+public class User {
+    //private int id;
+    private int id;
     private String username;
     private String password;
-    private double money;
-    private List<Object> objectsList;
-    private List<Game> gamesList;
     private String fullName;
     private String email;
+    private int money;
+    //private List<Object> objectsList;
+    //private List<Game> gamesList;
 
     /*public Player(int idPlayer, String username, String password, double money) {
         this.setIdPlayer(idPlayer);
@@ -20,31 +21,40 @@ public class Player {
         this.setMoney(money);
     }*/
 
-    public Player(String username, String password, int idPlayer) {
+    public User(String username, String password, int id) {
         this.setUsername(username);
         this.setPassword(password);
-        this.setIdPlayer(idPlayer);
-        this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
+        //this.setId(id);
+        this.setMoney(50); //Valor inicial para cada jugador nuevo.
 
     }
 
-    public Player(CompleteCredentials newUsr, int idPlayer) {
+    public User(CompleteCredentials newUsr, int id) {
         this.setUsername(newUsr.getUsername());
         this.setPassword(newUsr.getPassword());
         this.setFullName(newUsr.getFullName());
         this.setEmail(newUsr.getEmail());
-        this.setIdPlayer(idPlayer);
-        this.setMoney(50.0); //Valor inicial para cada jugador nuevo.
-
+        //this.setId(id);
+        this.setMoney(50); //Valor inicial para cada jugador nuevo.
     }
 
-    public int getIdPlayer() {
-        return idPlayer;
+    public User(String username, String password, String fullName, String email)
+    {
+        this.id = 0;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+        this.money = 50;
     }
 
-    public void setIdPlayer(int idPlayer) {
-        this.idPlayer = idPlayer;
+    /*public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }*/
 
     public String getUsername() {
         return username;
@@ -66,11 +76,11 @@ public class Player {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
-    public List<Object> getObjectsList() {
+    /*public List<Object> getObjectsList() {
         return objectsList;
     }
 
@@ -84,11 +94,11 @@ public class Player {
 
     public void setGamesList(List<Game> gamesList) {
         this.gamesList = gamesList;
-    }
+    }*/
 
-    public String toString() {
-        return idPlayer + ", " + username;
-    }
+    /*public String toString() {
+        return id + ", " + username;
+    }*/
 
     public String getFullName() {
         return fullName;
