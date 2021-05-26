@@ -14,6 +14,8 @@ public class CompleteCredentials {
         this.email = email;
     }
 
+    public CompleteCredentials(){}
+
     public String getUsername() {
         return username;
     }
