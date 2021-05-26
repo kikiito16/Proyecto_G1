@@ -44,6 +44,7 @@ public class GameImpl implements GameInterface{
     public int logIn(String username, String password) {
 
         int res = dao.logIn(username, password);
+        if(res == 0) addConnected(username);
 
         return res;
     }
@@ -54,6 +55,7 @@ public class GameImpl implements GameInterface{
     public int signUp(CompleteCredentials user) {
 
         int res = dao.addUser(user.getUsername(), user.getPassword(), user.getFullName(), user.getEmail());
+        if(res != -1) addConnected(user.getUsername());
 
         return res;
     }
@@ -120,7 +122,7 @@ public class GameImpl implements GameInterface{
         if (connectedList.size()>0) {
             while (!found && i < connectedList.size()) {
                 if (username.equals(connectedList.get(i))) {
-                    logger.info("Desconexión correcta");
+                    logger.info("Desconexión correcta de " + username);
                     Disconnect(i);
                     error = 0;
                     found = true;
@@ -129,7 +131,7 @@ public class GameImpl implements GameInterface{
             }
         }
         if (error==-1)
-            logger.info("No se ha podido desconectar al usuario.");
+            logger.info("No se ha podido desconectar al usuario " + username);
 
         return error;
     }
