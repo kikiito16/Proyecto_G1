@@ -69,6 +69,32 @@ public class UserDAOImpl implements UserDAO{
 
     }
 
+	@Override
+    public User getUser(String username) {
+        User user = null;
+        try {
+            session = SessionFactory.openSession();
+
+            HashMap<String, Object> attributes = session.getBy(User.class, "username", username);
+            user = new User(
+                    attributes.get("username").toString(),
+                    attributes.get("password").toString(),
+                    attributes.get("fullName").toString(),
+                    attributes.get("email").toString(),
+                    (Integer) attributes.get("money")
+            );
+
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            session.close();
+        }
+
+        return user;
+    }
+
     //-2 --> error database
     //-1 --> login failed
     //0 --> correct login
