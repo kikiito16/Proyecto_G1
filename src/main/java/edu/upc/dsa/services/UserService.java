@@ -1,5 +1,6 @@
 package edu.upc.dsa.services;
 
+import com.google.gson.Gson;
 import edu.upc.dsa.GameImpl;
 import edu.upc.dsa.GameInterface;
 import edu.upc.dsa.models.User;
@@ -40,6 +41,7 @@ public class UserService {
         User t = this.gameInterface.getUser(username);
         if (t == null) return Response.status(404).build();
         else  return Response.status(201).entity(t).build();
+        //new Gson().toJson(t)
     }
 
     /*@POST
