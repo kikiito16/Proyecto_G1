@@ -19,6 +19,8 @@ public class User {
         this.setPassword(password);
         this.setMoney(money);
     }*/
+	
+	public User(){}
 
     public User(String username, String password, int id) {
         this.setUsername(username);
@@ -45,6 +47,16 @@ public class User {
         this.fullName = fullName;
         this.email = email;
         this.money = 50;
+    }
+
+
+    public User(String username, String password, String fullName, String email, int money)
+    {
+        this.id = 0;
+        this.username = username;
+        this.fullName = fullName;
+        this.email = email;
+        this.money = money;
     }
 
     public int getId() {

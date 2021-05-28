@@ -68,17 +68,7 @@ public class GameImpl implements GameInterface{
 
     @Override
     public User getUser(String username) {
-        User p = null;
-        int i = 0;
-        boolean found = false;
-        while(!found && i < playersList.size()){
-            if(username.equals(playersList.get(i).getUsername())) {
-                found = true;
-                p = playersList.get(i);
-                i++;
-            }
-        }
-        return p;
+        return dao.getUser(username);
     }
 
     @Override

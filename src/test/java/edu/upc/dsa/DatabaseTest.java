@@ -54,9 +54,9 @@ public class DatabaseTest {
     public void updateUserAttributeTest()
     {
         UserDAO dao = new UserDAOImpl();
-        dao.updateUserAttribute(36, "fullName", "Marta Jamon");
+        dao.updateUserAttribute(36, "fullName", "Marta Juan");
 
         User user = dao.getUser(36);
-        Assert.assertEquals("Marta Jamon", user.getFullName());
+        Assert.assertEquals("Marta Juan", user.getFullName());
     }
 }
