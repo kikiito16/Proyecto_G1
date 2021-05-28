@@ -47,13 +47,16 @@ public class UserDAOImpl implements UserDAO{
 
             HashMap<String, Object> attributes = session.getBy(User.class, "id", userId);
 
-            if(attributes != null)
+            if(attributes != null) {
                 user = new User(
                         attributes.get("username").toString(),
                         attributes.get("password").toString(),
                         attributes.get("fullName").toString(),
                         attributes.get("email").toString()
                 );
+                user.setId((int)attributes.get("id"));
+                user.setMoney((int)attributes.get("money"));
+            }
             else return null;
 
         }
@@ -100,5 +103,54 @@ public class UserDAOImpl implements UserDAO{
             return 0;
 
         return -1;
+    }
+
+    //0 successful
+    //-1 error
+    @Override
+    public int updateUser(int id, String username, String password, String fullName,
+                          String email, int money) {
+        int res = -1;
+        try
+        {
+            session = SessionFactory.openSession();
+
+            User user = new User(username, password, fullName, email);
+            user.setId(id);
+            user.setMoney(money);
+
+            res = session.update(user);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        finally {
+            session.close();
+        }
+
+        return res;
+    }
+
+    //-2 --> error with the db
+    //-1 --> incorrect query
+    //0 successful
+    @Override
+    public int updateUserAttribute(int id, String attribute, Object value) {
+
+        int res = -2;
+        try
+        {
+            session = SessionFactory.openSession();
+
+            res = session.update(User.class, id, attribute, value);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -2;
+        }
+
+        return res;
     }
 }

@@ -136,6 +136,23 @@ public class GameImpl implements GameInterface{
         return error;
     }
 
+    // 0 sucessful
+    // -1 error
+    @Override
+    public int updateUser(int id, String username, String password, String fullName, String email, int money) {
+        int res = dao.updateUser(id, username, password, fullName, email, money);
+        return res;
+    }
+
+    //-2 --> error with the db
+    //-1 --> incorrect query
+    //0 successful
+    @Override
+    public int updateUserAttribute(int id, String attribute, java.lang.Object value) {
+        int res = dao.updateUserAttribute(id, attribute, value);
+        return res;
+    }
+
     @Override
     public Object buyObject(String object) {
         return null;

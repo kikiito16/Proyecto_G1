@@ -30,4 +30,33 @@ public class DatabaseTest {
         int log1 = dao.logIn("noexiste", "holahola");
         Assert.assertEquals(-1, log1);
     }
+
+    @Test
+    public void updateUserTest()
+    {
+        User user = new User("martapm", "contra_marta", "Marta Pardo", "marta@gmail.com");
+        user.setId(36);
+        user.setMoney(125);
+
+        UserDAO dao = new UserDAOImpl();
+        int res = dao.updateUser(36, "martapm", "contra_marta", "Marta Pardo", "marta@gmail.com", 125);
+        User user1 = dao.getUser(36);
+
+        Assert.assertEquals(36, user1.getId());
+        Assert.assertEquals("martapm", user1.getUsername());
+        Assert.assertEquals("contra_marta", user1.getPassword());
+        Assert.assertEquals("Marta Pardo", user1.getFullName());
+        Assert.assertEquals("marta@gmail.com", user1.getEmail());
+        Assert.assertEquals(125, user1.getMoney());
+    }
+
+    @Test
+    public void updateUserAttributeTest()
+    {
+        UserDAO dao = new UserDAOImpl();
+        dao.updateUserAttribute(36, "fullName", "Marta Jamon");
+
+        User user = dao.getUser(36);
+        Assert.assertEquals("Marta Jamon", user.getFullName());
+    }
 }

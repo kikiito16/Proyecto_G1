@@ -4,7 +4,6 @@ package edu.upc.dsa.models;
 import edu.upc.dsa.models.api.CompleteCredentials;
 
 public class User {
-    //private int id;
     private int id;
     private String username;
     private String password;
@@ -40,7 +39,7 @@ public class User {
 
     public User(String username, String password, String fullName, String email)
     {
-        this.id = 0;
+        this.id = -1;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -48,13 +47,13 @@ public class User {
         this.money = 50;
     }
 
-    /*public int getId() {
+    public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }*/
+    }
 
     public String getUsername() {
         return username;
@@ -72,7 +71,7 @@ public class User {
         this.password = password;
     }
 
-    public double getMoney() {
+    public int getMoney() {
         return money;
     }
 

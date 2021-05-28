@@ -39,4 +39,31 @@ public class QueryHelper {
         return query;
     }
 
+    public static String createQueryUPDATE(Object object)
+    {
+        String query = "UPDATE " + object.getClass().getSimpleName() + " SET ";
+        String[] fields = ObjectHelper.getFields(object);
+
+        for(String f : fields)
+        {
+            if(!f.equals("id"))
+            query = query + f + "=?, ";
+        }
+
+        //erase the last ,
+        query = query.substring(0,query.length()-2);
+
+        query = query + " WHERE id=?;";
+
+        return query;
+    }
+
+    public static String createQueryUPDATEAttribute(Class theClass, String attribute)
+    {
+        String query = "UPDATE " + theClass.getSimpleName() + " SET ";
+        query = query + attribute + "=? WHERE id=?;";
+
+        return query;
+    }
+
 }

@@ -2,6 +2,7 @@ package edu.upc.dsa.database;
 
 import edu.upc.dsa.database.util.ObjectHelper;
 import edu.upc.dsa.database.util.QueryHelper;
+import edu.upc.dsa.models.User;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -58,11 +59,74 @@ public class SessionImpl implements Session{
     @Override
     public void delete(Object entity) {
 
+
     }
 
+    //0 --> successful
+    //-1 --> error
     @Override
-    public void update(Object entity) {
+    public int update(Object entity) {
 
+        PreparedStatement preparedStatement = null;
+        String query = QueryHelper.createQueryUPDATE(entity);
+        ResultSet resultSet;
+
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+            String[] fields = ObjectHelper.getFields(entity);
+
+            int i = 1;
+
+            for(String f : fields)
+            {
+                if(!f.equals("id")) {
+                    preparedStatement.setObject(i, ObjectHelper.getValue(entity, f));
+                    i++;
+                }
+            }
+            preparedStatement.setObject(fields.length, ObjectHelper.getValue(entity, "id"));
+
+            resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.first())
+                return 0;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return -1;
+    }
+
+    //-2 --> error with the db
+    //-1 --> incorrect query
+    //0 successful
+    @Override
+    public int update(Class theClass, int id, String attribute, Object value) {
+
+        PreparedStatement preparedStatement = null;
+        String query = QueryHelper.createQueryUPDATEAttribute(theClass, attribute);
+        ResultSet resultSet;
+
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setObject(1, value);
+            preparedStatement.setInt(2, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if(!resultSet.first())
+                return -1;
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return -2;
+        }
+
+        return 0;
     }
 
     @Override
