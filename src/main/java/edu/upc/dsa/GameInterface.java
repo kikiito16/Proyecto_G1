@@ -14,7 +14,7 @@ public interface GameInterface {
     public User getUser (int ID);
     //public Player changeName (String username, String password);
     public int logOut(String username);
-    public int updateUser(int id, String username, String password, String fullName, String email, int money);
+    public int updateUser(int id, String username, String fullName, String email, int money);
     public int updateUserAttribute(int id, String attribute, java.lang.Object value);
 
     public Object buyObject (String object);

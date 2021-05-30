@@ -134,16 +134,14 @@ public class UserDAOImpl implements UserDAO{
     //0 successful
     //-1 error
     @Override
-    public int updateUser(int id, String username, String password, String fullName,
+    public int updateUser(int id, String username, String fullName,
                           String email, int money) {
         int res = -1;
         try
         {
             session = SessionFactory.openSession();
 
-            User user = new User(username, password, fullName, email);
-            user.setId(id);
-            user.setMoney(money);
+            User user = new User(username, String.valueOf(session.getBy(User.class, "id", id).get("password")), fullName, email, money, id);
 
             res = session.update(user);
         }

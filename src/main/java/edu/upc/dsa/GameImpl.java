@@ -129,8 +129,8 @@ public class GameImpl implements GameInterface{
     // 0 sucessful
     // -1 error
     @Override
-    public int updateUser(int id, String username, String password, String fullName, String email, int money) {
-        int res = dao.updateUser(id, username, password, fullName, email, money);
+    public int updateUser(int id, String username, String fullName, String email, int money) {
+        int res = dao.updateUser(id, username, fullName, email, money);
         return res;
     }
 

@@ -39,7 +39,7 @@ public class DatabaseTest {
         user.setMoney(125);
 
         UserDAO dao = new UserDAOImpl();
-        int res = dao.updateUser(36, "martapm", "contra_marta", "Marta Pardo", "marta@gmail.com", 125);
+        int res = dao.updateUser(36, "martapm", "Marta Pardo", "marta@gmail.com", 125);
         User user1 = dao.getUser(36);
 
         Assert.assertEquals(36, user1.getId());

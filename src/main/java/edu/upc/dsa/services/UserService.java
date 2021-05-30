@@ -41,65 +41,20 @@ public class UserService {
         User t = this.gameInterface.getUser(ID);
         if (t == null) return Response.status(404).build();
         else  return Response.status(201).entity(new Gson().toJson(t)).build();
-        //new Gson().toJson(t)
     }
 
-    /*@POST
-    @ApiOperation(value = "Sign Up", notes = "Create a new account")
+    @PUT
+    @ApiOperation(value = "Update user", notes = "Update user's data (password not included)")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response = Integer.class),
-            @ApiResponse(code = 404, message = "Username already exists"),
-
-    })
-    @Path("/signup")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response signUp(CompleteCredentials cred) {
-        int res = gameInterface.signUp(cred);
-        if(res == -1)
-            return Response.status(404).build();
-        else
-            return Response.status(200).entity(res).build();
-    }
-
-
-    @POST
-    @ApiOperation(value = "Log In", notes = "asdasd")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful"),
-            @ApiResponse(code = 404, message = "Incorrect username or password"),
-            @ApiResponse(code = 409, message = "Unknown error")
-    })
-    @Path("/login")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response login(Credentials cred) {
-
-        int res = gameInterface.logIn(cred.getUsername(), cred.getPassword());
-
-        if(res == 0)
-            return Response.status(200).build();
-        else if(res == -1)
-            return Response.status(404).build();
-
-        return  Response.status(409).build();
-    }
-
-    @POST
-    @ApiOperation(value = "Log Out", notes = "asdasd")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful"),
+            @ApiResponse(code = 201, message = "Successful"),
             @ApiResponse(code = 404, message = "User not found")
-
     })
-    @Path("/logout")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response logOut(Credentials cred) {
+    @Path("/update")
+    public Response updateUser(User user) {
 
-        int res = gameInterface.logOut(cred.getUsername());
+        int res = this.gameInterface.updateUser(user.getId(), user.getUsername(), user.getFullName(), user.getEmail(), user.getMoney());
 
-        if(res == 0)
-            return Response.status(200).build();
-        else
-            return Response.status(404).build();
-    }*/
-
+        if (res != 0) return Response.status(404).build();
+        else return Response.status(201).build();
+    }
 }

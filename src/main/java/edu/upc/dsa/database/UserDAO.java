@@ -7,6 +7,6 @@ public interface UserDAO {
     User getUser(int userId);
     User getUser(String username);
     int logIn(String username, String password);
-    int updateUser(int id, String username, String password, String fullName, String email, int money);
+    int updateUser(int id, String username, String fullName, String email, int money);
     int updateUserAttribute(int id, String attribute, Object value);
 }
