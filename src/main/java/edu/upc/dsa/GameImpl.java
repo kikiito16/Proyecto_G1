@@ -44,7 +44,7 @@ public class GameImpl implements GameInterface{
     public int logIn(String username, String password) {
 
         int res = dao.logIn(username, password);
-        if(res == 0) addConnected(username);
+        if(res >= 0) addConnected(username);
 
         return res;
     }
@@ -69,6 +69,11 @@ public class GameImpl implements GameInterface{
     @Override
     public User getUser(String username) {
         return dao.getUser(username);
+    }
+
+    @Override
+    public User getUser(int ID) {
+        return dao.getUser(ID);
     }
 
     @Override
@@ -97,11 +102,6 @@ public class GameImpl implements GameInterface{
             logger.info("El usuario " + user + " ha sido eliminado.");
         }
         return error;
-    }
-
-    @Override
-    public User setUser(int idUser, String name, String password, int money) {
-        return null;
     }
 
     @Override
@@ -141,6 +141,11 @@ public class GameImpl implements GameInterface{
     public int updateUserAttribute(int id, String attribute, java.lang.Object value) {
         int res = dao.updateUserAttribute(id, attribute, value);
         return res;
+    }
+
+    @Override
+    public User setUser(int idUser, String name, String password, int money) {
+        return null;
     }
 
     @Override

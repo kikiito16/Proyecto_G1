@@ -25,7 +25,7 @@ public class AuthenticationService {
     }
 
     @POST
-    @ApiOperation(value = "Sign Up", notes = "Create a new account")
+    @ApiOperation(value = "Sign Up", notes = "Create a new account and log in")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful", response = Integer.class),
             @ApiResponse(code = 404, message = "Username already exists"),
@@ -43,9 +43,9 @@ public class AuthenticationService {
 
 
     @POST
-    @ApiOperation(value = "Log In", notes = "asdasd")
+    @ApiOperation(value = "Log In", notes = "Authenticate and log in")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful"),
+            @ApiResponse(code = 200, message = "Successful", response = Integer.class),
             @ApiResponse(code = 404, message = "Incorrect username or password"),
             @ApiResponse(code = 409, message = "Unknown error")
     })
@@ -55,16 +55,16 @@ public class AuthenticationService {
 
         int res = gameInterface.logIn(cred.getUsername(), cred.getPassword());
 
-        if(res == 0)
-            return Response.status(200).build();
-        else if(res == -1)
+        if(res == -1)
             return Response.status(404).build();
-
-        return  Response.status(409).build();
+        else if(res == -2)
+            return  Response.status(409).build();
+        else
+            return Response.status(200).entity(res).build();
     }
 
     @POST
-    @ApiOperation(value = "Log Out", notes = "asdasd")
+    @ApiOperation(value = "Log Out", notes = "Log out")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful"),
             @ApiResponse(code = 404, message = "User not found")

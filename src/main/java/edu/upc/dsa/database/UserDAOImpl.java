@@ -124,11 +124,11 @@ public class UserDAOImpl implements UserDAO{
         if(attributes == null)
             return -1;
 
-        if(attributes.get("username").equals(username)
+        else if(attributes.get("username").equals(username)
                 && attributes.get("password").equals(password))
-            return 0;
+            return (Integer) session.getBy(User.class, "username", username).get("id");
 
-        return -1;
+        else return -1;
     }
 
     //0 successful

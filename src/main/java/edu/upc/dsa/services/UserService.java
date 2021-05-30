@@ -30,17 +30,17 @@ public class UserService {
     }
 
     @GET
-    @ApiOperation(value = "Get user", notes = "asdasd")
+    @ApiOperation(value = "Get user", notes = "Get user by ID")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = User.class),
             @ApiResponse(code = 404, message = "Track not found")
     })
     @Path("/get/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTrack(@PathParam("username") String username) {
-        User t = this.gameInterface.getUser(username);
+    public Response getTrack(@PathParam("username") int ID) {
+        User t = this.gameInterface.getUser(ID);
         if (t == null) return Response.status(404).build();
-        else  return Response.status(201).entity(t).build();
+        else  return Response.status(201).entity(new Gson().toJson(t)).build();
         //new Gson().toJson(t)
     }
 
