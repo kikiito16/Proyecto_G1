@@ -105,9 +105,8 @@ public class SessionImpl implements Session{
             }
             preparedStatement.setObject(fields.length, ObjectHelper.getValue(entity, "id"));
 
-            resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.first())
+            boolean error = preparedStatement.execute();
+            if(!error)
                 return 0;
         }
         catch (SQLException e) {
