@@ -38,7 +38,7 @@ public interface GameInterface {
 
     public void clear();
 
-    public int deletePlayer(String user, String psw);
+    public int deleteUser(int id, String password);
     public User setUser(int idUser, String name, String password, int money);
 
 }

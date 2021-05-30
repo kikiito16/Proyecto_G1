@@ -66,4 +66,20 @@ public class QueryHelper {
         return query;
     }
 
+    public static String createQueryDELETE(Class theClass)
+    {
+        String query = "DELETE FROM " + theClass.getSimpleName() +
+                "WHERE id=?;";
+
+        return query;
+    }
+
+    public static String createQueryDELETEWithCondition(Class theClass, String attribute)
+    {
+        String query = "DELETE FROM "+ theClass.getSimpleName() + " WHERE id=? AND " +
+                attribute + "=?;";
+
+        return query;
+    }
+
 }

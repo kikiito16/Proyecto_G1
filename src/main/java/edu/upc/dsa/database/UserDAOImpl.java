@@ -98,6 +98,31 @@ public class UserDAOImpl implements UserDAO{
         return user;
     }
 
+    //-2 error
+    //-1 incorrect password
+    @Override
+    public int deleteUser(int id, String password) {
+        int res = -1;
+        try
+        {
+            session = SessionFactory.openSession();
+            res = session.delete(User.class, id, "password", password);
+
+            if(session.getBy(User.class, "id", id) != null && res == 0)
+                return -1;
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -2;
+        }
+        finally {
+            session.close();
+        }
+
+        return res;
+    }
+
     //-2 --> error database
     //-1 --> login failed
     //0 --> correct login
@@ -156,13 +181,13 @@ public class UserDAOImpl implements UserDAO{
         return res;
     }
 
-    //-2 --> error with the db
-    //-1 --> incorrect query
+
+    //-1 --> error
     //0 successful
     @Override
     public int updateUserAttribute(int id, String attribute, Object value) {
 
-        int res = -2;
+        int res = -1;
         try
         {
             session = SessionFactory.openSession();
@@ -172,7 +197,10 @@ public class UserDAOImpl implements UserDAO{
         }
         catch (Exception e) {
             e.printStackTrace();
-            return -2;
+            return -1;
+        }
+        finally {
+            session.close();
         }
 
         return res;

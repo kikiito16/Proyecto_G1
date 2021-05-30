@@ -56,10 +56,28 @@ public class SessionImpl implements Session{
         return 0;
     }
 
+    //-1 error
+    //0 successful
     @Override
-    public void delete(Object entity) {
+    public int delete(Class theClass, int id, String attribute, Object value) {
 
+        PreparedStatement preparedStatement = null;
+        String query = QueryHelper.createQueryDELETEWithCondition(theClass, attribute);
 
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setObject(2, value);
+
+            preparedStatement.executeQuery();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return -2;
+        }
+
+        return 0;
     }
 
     //0 --> successful
@@ -99,8 +117,8 @@ public class SessionImpl implements Session{
         return -1;
     }
 
-    //-2 --> error with the db
-    //-1 --> incorrect query
+
+    //-1 --> error
     //0 successful
     @Override
     public int update(Class theClass, int id, String attribute, Object value) {
@@ -115,15 +133,12 @@ public class SessionImpl implements Session{
             preparedStatement.setObject(1, value);
             preparedStatement.setInt(2, id);
 
-            resultSet = preparedStatement.executeQuery();
-
-            if(!resultSet.first())
-                return -1;
+            preparedStatement.executeQuery();
 
         }
         catch (SQLException e) {
             e.printStackTrace();
-            return -2;
+            return -1;
         }
 
         return 0;

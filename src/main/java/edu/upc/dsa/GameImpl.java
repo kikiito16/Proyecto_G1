@@ -76,33 +76,6 @@ public class GameImpl implements GameInterface{
         return dao.getUser(ID);
     }
 
-    @Override
-    public int deletePlayer(String user, String psw) {
-        int error = -1;
-        boolean found = false;
-        int i = 0;
-        int pos=0;
-        while(!found && i< playersList.size()) {
-            if (user.equals(playersList.get(i).getUsername()) && psw.equals(playersList.get(i).getPassword())) {
-                error = 0;
-                found = true;
-                pos=i;
-            }
-            i++;
-        }
-        if (error == -1) logger.info("No se ha podido encontrar este usuario");
-        else {
-            logger.info("El usuario " + user+ " va a ser eliminado.");
-            this.playersList.remove(pos);
-            //(this.connectedList.remove(pos);  //Crear busqueda de usuario en conectados
-            hmPlayers.remove(user);
-            logger.info("Esta es la lista jugadores ahora: " + this.playersList);
-            //logger.info("Esta es la lista conectados ahora: " + this.connectedList);
-            logger.info("Este es el hash map ahora: " + this.hmPlayers);
-            logger.info("El usuario " + user + " ha sido eliminado.");
-        }
-        return error;
-    }
 
     @Override
     public int logOut(String username) {
@@ -134,8 +107,8 @@ public class GameImpl implements GameInterface{
         return res;
     }
 
-    //-2 --> error with the db
-    //-1 --> incorrect query
+
+    //-1 error
     //0 successful
     @Override
     public int updateUserAttribute(int id, String attribute, java.lang.Object value) {
@@ -224,5 +197,14 @@ public class GameImpl implements GameInterface{
         hmPlayers.clear();
         objectsList.clear();
         mapsList.clear();
+    }
+
+    //0 successful
+    //-1 incorrect password
+    //-2 error
+    @Override
+    public int deleteUser(int id, String password) {
+        int res = dao.deleteUser(id, password);
+        return res;
     }
 }

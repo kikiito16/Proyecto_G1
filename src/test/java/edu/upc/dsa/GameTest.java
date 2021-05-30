@@ -39,10 +39,4 @@ public class GameTest {
         //gm.signUp(2, "Enric", "kikito",3.0);
 
     }
-
-    @Test
-    public void test2() {
-        //Player p4 = new Player(1, "Marc", "cucu",3.0);
-        gm.deletePlayer("Marc","cucu");
-    }
 }

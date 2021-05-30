@@ -59,4 +59,19 @@ public class DatabaseTest {
         User user = dao.getUser(36);
         Assert.assertEquals("Marta Juan", user.getFullName());
     }
+
+    @Test
+    public void deleteUserTest()
+    {
+        UserDAO dao = new UserDAOImpl();
+        int res = dao.deleteUser(16, "kjhkj");
+        Assert.assertEquals(-1, res);
+
+        res = dao.deleteUser(18, "holahola1");
+        Assert.assertEquals(-1, res);
+
+        res = dao.deleteUser(18, "holahola");
+        Assert.assertEquals(0, res);
+    }
+
 }
