@@ -57,4 +57,19 @@ public class UserService {
         if (res != 0) return Response.status(404).build();
         else return Response.status(201).build();
     }
+
+    @PUT
+    @ApiOperation(value = "Update password", notes = "Update user's password")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "User not found")
+    })
+    @Path("/update/password")
+    public Response updatePassword(User user) {
+
+        int res = this.gameInterface.updateUserAttribute(user.getId(), "password", user.getPassword());
+
+        if (res != 0) return Response.status(404).build();
+        else return Response.status(201).build();
+    }
 }
