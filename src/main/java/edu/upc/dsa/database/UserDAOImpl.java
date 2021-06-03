@@ -98,23 +98,20 @@ public class UserDAOImpl implements UserDAO{
         return user;
     }
 
-    //-2 error
-    //-1 incorrect password
+
+    //-1 error
+    //0 successful
     @Override
-    public int deleteUser(int id, String password) {
+    public int deleteUser(int id) {
         int res = -1;
         try
         {
             session = SessionFactory.openSession();
-            res = session.delete(User.class, id, "password", password);
-
-            if(session.getBy(User.class, "id", id) != null && res == 0)
-                return -1;
-
+            res = session.delete(User.class, id);
         }
         catch (Exception e) {
             e.printStackTrace();
-            return -2;
+            return -1;
         }
         finally {
             session.close();

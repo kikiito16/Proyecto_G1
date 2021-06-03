@@ -203,8 +203,8 @@ public class GameImpl implements GameInterface{
     //-1 incorrect password
     //-2 error
     @Override
-    public int deleteUser(int id, String password) {
-        int res = dao.deleteUser(id, password);
+    public int deleteUser(int id) {
+        int res = dao.deleteUser(id);
         return res;
     }
 }

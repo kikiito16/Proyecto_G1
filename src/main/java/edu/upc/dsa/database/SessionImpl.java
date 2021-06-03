@@ -59,22 +59,21 @@ public class SessionImpl implements Session{
     //-1 error
     //0 successful
     @Override
-    public int delete(Class theClass, int id, String attribute, Object value) {
+    public int delete(Class theClass, int id) {
 
         PreparedStatement preparedStatement = null;
-        String query = QueryHelper.createQueryDELETEWithCondition(theClass, attribute);
+        String query = QueryHelper.createQueryDELETE(theClass);
 
         try
         {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, id);
-            preparedStatement.setObject(2, value);
 
             preparedStatement.executeQuery();
         }
         catch (SQLException e) {
             e.printStackTrace();
-            return -2;
+            return -1;
         }
 
         return 0;

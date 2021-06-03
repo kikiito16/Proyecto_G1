@@ -69,7 +69,7 @@ public class QueryHelper {
     public static String createQueryDELETE(Class theClass)
     {
         String query = "DELETE FROM " + theClass.getSimpleName() +
-                "WHERE id=?;";
+                " WHERE id=?;";
 
         return query;
     }
