@@ -116,6 +116,15 @@ public class GameImpl implements GameInterface{
         return res;
     }
 
+    //0 successful
+    //-1 incorrect password
+    //-2 error
+    @Override
+    public int deleteUser(int id) {
+        int res = dao.deleteUser(id);
+        return res;
+    }
+
     @Override
     public User setUser(int idUser, String name, String password, int money) {
         return null;
@@ -197,14 +206,5 @@ public class GameImpl implements GameInterface{
         hmPlayers.clear();
         objectsList.clear();
         mapsList.clear();
-    }
-
-    //0 successful
-    //-1 incorrect password
-    //-2 error
-    @Override
-    public int deleteUser(int id) {
-        int res = dao.deleteUser(id);
-        return res;
     }
 }

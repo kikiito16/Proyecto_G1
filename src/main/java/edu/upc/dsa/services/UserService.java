@@ -72,4 +72,17 @@ public class UserService {
         if (res != 0) return Response.status(404).build();
         else return Response.status(201).build();
     }
+
+    @DELETE
+    @ApiOperation(value = "Delete a user", notes = "Delete user by id (needed password)")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "User not found")
+    })
+    @Path("/delete")
+    public Response deleteUser(@PathParam("username") int ID) {
+        int res = gameInterface.deleteUser(ID);
+        if (res != 0) return Response.status(404).build();
+        else return Response.status(201).build();
+    }
 }
