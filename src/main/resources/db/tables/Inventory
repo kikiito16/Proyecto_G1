@@ -1,0 +1,5 @@
+CREATE TABLE Inventory (
+    userId int not null,
+    objectId int not null,
+    quantity int not null
+);

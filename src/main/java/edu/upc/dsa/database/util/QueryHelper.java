@@ -1,22 +1,24 @@
 package edu.upc.dsa.database.util;
 
+import java.util.List;
+
 public class QueryHelper {
 
     public static String createQueryINSERT(Object object)
     {
         String query = "INSERT INTO " + object.getClass().getSimpleName() + " (";
 
-        String[] fields = ObjectHelper.getFields(object);
+        List<String> fields = ObjectHelper.getSimpleFields(object);
 
-        query = query + fields[0];
+        query = query + fields.get(0);
 
-        for(int i = 1; i < fields.length; i++)
-            query = query + "," + fields[i];
+        for(int i = 1; i < fields.size(); i++)
+            query = query + "," + fields.get(i);
 
 
         query = query + ") VALUES (?";
 
-        for(int i = 0; i < fields.length - 1; i++)
+        for(int i = 0; i < fields.size() - 1; i++)
             query = query + ",?";
 
         query = query + ");";
@@ -42,7 +44,7 @@ public class QueryHelper {
     public static String createQueryUPDATE(Object object)
     {
         String query = "UPDATE " + object.getClass().getSimpleName() + " SET ";
-        String[] fields = ObjectHelper.getFields(object);
+        List<String> fields = ObjectHelper.getSimpleFields(object);
 
         for(String f : fields)
         {

@@ -1,19 +1,37 @@
 package edu.upc.dsa.database.util;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ObjectHelper {
 
-    public static String[] getFields(java.lang.Object object)
+    public static List<String> getSimpleFields(java.lang.Object object)
     {
         Field[] fields = object.getClass().getDeclaredFields();
 
-        String[] sFields = new String[fields.length];
+        List<String> sFields = new ArrayList();
+
+        for(Field f : fields)
+        {
+            if(f.getType() != List.class)
+                sFields.add(f.getName());
+        }
+
+        return sFields;
+
+    }
+
+    public static List<String> getFields(java.lang.Object object)
+    {
+        Field[] fields = object.getClass().getDeclaredFields();
+
+        List<String> sFields = new ArrayList<>();
         int i = 0;
 
         for(Field f : fields)
         {
-            sFields[i++] = f.getName();
+            sFields.add(f.getName());
         }
 
         return sFields;

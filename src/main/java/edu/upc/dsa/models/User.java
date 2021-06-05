@@ -3,6 +3,8 @@ package edu.upc.dsa.models;
 
 import edu.upc.dsa.models.api.CompleteCredentials;
 
+import java.util.List;
+
 public class User {
     private int id;
     private String username;
@@ -10,7 +12,7 @@ public class User {
     private String fullName;
     private String email;
     private int money;
-    //private List<Object> objectsList;
+    private List<Object> objectsList;
     //private List<Game> gamesList;
 
     /*public Player(int idPlayer, String username, String password, double money) {
@@ -109,7 +111,7 @@ public class User {
         this.money = money;
     }
 
-    /*public List<Object> getObjectsList() {
+    public List<Object> getObjectsList() {
         return objectsList;
     }
 
@@ -117,7 +119,7 @@ public class User {
         this.objectsList = objectsList;
     }
 
-    public List<Game> getGamesList() {
+    /*public List<Game> getGamesList() {
         return gamesList;
     }
 

@@ -5,6 +5,7 @@ import edu.upc.dsa.database.util.QueryHelper;
 
 import java.sql.*;
 import java.util.HashMap;
+import java.util.List;
 
 public class SessionImpl implements Session{
 
@@ -29,7 +30,7 @@ public class SessionImpl implements Session{
 
             int i = 1;
 
-            String[] fields = ObjectHelper.getFields(entity);
+            List<String > fields = ObjectHelper.getSimpleFields(entity);
             for(String f: fields)
             {
                 if(f.equals("id"))
@@ -90,7 +91,7 @@ public class SessionImpl implements Session{
         try
         {
             preparedStatement = conn.prepareStatement(query);
-            String[] fields = ObjectHelper.getFields(entity);
+            List<String> fields = ObjectHelper.getSimpleFields(entity);
 
             int i = 1;
 
@@ -101,7 +102,7 @@ public class SessionImpl implements Session{
                     i++;
                 }
             }
-            preparedStatement.setObject(fields.length, ObjectHelper.getValue(entity, "id"));
+            preparedStatement.setObject(fields.size(), ObjectHelper.getValue(entity, "id"));
 
             boolean error = preparedStatement.execute();
             if(!error)
