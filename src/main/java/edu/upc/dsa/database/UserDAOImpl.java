@@ -1,7 +1,6 @@
 package edu.upc.dsa.database;
 
 import edu.upc.dsa.models.User;
-import edu.upc.dsa.models.api.CompleteCredentials;
 
 import java.util.HashMap;
 

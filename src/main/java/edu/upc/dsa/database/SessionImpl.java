@@ -2,7 +2,6 @@ package edu.upc.dsa.database;
 
 import edu.upc.dsa.database.util.ObjectHelper;
 import edu.upc.dsa.database.util.QueryHelper;
-import edu.upc.dsa.models.User;
 
 import java.sql.*;
 import java.util.HashMap;

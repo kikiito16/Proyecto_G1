@@ -4,15 +4,11 @@ import com.google.gson.Gson;
 import edu.upc.dsa.GameImpl;
 import edu.upc.dsa.GameInterface;
 import edu.upc.dsa.models.User;
-import edu.upc.dsa.models.api.CompleteCredentials;
-import edu.upc.dsa.models.api.Credentials;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -79,7 +75,7 @@ public class UserService {
             @ApiResponse(code = 201, message = "Successful"),
             @ApiResponse(code = 404, message = "User not found")
     })
-    @Path("/delete")
+    @Path("/delete/{username}")
     public Response deleteUser(@PathParam("username") int ID) {
         int res = gameInterface.deleteUser(ID);
         if (res != 0) return Response.status(404).build();
