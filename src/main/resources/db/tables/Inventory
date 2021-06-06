@@ -1,5 +1,8 @@
+DROP TABLE IF EXISTS Inventory;
 CREATE TABLE Inventory (
     userId int not null,
     objectId int not null,
-    quantity int not null
+    quantity int not null,
+    FOREIGN KEY (userId) REFERENCES User(id),
+    FOREIGN KEY (objectId) REFERENCES Object(id)
 );

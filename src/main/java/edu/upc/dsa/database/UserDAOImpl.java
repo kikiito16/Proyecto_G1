@@ -1,8 +1,13 @@
 package edu.upc.dsa.database;
 
+import edu.upc.dsa.models.FullObject;
+import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.api.Inventory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO{
 
@@ -37,6 +42,57 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
+    public int addToInventory(List<Object> objectList, int userId)
+    {
+        int res = -1;
+        try {
+            session = SessionFactory.openSession();
+            for (Object o : objectList) {
+                Inventory inventory = new Inventory(userId, o.getId(), o.getQuantity());
+                res = session.create(inventory);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        finally {
+            session.close();
+        }
+
+        return res;
+    }
+
+    @Override
+    public List<FullObject> getInventoryOf(int userId) {
+        List<FullObject> objectList = new ArrayList<>();
+        try
+        {
+            session = SessionFactory.openSession();
+            List<HashMap<String, java.lang.Object>> inventoryTable = session.getAllBy(Inventory.class, "userId", userId);
+
+            for(HashMap<String, java.lang.Object> i : inventoryTable)
+            {
+                HashMap objectHashmap = session.getBy(Object.class, "id", i.get("objectId"));
+                if(objectHashmap != null)
+                    objectList.add(new FullObject(
+                            (int)objectHashmap.get("id"),
+                            (String)objectHashmap.get("name"),
+                            (int)objectHashmap.get("attack"),
+                            (int)objectHashmap.get("defense"),
+                            (int)objectHashmap.get("life"),
+                            (int)objectHashmap.get("price"),
+                            (int)i.get("quantity")
+                    ));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return objectList;
+    }
+
+    @Override
     public User getUser(int userId) {
 
         User user = null;
@@ -44,7 +100,7 @@ public class UserDAOImpl implements UserDAO{
         {
             session = SessionFactory.openSession();
 
-            HashMap<String, Object> attributes = session.getBy(User.class, "id", userId);
+            HashMap<String, java.lang.Object> attributes = session.getBy(User.class, "id", userId);
 
             if(attributes != null) {
                 user = new User(
@@ -77,7 +133,7 @@ public class UserDAOImpl implements UserDAO{
         try {
             session = SessionFactory.openSession();
 
-            HashMap<String, Object> attributes = session.getBy(User.class, "username", username);
+            HashMap<String, java.lang.Object> attributes = session.getBy(User.class, "username", username);
             user = new User(
                     attributes.get("username").toString(),
                     attributes.get("password").toString(),
@@ -181,7 +237,7 @@ public class UserDAOImpl implements UserDAO{
     //-1 --> error
     //0 successful
     @Override
-    public int updateUserAttribute(int id, String attribute, Object value) {
+    public int updateUserAttribute(int id, String attribute, java.lang.Object value) {
 
         int res = -1;
         try

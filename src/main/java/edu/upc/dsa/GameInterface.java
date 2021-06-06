@@ -18,7 +18,8 @@ public interface GameInterface {
     public int updateUserAttribute(int id, String attribute, java.lang.Object value);
 
     public Object buyObject (String object);
-    public Object addObject (String object);
+    public int addObject (List<Object> objectList, int userId);
+    public List<FullObject> getAllObjects(int userId);
     public Object useObject (String object);
 
     public List<Object> getAllObjects ();

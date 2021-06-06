@@ -4,6 +4,7 @@ import edu.upc.dsa.database.util.ObjectHelper;
 import edu.upc.dsa.database.util.QueryHelper;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -175,6 +176,7 @@ public class SessionImpl implements Session{
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
 
         return attributes;
@@ -182,6 +184,41 @@ public class SessionImpl implements Session{
 
     }
 
+    @Override
+    public List<HashMap<String, Object>> getAllBy(Class theClass, String attr, Object value) {
+
+        PreparedStatement preparedStatement = null;
+        String query = QueryHelper.createQuerySELECT(theClass, attr);
+        List<HashMap<String, java.lang.Object>> list = new ArrayList<>();
+
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setObject(1, value);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next())
+            {
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                HashMap<String, java.lang.Object> attributes = new HashMap<>();
+                for (int i = 0; i < resultSetMetaData.getColumnCount(); i++) {
+                    attributes.put(resultSetMetaData.getColumnName(i + 1), resultSet.getObject(i + 1));
+                }
+                list.add(attributes);
+            }
+
+            if(!resultSet.first())
+                return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return list;
+
+    }
 
 
 }

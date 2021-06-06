@@ -1,49 +1,21 @@
 package edu.upc.dsa.models;
 
 public class Object {
-    private String idObject;
-    private int idOwner;
-    private int number;
-    private double costBuy;
-    private double costSell;
+    int id;
+    int quantity;
 
-    public String getIdObject() {
-        return idObject;
+    public Object(int id, int quantity)
+    {
+        this.id = id;
+        this.quantity = quantity;
     }
 
-    public void setIdObject(String idObject) {
-        this.idObject = idObject;
+    public int getId()
+    {
+        return this.id;
     }
 
-    public int getIdOwner() {
-        return idOwner;
-    }
-
-    public void setIdOwner(int idOwner) {
-        this.idOwner = idOwner;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public double getCostBuy() {
-        return costBuy;
-    }
-
-    public void setCostBuy(double costBuy) {
-        this.costBuy = costBuy;
-    }
-
-    public double getCostSell() {
-        return costSell;
-    }
-
-    public void setCostSell(double costSell) {
-        this.costSell = costSell;
+    public int getQuantity() {
+        return quantity;
     }
 }

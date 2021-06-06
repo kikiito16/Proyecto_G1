@@ -135,10 +135,21 @@ public class GameImpl implements GameInterface{
         return null;
     }
 
+    //0 successful
+    //-1 error
     @Override
-    public Object addObject(String object) {
-        return null;
+    public int addObject(List<Object> objectList, int userId) {
+        int res = dao.addToInventory(objectList, userId);
+        return res;
     }
+
+    @Override
+    public List<FullObject> getAllObjects(int userId) {
+        List<FullObject> list = dao.getInventoryOf(userId);
+
+        return list;
+    }
+
 
     @Override
     public Object useObject(String object) {

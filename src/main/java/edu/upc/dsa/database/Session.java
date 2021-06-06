@@ -1,6 +1,7 @@
 package edu.upc.dsa.database;
 
 import java.util.HashMap;
+import java.util.List;
 
 public interface Session {
 
@@ -10,6 +11,7 @@ public interface Session {
     int update(Class theClass, int id, String attribute, Object value);
     void close();
     HashMap getBy(Class theClass, String attr, Object value);
+    List<HashMap<String, Object>> getAllBy(Class theClass, String attr, Object value);
 
 
 }

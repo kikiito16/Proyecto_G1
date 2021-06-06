@@ -1,6 +1,10 @@
+DROP TABLE IF EXISTS Object;
 CREATE TABLE Object (
     id int not null auto_increment,
     name varchar(25) not null unique,
+    attack int not null,
+    defense int not null,
+    life int not null,
     price int not null,
     PRIMARY KEY(id)
 );

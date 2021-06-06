@@ -1,11 +1,17 @@
 package edu.upc.dsa;
 
-import edu.upc.dsa.database.UserDAO;
-import edu.upc.dsa.database.UserDAOImpl;
+import edu.upc.dsa.database.*;
+import edu.upc.dsa.models.FullObject;
+import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.CompleteCredentials;
+import edu.upc.dsa.models.api.Inventory;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class DatabaseTest {
 
@@ -67,5 +73,13 @@ public class DatabaseTest {
         int res = dao.deleteUser(5);
         Assert.assertEquals(0, res);
     }
+
+    @Test
+    public void addToInventoryTest()
+    {
+        UserDAO dao = new UserDAOImpl();
+        List<FullObject> list = dao.getInventoryOf(50);
+    }
+
 
 }
