@@ -81,6 +81,7 @@ public class UserDAOImpl implements UserDAO{
                                 (int)objectHashmap.get("attack"),
                                 (int)objectHashmap.get("defense"),
                                 (int)objectHashmap.get("life"),
+                                (String)objectHashmap.get("imageURL"),
                                 (int)objectHashmap.get("price"),
                                 (int)i.get("quantity")
                         ));

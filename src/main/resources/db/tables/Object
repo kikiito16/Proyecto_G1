@@ -5,22 +5,23 @@ CREATE TABLE Object (
     attack int not null,
     defense int not null,
     life int not null,
+    imageURL varchar(300),
     price int not null,
     PRIMARY KEY(id)
 );
 
-insert into object values(1, "banana", 10, 0, 0, 5);
-insert into object values(2, "bnc", 15, 0, 0, 10);
-insert into object values(3, "sonda", 20, 0, 5, 20);
+insert into object values(1, "banana", 10, 0, 0, null, 5);
+insert into object values(2, "bnc", 15, 0, 0, null, 10);
+insert into object values(3, "sonda", 20, 0, 5, null, 20);
 
-insert into object values(4, "dipolo", 5, 5, 0, 5);
-insert into object values(5, "parabolica", 0, 30, 10, 25);
+insert into object values(4, "dipolo", 5, 5, 0, null, 5);
+insert into object values(5, "parabolica", 0, 30, 10, null, 25);
 
-insert into object values(6, "boli gastado", 1, 0, 0, 1);
-insert into object values(7, "lapiz de minas", 5, 0, 0, 5);
-insert into object values(8, "calculadora", 0, 10, 0, 5);
+insert into object values(6, "boli gastado", 1, 0, 0, null, 1);
+insert into object values(7, "lapiz de minas", 5, 0, 0, null, 5);
+insert into object values(8, "calculadora", 0, 10, 0, null, 5);
 
-insert into object values(9, "birra", 0, 0, 20, 5);
-insert into object values(10, "bravas", 5, 0, 10, 5);
+insert into object values(9, "birra", 0, 0, 20, null, 5);
+insert into object values(10, "bravas", 5, 0, 10, null, 5);
 
-insert into object values(11, "examen filtrado", 0, 0, 50, 40);
+insert into object values(11, "examen filtrado", 0, 0, 50, null, 40);

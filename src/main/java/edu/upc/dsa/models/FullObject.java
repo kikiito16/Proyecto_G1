@@ -6,11 +6,12 @@ public class FullObject extends Object {
     int attack;
     int defense;
     int life;
+    String imageURL;
     int price;
 
     public FullObject() {}
 
-    public FullObject(int id, String name, int attack, int defense, int life, int price, int quantity)
+    public FullObject(int id, String name, int attack, int defense, int life, String imageURL, int price, int quantity)
     {
         super.id = id;
         super.quantity = quantity;
@@ -18,6 +19,7 @@ public class FullObject extends Object {
         this.attack = attack;
         this.defense = defense;
         this.life = life;
+        this.imageURL = imageURL;
         this.price = price;
     }
 
@@ -51,4 +53,11 @@ public class FullObject extends Object {
 
     public void setPrice(int price) { this.price = price; }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 }

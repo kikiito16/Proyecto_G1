@@ -78,7 +78,7 @@ public class DatabaseTest {
     public void InventoryTest()
     {
         UserDAO dao = new UserDAOImpl();
-        List<FullObject> list = dao.getInventoryOf(16);
+        List<FullObject> list = dao.getInventoryOf(1);
 
         List<Object> objectList = new ArrayList<>();
         objectList.add(new Object(1, 1));
@@ -87,9 +87,7 @@ public class DatabaseTest {
         int res = dao.addToInventory(objectList, 50);
         Assert.assertEquals(-1, res);
 
-        res = dao.addToInventory(objectList, 21);
+        res = dao.addToInventory(objectList, 2);
         Assert.assertEquals(0, res);
     }
-
-
 }
