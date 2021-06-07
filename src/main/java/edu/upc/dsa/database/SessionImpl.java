@@ -17,6 +17,7 @@ public class SessionImpl implements Session{
         this.conn = conn;
     }
 
+    //-2 --> error
     //-1 --> username already exists
     //0 inserted correctly
     @Override
@@ -53,7 +54,14 @@ public class SessionImpl implements Session{
         catch(SQLException e)
         {
             e.printStackTrace();
+            return -2;
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return -2;
+        }
+
         return 0;
     }
 
@@ -73,6 +81,11 @@ public class SessionImpl implements Session{
             preparedStatement.executeQuery();
         }
         catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return -1;
         }
@@ -113,6 +126,12 @@ public class SessionImpl implements Session{
             e.printStackTrace();
             return -1;
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
+
         return -1;
     }
 
@@ -136,6 +155,11 @@ public class SessionImpl implements Session{
 
         }
         catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return -1;
         }
@@ -178,6 +202,11 @@ public class SessionImpl implements Session{
             e.printStackTrace();
             return null;
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
 
         return attributes;
 
@@ -212,6 +241,11 @@ public class SessionImpl implements Session{
                 return null;
 
         } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }

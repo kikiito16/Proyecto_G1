@@ -1,31 +1,24 @@
 package edu.upc.dsa.models;
 
-public class FullObject {
+public class FullObject extends Object {
 
-    int id;
     String name;
     int attack;
     int defense;
     int life;
     int price;
-    int quantity;
 
     public FullObject() {}
 
     public FullObject(int id, String name, int attack, int defense, int life, int price, int quantity)
     {
-        this.id = id;
+        super.id = id;
+        super.quantity = quantity;
         this.name = name;
         this.attack = attack;
         this.defense = defense;
         this.life = life;
         this.price = price;
-        this.quantity = quantity;
-    }
-
-    public int getId()
-    {
-        return this.id;
     }
 
     public int getAttack() {
@@ -48,12 +41,6 @@ public class FullObject {
         return name;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setId(int id) { this.id = id; }
-
     public void setName(String name) { this.name = name; }
 
     public void setAttack(int attack) { this.attack = attack; }
@@ -64,5 +51,4 @@ public class FullObject {
 
     public void setPrice(int price) { this.price = price; }
 
-    public void setQuantity(int quantity) { this.quantity = quantity; }
 }

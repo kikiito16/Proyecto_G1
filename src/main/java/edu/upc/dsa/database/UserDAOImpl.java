@@ -70,20 +70,21 @@ public class UserDAOImpl implements UserDAO{
             session = SessionFactory.openSession();
             List<HashMap<String, java.lang.Object>> inventoryTable = session.getAllBy(Inventory.class, "userId", userId);
 
-            for(HashMap<String, java.lang.Object> i : inventoryTable)
-            {
-                HashMap objectHashmap = session.getBy(Object.class, "id", i.get("objectId"));
-                if(objectHashmap != null)
-                    objectList.add(new FullObject(
-                            (int)objectHashmap.get("id"),
-                            (String)objectHashmap.get("name"),
-                            (int)objectHashmap.get("attack"),
-                            (int)objectHashmap.get("defense"),
-                            (int)objectHashmap.get("life"),
-                            (int)objectHashmap.get("price"),
-                            (int)i.get("quantity")
-                    ));
-            }
+            if(inventoryTable != null)
+                for(HashMap<String, java.lang.Object> i : inventoryTable)
+                {
+                    HashMap objectHashmap = session.getBy(Object.class, "id", i.get("objectId"));
+                    if(objectHashmap != null)
+                        objectList.add(new FullObject(
+                                (int)objectHashmap.get("id"),
+                                (String)objectHashmap.get("name"),
+                                (int)objectHashmap.get("attack"),
+                                (int)objectHashmap.get("defense"),
+                                (int)objectHashmap.get("life"),
+                                (int)objectHashmap.get("price"),
+                                (int)i.get("quantity")
+                        ));
+                }
         }
         catch (Exception e) {
             e.printStackTrace();

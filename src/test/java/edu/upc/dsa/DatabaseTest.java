@@ -75,10 +75,20 @@ public class DatabaseTest {
     }
 
     @Test
-    public void addToInventoryTest()
+    public void InventoryTest()
     {
         UserDAO dao = new UserDAOImpl();
-        List<FullObject> list = dao.getInventoryOf(50);
+        List<FullObject> list = dao.getInventoryOf(16);
+
+        List<Object> objectList = new ArrayList<>();
+        objectList.add(new Object(1, 1));
+        objectList.add(new Object(2, 2));
+        objectList.add(new Object(3, 3));
+        int res = dao.addToInventory(objectList, 50);
+        Assert.assertEquals(-1, res);
+
+        res = dao.addToInventory(objectList, 21);
+        Assert.assertEquals(0, res);
     }
 
 
