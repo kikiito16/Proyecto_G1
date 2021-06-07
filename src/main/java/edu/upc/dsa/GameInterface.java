@@ -19,11 +19,9 @@ public interface GameInterface {
 
     public Object buyObject (String object);
     public int addObject (List<Object> objectList, int userId);
-    public List<FullObject> getAllObjects(int userId);
     public Object useObject (String object);
-
     public List<Object> getAllObjects ();
-    public List<Object> getUserObjects (String name);
+    public List<FullObject> getUserObjects (int id);
 
     public Game addGame (String player, Game game);
     public Game getGame (int idGame);

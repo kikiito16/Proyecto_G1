@@ -4,6 +4,8 @@ public class Object {
     int id;
     int quantity;
 
+    public Object() {}
+
     public Object(int id, int quantity)
     {
         this.id = id;
@@ -18,4 +20,8 @@ public class Object {
     public int getQuantity() {
         return quantity;
     }
+
+    public void setId(int id) { this.id = id; }
+
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 }

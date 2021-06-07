@@ -144,7 +144,7 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public List<FullObject> getAllObjects(int userId) {
+    public List<FullObject> getUserObjects(int userId) {
         List<FullObject> list = dao.getInventoryOf(userId);
 
         return list;
@@ -160,9 +160,6 @@ public class GameImpl implements GameInterface{
     public List<Object> getAllObjects() {
         return null;
     }
-
-    @Override
-    public List<Object> getUserObjects(String name) { return null; }
 
     @Override
     public Game addGame(String player, Game partida) {

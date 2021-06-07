@@ -10,6 +10,8 @@ public class FullObject {
     int price;
     int quantity;
 
+    public FullObject() {}
+
     public FullObject(int id, String name, int attack, int defense, int life, int price, int quantity)
     {
         this.id = id;
@@ -49,4 +51,18 @@ public class FullObject {
     public int getQuantity() {
         return quantity;
     }
+
+    public void setId(int id) { this.id = id; }
+
+    public void setName(String name) { this.name = name; }
+
+    public void setAttack(int attack) { this.attack = attack; }
+
+    public void setDefense(int defense) { this.defense = defense; }
+
+    public void setLife(int life) { this.life = life; }
+
+    public void setPrice(int price) { this.price = price; }
+
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 }

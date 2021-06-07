@@ -12,7 +12,6 @@ public class User {
     private String fullName;
     private String email;
     private int money;
-    private List<Object> objectsList;
     //private List<Game> gamesList;
 
     /*public Player(int idPlayer, String username, String password, double money) {
@@ -109,14 +108,6 @@ public class User {
 
     public void setMoney(int money) {
         this.money = money;
-    }
-
-    public List<Object> getObjectsList() {
-        return objectsList;
-    }
-
-    public void setObjectsList(List<Object> objectsList) {
-        this.objectsList = objectsList;
     }
 
     /*public List<Game> getGamesList() {
