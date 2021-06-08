@@ -183,7 +183,7 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public int logIn(String username, String password) {
 
-        HashMap<String,Object> attributes = null;
+        HashMap<String,java.lang.Object> attributes = null;
         try
         {
             session = SessionFactory.openSession();
