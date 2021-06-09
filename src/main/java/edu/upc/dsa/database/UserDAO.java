@@ -5,11 +5,12 @@ import edu.upc.dsa.models.Game;
 import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.User;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface UserDAO {
     int addUser(String username, String password, String fullName, String email);
-    int logIn(String username, String password);
+    int logIn(String username, String password) throws NoSuchAlgorithmException;
 
     User getUser(int userId);
     User getUser(String username);

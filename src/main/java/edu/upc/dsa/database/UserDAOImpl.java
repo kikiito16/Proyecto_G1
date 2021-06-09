@@ -6,6 +6,10 @@ import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.Inventory;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -290,11 +294,27 @@ public class UserDAOImpl implements UserDAO{
         if(attributes == null)
             return -1;
 
-        else if(attributes.get("username").equals(username)
-                && attributes.get("password").equals(password))
-            return (Integer) session.getBy(User.class, "username", username).get("id");
+        else
+        {
+            String passwordHash;
+            try {
+                //MD5 encryption
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                byte[] messageDigest = md.digest(password.getBytes());
+                BigInteger number = new BigInteger(1, messageDigest);
+                passwordHash = number.toString(16);
+            }
+            catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                return -2;
+            }
 
-        else return -1;
+            if(attributes.get("username").equals(username)
+                    && attributes.get("password").equals(passwordHash))
+                return (Integer) session.getBy(User.class, "username", username).get("id");
+        }
+
+        return -1;
     }
 
     //0 successful

@@ -4,11 +4,12 @@ import edu.upc.dsa.models.*;
 import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.api.CompleteCredentials;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface GameInterface {
 
-    public int logIn  (String username, String password);
+    public int logIn  (String username, String password) throws NoSuchAlgorithmException;
     public int signUp (CompleteCredentials newUsr);  //inicializar listas o pasarlas?
     public User getUser (String username);
     public User getUser (int ID);

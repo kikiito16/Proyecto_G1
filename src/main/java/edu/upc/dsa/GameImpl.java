@@ -1,5 +1,6 @@
 package edu.upc.dsa;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import edu.upc.dsa.database.UserDAO;
@@ -41,7 +42,7 @@ public class GameImpl implements GameInterface{
     //          -1 --> datos no coinciden
     //          -2 --> error base de datos
     @Override
-    public int logIn(String username, String password) {
+    public int logIn(String username, String password) throws NoSuchAlgorithmException {
 
         int res = dao.logIn(username, password);
         if(res >= 0) addConnected(username);

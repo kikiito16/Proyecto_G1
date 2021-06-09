@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiResponses;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.security.NoSuchAlgorithmException;
 
 @Api(value = "/auth")
 @Path("/auth")
@@ -29,6 +30,7 @@ public class AuthenticationService {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful", response = Integer.class),
             @ApiResponse(code = 404, message = "Username already exists"),
+            @ApiResponse(code = 409, message = "Unknown error")
 
     })
     @Path("/signup")
@@ -37,6 +39,8 @@ public class AuthenticationService {
         int res = gameInterface.signUp(cred);
         if(res == -1)
             return Response.status(404).build();
+        else if(res == -2)
+            return Response.status(409).build();
         else
             return Response.status(200).entity(res).build();
     }
@@ -53,7 +57,13 @@ public class AuthenticationService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(Credentials cred) {
 
-        int res = gameInterface.logIn(cred.getUsername(), cred.getPassword());
+        int res = 0;
+        try {
+            res = gameInterface.logIn(cred.getUsername(), cred.getPassword());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            res = -2;
+        }
 
         if(res == -1)
             return Response.status(404).build();

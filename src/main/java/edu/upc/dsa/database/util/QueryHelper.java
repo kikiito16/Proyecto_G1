@@ -10,16 +10,39 @@ public class QueryHelper {
 
         List<String> fields = ObjectHelper.getSimpleFields(object);
 
+        int passwordIndex = -1;
+
+        //We check if a password attribute is in field[0]
+        if(fields.get(0).equals("password"))
+            passwordIndex = 0;
+
         query = query + fields.get(0);
 
-        for(int i = 1; i < fields.size(); i++)
+        for(int i = 1; i < fields.size(); i++) {
+
+            //We check if there is a password attribute, in order to encrypt it later
+            if(fields.get(i).equals("password"))
+                passwordIndex = i;
+
+            //attribute name added to the query string
             query = query + "," + fields.get(i);
+        }
 
 
-        query = query + ") VALUES (?";
+        if(passwordIndex == 0)
+            query = query + ") VALUES (MD(?)";
+        else
+            query = query + ") VALUES (?";
 
-        for(int i = 0; i < fields.size() - 1; i++)
-            query = query + ",?";
+        for(int i = 0; i < fields.size() - 1; i++) {
+
+            //We encrypt the password if there is
+            if (i == passwordIndex-1)
+                query = query + ",MD5(?)";
+
+            else
+                query = query + ",?";
+        }
 
         query = query + ");";
 

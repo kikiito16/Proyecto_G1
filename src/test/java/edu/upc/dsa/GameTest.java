@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import edu.upc.dsa.models.User;
 
+import java.security.NoSuchAlgorithmException;
 
 
 public class GameTest {
@@ -30,7 +31,7 @@ public class GameTest {
     }
 
     @Test
-    public void test1() {
+    public void test1() throws NoSuchAlgorithmException {
         User p3 = new User( "Enric", "kikito",3);
         String usuario= "Enric";
         String psw = "kikito";

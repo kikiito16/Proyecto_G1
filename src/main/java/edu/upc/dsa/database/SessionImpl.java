@@ -36,7 +36,7 @@ public class SessionImpl implements Session{
             for(String f: fields)
             {
                 if(f.equals("id"))
-                    preparedStatement.setNull(1, Types.NULL);
+                    preparedStatement.setNull(i, Types.NULL);
                 else {
                     java.lang.Object object = ObjectHelper.getValue(entity, f);
                     preparedStatement.setObject(i, object);

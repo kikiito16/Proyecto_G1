@@ -8,14 +8,16 @@ import edu.upc.dsa.models.User;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseTest {
 
     @Test
-    public void test()
-    {
+    public void test() throws NoSuchAlgorithmException {
         UserDAO dao = new UserDAOImpl();
 
         int id = dao.addUser("hola", "contra", "Pepito Luis", "pepe@gmail.com");
