@@ -17,11 +17,6 @@ public class GameTest {
 
         User p1 = new User( "Enric", "kikito",0);
         User p2 = new User( "Marc", "cucu",1);
-
-
-        gm.addPlayer(p1);
-        gm.addPlayer(p2);
-
     }
 
     @After

@@ -8,35 +8,33 @@ import java.util.List;
 
 public interface GameInterface {
 
-    public int logIn  (String username, String password);
-    public int signUp (CompleteCredentials newUsr);  //inicializar listas o pasarlas?
-    public User getUser (String username);
-    public User getUser (int ID);
-    //public Player changeName (String username, String password);
-    public int logOut(String username);
-    public int updateUser(int id, String username, String fullName, String email, int money);
-    public int updateUserAttribute(int id, String attribute, java.lang.Object value);
+    //Related to authService
+    int logIn  (String username, String password);
+    int signUp (CompleteCredentials newUsr);
+    int logOut(String username);
 
-    public Object buyObject (String object);
-    public int addObject (List<Object> objectList, int userId);
-    public Object useObject (String object);
-    public List<Object> getAllObjects ();
-    public List<FullObject> getUserObjects (int id);
+    //Related to userService
+    User getUser (int ID);
+    int deleteUser(int id);
+    int updateUser(int id, String username, String fullName, String email, int money);
+    int updateUserAttribute(int id, String attribute, java.lang.Object value);
 
-    public int addGame(int playerId, int duration, int victory, int score);
-    public Game getGame(int id);
-    public List<Game> getAllGamesOf(int playerId);
+    //Related to objectService
+    Object buyObject (String object);
+    int addObject (List<Object> objectList, int userId);
+    Object useObject (String object);
+    List<FullObject> getUserObjects (int id);
 
-    public Map getMap (int idMap);
+    //Related to gameService
+    int addGame(int playerId, int duration, int victory, int score);
+    Game getGame(int id);
+    List<Game> getAllGamesOf(int playerId);
 
-    public List<String> addConnected (String user);
-    public void Disconnect(int pos);
+    //Related to mapsService
+    Map getMap (int idMap);
 
-    public void addPlayer(User user);
-
-    public void clear();
-
-    public int deleteUser(int id);
-    public User setUser(int idUser, String name, String password, int money);
-
+    //Internal calls
+    List<String> addConnected (String user);
+    void Disconnect(int pos);
+    void clear();
 }

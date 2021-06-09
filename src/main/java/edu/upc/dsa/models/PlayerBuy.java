@@ -5,6 +5,8 @@ public class PlayerBuy {
     String idPlayer;
     String nameObject;
 
+    public PlayerBuy() {}
+
     public int getCost() { return cost; }
 
     public void setCost(int cost) { this.cost = cost; }

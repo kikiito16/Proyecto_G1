@@ -6,8 +6,7 @@ public class Object {
 
     public Object() {}
 
-    public Object(int id, int quantity)
-    {
+    public Object(int id, int quantity) {
         this.id = id;
         this.quantity = quantity;
     }
