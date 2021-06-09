@@ -5,13 +5,10 @@ import edu.upc.dsa.models.FullObject;
 import edu.upc.dsa.models.Game;
 import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.User;
-import edu.upc.dsa.models.api.CompleteCredentials;
-import edu.upc.dsa.models.api.Inventory;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseTest {
@@ -110,6 +107,6 @@ public class DatabaseTest {
 
         Game game2 = dao.getGame(4);
 
-        List<Game> gameList = dao.getAllGameOf(1);
+        List<Game> gameList = dao.getAllGamesOf(1);
     }
 }

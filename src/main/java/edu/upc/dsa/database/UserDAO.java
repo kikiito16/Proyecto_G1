@@ -24,6 +24,6 @@ public interface UserDAO {
 
     int addGame(int playerId, int duration, int victory, int score);
     Game getGame(int id);
-    List<Game> getAllGameOf(int playerId);
+    List<Game> getAllGamesOf(int playerId);
 
 }

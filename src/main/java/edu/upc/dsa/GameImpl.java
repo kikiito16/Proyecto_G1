@@ -150,6 +150,30 @@ public class GameImpl implements GameInterface{
         return list;
     }
 
+    //0 successful
+    //-1 incorrect playerId
+    //-2 error
+    @Override
+    public int addGame(int playerId, int duration, int victory, int score) {
+        int res = dao.addGame(playerId, duration, victory, score);
+        return res;
+    }
+
+    //Returns game if found
+    //null if no results
+    @Override
+    public Game getGame(int id) {
+        Game game = dao.getGame(id);
+        return game;
+    }
+
+    //null -> not found
+    @Override
+    public List<Game> getAllGamesOf(int playerId) {
+        List<Game> gameList = dao.getAllGamesOf(playerId);
+        return gameList;
+    }
+
 
     @Override
     public Object useObject(String object) {
@@ -161,25 +185,6 @@ public class GameImpl implements GameInterface{
         return null;
     }
 
-    @Override
-    public Game addGame(String player, Game partida) {
-        return null;
-    }
-
-    @Override
-    public Game getGame(int id_game) {
-        return null;
-    }
-
-    @Override
-    public List<Game> getAllGames() {
-        return null;
-    }
-
-    @Override
-    public List<Game> getGamesByUser(String user) {
-        return null;
-    }
 
     @Override
     public Map getMap(int id_map) {

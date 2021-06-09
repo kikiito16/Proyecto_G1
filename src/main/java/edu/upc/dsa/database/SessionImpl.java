@@ -214,6 +214,7 @@ public class SessionImpl implements Session{
 
     }
 
+    //null -> not found
     @Override
     public List<HashMap<String, Object>> getAllBy(Class theClass, String attr, Object value) {
 

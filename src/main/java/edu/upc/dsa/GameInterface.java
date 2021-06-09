@@ -23,10 +23,9 @@ public interface GameInterface {
     public List<Object> getAllObjects ();
     public List<FullObject> getUserObjects (int id);
 
-    public Game addGame (String player, Game game);
-    public Game getGame (int idGame);
-    public List<Game> getAllGames ();
-    public List<Game> getGamesByUser (String user);
+    public int addGame(int playerId, int duration, int victory, int score);
+    public Game getGame(int id);
+    public List<Game> getAllGamesOf(int playerId);
 
     public Map getMap (int idMap);
 

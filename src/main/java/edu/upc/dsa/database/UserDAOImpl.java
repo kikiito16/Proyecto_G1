@@ -119,6 +119,8 @@ public class UserDAOImpl implements UserDAO{
         return res;
     }
 
+    //Returns game if found
+    //null if no results
     @Override
     public Game getGame(int id) {
 
@@ -147,8 +149,9 @@ public class UserDAOImpl implements UserDAO{
         return game;
     }
 
+    //null -> not found
     @Override
-    public List<Game> getAllGameOf(int playerId) {
+    public List<Game> getAllGamesOf(int playerId) {
         List<Game> gameList = null;
 
         try
