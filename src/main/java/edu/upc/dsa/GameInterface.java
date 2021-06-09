@@ -21,9 +21,9 @@ public interface GameInterface {
     int updateUserAttribute(int id, String attribute, java.lang.Object value);
 
     //Related to objectService
-    Object buyObject (String object);
+    int buyObject (List<Object> object, int id);
     int addObject (List<Object> objectList, int userId);
-    Object useObject (String object);
+    int useObject (Object object, int id);
     List<FullObject> getUserObjects (int id);
 
     //Related to gameService

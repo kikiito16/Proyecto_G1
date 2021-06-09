@@ -19,7 +19,7 @@ import java.security.NoSuchAlgorithmException;
 @Path("/auth")
 public class AuthenticationService {
 
-    private GameInterface gameInterface;
+    private final GameInterface gameInterface;
 
     public AuthenticationService()
     {
@@ -29,7 +29,7 @@ public class AuthenticationService {
     @POST
     @ApiOperation(value = "Sign Up", notes = "Create a new account and log in")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response = Integer.class),
+            @ApiResponse(code = 201, message = "Successful", response = Integer.class),
             @ApiResponse(code = 404, message = "Username already exists"),
             @ApiResponse(code = 409, message = "Unknown error")
 
@@ -43,7 +43,7 @@ public class AuthenticationService {
         else if(res == -2)
             return Response.status(409).build();
         else
-            return Response.status(200).entity(res).build();
+            return Response.status(201).entity(res).build();
     }
 
 
@@ -58,7 +58,7 @@ public class AuthenticationService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(Credentials cred) {
 
-        int res = 0;
+        int res;
         try {
             res = gameInterface.logIn(cred.getUsername(), cred.getPassword());
         } catch (NoSuchAlgorithmException e) {

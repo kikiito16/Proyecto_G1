@@ -98,8 +98,8 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public Object buyObject(String object) {
-        return null;
+    public int buyObject(List<Object> object, int id) {
+        return 0;
     }
 
     @Override
@@ -110,8 +110,8 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public Object useObject(String object) {
-        return null;
+    public int useObject(Object object, int id) {
+        return 0;
     }
 
     @Override
