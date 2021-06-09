@@ -1,5 +1,6 @@
 package edu.upc.dsa.services;
 
+import com.google.gson.Gson;
 import edu.upc.dsa.GameImpl;
 import edu.upc.dsa.GameInterface;
 import edu.upc.dsa.models.api.CompleteCredentials;
@@ -70,7 +71,7 @@ public class AuthenticationService {
         else if(res == -2)
             return  Response.status(409).build();
         else
-            return Response.status(200).entity(res).build();
+            return Response.status(200).entity(new Gson().toJson(res)).build();
     }
 
     @POST

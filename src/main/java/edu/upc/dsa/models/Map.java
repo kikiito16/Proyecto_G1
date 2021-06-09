@@ -4,6 +4,8 @@ public class Map {
     private int idMap;
     private double cells;   //double, string, int???
 
+    public Map() {}
+
     public int getIdMap() {
         return idMap;
     }

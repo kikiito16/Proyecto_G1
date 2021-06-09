@@ -234,7 +234,6 @@ public class UserDAOImpl implements UserDAO{
                     attributes.get("email").toString(),
                     (Integer) attributes.get("money")
             );
-
         }
         catch(Exception e) {
             System.out.println(e.getMessage());
