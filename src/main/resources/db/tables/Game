@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS Game;
+CREATE TABLE Game (
+    id int not null auto_increment,
+    playerId int not null,
+    duration int not null,
+    victory int not null,
+    score int not null,
+    FOREIGN KEY (playerId) REFERENCES User(id),
+    PRIMARY KEY(id)
+);

@@ -18,7 +18,7 @@ public class SessionImpl implements Session{
     }
 
     //-2 --> error
-    //-1 --> username already exists
+    //-1 --> username already exists or foreign key error
     //0 inserted correctly
     @Override
     public int create(Object entity) {
@@ -49,6 +49,7 @@ public class SessionImpl implements Session{
         }
         catch (SQLIntegrityConstraintViolationException e)
         {
+            e.printStackTrace();
             return -1;
         }
         catch(SQLException e)

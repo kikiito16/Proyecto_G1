@@ -2,6 +2,7 @@ package edu.upc.dsa;
 
 import edu.upc.dsa.database.*;
 import edu.upc.dsa.models.FullObject;
+import edu.upc.dsa.models.Game;
 import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.CompleteCredentials;
@@ -89,5 +90,26 @@ public class DatabaseTest {
 
         res = dao.addToInventory(objectList, 2);
         Assert.assertEquals(0, res);
+    }
+
+    @Test
+    public void GameTest()
+    {
+        UserDAO dao = new UserDAOImpl();
+        int res = dao.addGame(50, 76, 1, 106);
+        Assert.assertEquals(-1, res);
+
+        int res2 = dao.addGame(1, 76, 1, 106);
+        Assert.assertEquals(0, res2);
+
+        int res3 = dao.addGame(2, 57, 0, 19);
+        Assert.assertEquals(0, res3);
+
+        int res4 = dao.addGame(1, 60, 0, 17);
+        Assert.assertEquals(0, res4);
+
+        Game game2 = dao.getGame(4);
+
+        List<Game> gameList = dao.getAllGameOf(1);
     }
 }

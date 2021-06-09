@@ -1,6 +1,7 @@
 package edu.upc.dsa.database;
 
 import edu.upc.dsa.models.FullObject;
+import edu.upc.dsa.models.Game;
 import edu.upc.dsa.models.Object;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.Inventory;
@@ -26,8 +27,9 @@ public class UserDAOImpl implements UserDAO{
             session = SessionFactory.openSession();
 
             User user = new User(username, password, fullName, email);
-            if(session.create(user) == -1)
-                userId = -1;
+            int res = session.create(user);
+            if(res != 0)
+                userId = res;
             else
                 userId = (Integer) session.getBy(User.class, "username", username).get("id");
         }
@@ -92,6 +94,88 @@ public class UserDAOImpl implements UserDAO{
             return null;
         }
         return objectList;
+    }
+
+    //0 successful
+    //-1 incorrect playerId
+    //-2 error
+    @Override
+    public int addGame(int playerId, int duration, int victory, int score) {
+        Game game = new Game(playerId, duration, victory, score);
+        int res = -2;
+        try
+        {
+            session = SessionFactory.openSession();
+            res = session.create(game);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return res;
+        }
+        finally {
+            session.close();
+        }
+
+        return res;
+    }
+
+    @Override
+    public Game getGame(int id) {
+
+        Game game = null;
+
+        try
+        {
+            session = SessionFactory.openSession();
+            HashMap<String, java.lang.Object> hashMap = session.getBy(Game.class, "id", id);
+            if(hashMap != null)
+                game = new Game(
+                        (int)hashMap.get("id"),
+                        (int)hashMap.get("playerId"),
+                        (int)hashMap.get("duration"),
+                        (int)hashMap.get("victory"),
+                        (int)hashMap.get("score")
+                );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            session.close();
+        }
+
+        return game;
+    }
+
+    @Override
+    public List<Game> getAllGameOf(int playerId) {
+        List<Game> gameList = null;
+
+        try
+        {
+            session = SessionFactory.openSession();
+            List<HashMap<String, java.lang.Object>> hashMapList = session.getAllBy(Game.class, "playerId", playerId);
+
+            if(hashMapList != null) {
+                gameList = new ArrayList<>();
+                for (HashMap<String, java.lang.Object> h : hashMapList)
+                    gameList.add(new Game(
+                            (int) h.get("id"),
+                            (int) h.get("playerId"),
+                            (int) h.get("duration"),
+                            (int) h.get("victory"),
+                            (int) h.get("score")
+                    ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            session.close();
+        }
+
+        return gameList;
     }
 
     @Override

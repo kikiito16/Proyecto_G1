@@ -1,59 +1,68 @@
 package edu.upc.dsa.models;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Game {
-    private int idGame;
-    private int idPlayer;
-    private String victory;
-    private double duration;
-    private List<Map> mapsList;
+    private int id;
+    private int playerId;
+    private int duration;
+    private int victory; // 0 lost, 1 victory
+    private int score;
 
-    public Game(int idGame, int idPlayer) {
-        this.idGame = idGame;
-        this.idPlayer = idPlayer;
-        this.victory = "false";
-        this.duration = 0;
-        this.mapsList = new LinkedList<>();
-    }
+    public Game(){}
 
-    public int getIdGame() {
-        return idGame;
-    }
-
-    public void setIdGame(int idGame) {
-        this.idGame = idGame;
-    }
-
-    public int getIdPlayer() {
-        return idPlayer;
-    }
-
-    public void setIdPlayer(int idPlayer) {
-        this.idPlayer = idPlayer;
-    }
-
-    public String getVictory() {
-        return victory;
-    }
-
-    public void setVictory(String victory) {
+    public Game(int id, int playerId, int duration, int victory, int score) {
+        this.id = id;
+        this.playerId = playerId;
+        this.duration = duration;
         this.victory = victory;
+        this.score = score;
     }
 
-    public double getDuration() {
+    public Game(int playerId, int duration, int victory, int score) {
+        this.id = -1;
+        this.playerId = playerId;
+        this.duration = duration;
+        this.victory = victory;
+        this.score = score;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public int getVictory() {
+        return victory;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
+
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public List<Map> getMapsList() {
-        return mapsList;
+    public void setVictory(int victory) {
+        this.victory = victory;
     }
 
-    public void setMapsList(List<Map> mapsList) {
-        this.mapsList = mapsList;
+    public void setScore(int score) {
+        this.score = score;
     }
+
 }
