@@ -2,7 +2,7 @@ package edu.upc.dsa.database;
 
 import edu.upc.dsa.models.FullObject;
 import edu.upc.dsa.models.Game;
-import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.Inventory;
 
@@ -48,12 +48,12 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public int addToInventory(List<Object> objectList, int userId)
+    public int addToInventory(List<GameObject> objectList, int userId)
     {
         int res = -1;
         try {
             session = SessionFactory.openSession();
-            for (Object o : objectList) {
+            for (GameObject o : objectList) {
                 Inventory inventory = new Inventory(userId, o.getId(), o.getQuantity());
                 res = session.create(inventory);
             }

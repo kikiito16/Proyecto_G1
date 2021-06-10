@@ -1,6 +1,6 @@
 package edu.upc.dsa.models;
 
-public class FullObject extends Object {
+public class FullObject extends GameObject {
 
     String name;
     int attack;

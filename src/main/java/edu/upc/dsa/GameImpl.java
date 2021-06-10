@@ -7,7 +7,7 @@ import edu.upc.dsa.database.UserDAO;
 import edu.upc.dsa.database.UserDAOImpl;
 import edu.upc.dsa.models.*;
 import edu.upc.dsa.models.Map;
-import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.api.CompleteCredentials;
 import org.apache.log4j.Logger;
 
@@ -33,7 +33,10 @@ public class GameImpl implements GameInterface{
         //          -1 --> No match in data
         //          -2 --> error database
         int res = dao.logIn(username, password);
-        if(res >= 0) addConnected(username);
+        if(res >= 0) {
+            logger.info(username + " logged in successfully!");
+            addConnected(username);
+        }
 
         return res;
     }
@@ -43,7 +46,10 @@ public class GameImpl implements GameInterface{
         //-1 --> username already exists
         //others --> user id
         int res = dao.addUser(user.getUsername(), user.getPassword(), user.getFullName(), user.getEmail());
-        if(res != -1) addConnected(user.getUsername());
+        if(res != -1) {
+            logger.info(user.getUsername() + " signed up successfully!");
+            addConnected(user.getUsername());
+        }
 
         return res;
     }
@@ -56,7 +62,7 @@ public class GameImpl implements GameInterface{
         if (connectedList.size()>0) {
             while (!found && i < connectedList.size()) {
                 if (username.equals(connectedList.get(i))) {
-                    logger.info("Successfully disconnected: " + username);
+                    logger.info(username + " successfully disconnected!");
                     Disconnect(i);
                     error = 0;
                     found = true;
@@ -72,7 +78,9 @@ public class GameImpl implements GameInterface{
 
     @Override
     public User getUser(int ID) {
-        return dao.getUser(ID);
+        User user = dao.getUser(ID);
+        logger.info("Get user:" + user);
+        return user;
     }
 
     @Override
@@ -80,43 +88,55 @@ public class GameImpl implements GameInterface{
         //0 successful
         //-1 incorrect password
         //-2 error
-        return dao.deleteUser(id);
+        int res = dao.deleteUser(id);
+        if(res == 0) logger.info("User ID " + id + " deleted successfully!");
+        return res;
     }
 
     @Override
     public int updateUser(int id, String username, String fullName, String email, int money) {
         // 0 successful
         // -1 error
-        return dao.updateUser(id, username, fullName, email, money);
+        int res = dao.updateUser(id, username, fullName, email, money);
+        if (res == 0) logger.info("User ID " + id + " updated successfully!");
+        return res;
     }
 
     @Override
     public int updateUserAttribute(int id, String attribute, java.lang.Object value) {
         //-1 error
         //0 successful
-        return dao.updateUserAttribute(id, attribute, value);
+        int res = dao.updateUserAttribute(id, attribute, value);
+        if (res == 0) logger.info("User ID " + id + ": " + attribute + "updated successfully!");
+        return res;
     }
 
     @Override
-    public int buyObject(List<Object> object, int id) {
+    public int buyObject(List<GameObject> object, int id) {
+        logger.info("User ID " + id + ": Objects bought successfully! (DEMO)");
         return 0;
     }
 
     @Override
-    public int addObject(List<Object> objectList, int userId) {
+    public int addObject(List<GameObject> objectList, int userId) {
         //0 successful
         //-1 error
-        return dao.addToInventory(objectList, userId);
+        int res = dao.addToInventory(objectList, userId);
+        if (res == 0) logger.info("User ID " + userId + ": Objects added successfully!");
+        return res;
     }
 
     @Override
-    public int useObject(Object object, int id) {
+    public int useObject(GameObject object, int id) {
+        logger.info("User ID " + id + ": Object used successfully! (DEMO)");
         return 0;
     }
 
     @Override
     public List<FullObject> getUserObjects(int userId) {
-        return dao.getInventoryOf(userId);
+        List<FullObject> res = dao.getInventoryOf(userId);
+        if (res != null) logger.info("Get user objects (id = " + userId + "): " + res);
+        return res;
     }
 
     @Override
@@ -124,20 +144,26 @@ public class GameImpl implements GameInterface{
         //0 successful
         //-1 incorrect playerId
         //-2 error
-        return dao.addGame(playerId, duration, victory, score);
+        int res = dao.addGame(playerId, duration, victory, score);
+        if (res == 0) logger.info("Player " + playerId + ": Game added successfully!");
+        return res;
     }
 
     @Override
     public Game getGame(int id) {
         //Returns game if found
         //null if no results
-        return dao.getGame(id);
+        Game res = dao.getGame(id);
+        if (res != null) logger.info("Get game " + id + ": " + res);
+        return res;
     }
 
     @Override
     public List<Game> getAllGamesOf(int playerId) {
         //null -> not found
-        return dao.getAllGamesOf(playerId);
+        List<Game> res = dao.getAllGamesOf(playerId);
+        if (res != null) logger.info("Get games of player " + playerId + ": " + res);
+        return res;
     }
 
     @Override
@@ -156,10 +182,5 @@ public class GameImpl implements GameInterface{
     public void Disconnect (int pos) {
         this.connectedList.remove(pos);
 
-    }
-
-    @Override
-    public void clear() {
-        connectedList.clear();
     }
 }

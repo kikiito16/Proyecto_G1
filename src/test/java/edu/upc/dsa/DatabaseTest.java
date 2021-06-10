@@ -3,7 +3,7 @@ package edu.upc.dsa;
 import edu.upc.dsa.database.*;
 import edu.upc.dsa.models.FullObject;
 import edu.upc.dsa.models.Game;
-import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -80,10 +80,10 @@ public class DatabaseTest {
         UserDAO dao = new UserDAOImpl();
         List<FullObject> list = dao.getInventoryOf(1);
 
-        List<Object> objectList = new ArrayList<>();
-        objectList.add(new Object(1, 1));
-        objectList.add(new Object(2, 2));
-        objectList.add(new Object(3, 3));
+        List<GameObject> objectList = new ArrayList<>();
+        objectList.add(new GameObject(1, 1));
+        objectList.add(new GameObject(2, 2));
+        objectList.add(new GameObject(3, 3));
         int res = dao.addToInventory(objectList, 50);
         Assert.assertEquals(-1, res);
 

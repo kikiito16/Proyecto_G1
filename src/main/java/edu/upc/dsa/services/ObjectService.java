@@ -3,7 +3,7 @@ package edu.upc.dsa.services;
 import edu.upc.dsa.GameImpl;
 import edu.upc.dsa.GameInterface;
 import edu.upc.dsa.models.FullObject;
-import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.GameObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -40,7 +40,7 @@ public class ObjectService {
         else return Response.status(200).entity(entity).build();
     }
 
-    /*@POST
+    @POST
     @ApiOperation(value = "Add object", notes = "Add object for playerId")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful"),
@@ -48,7 +48,7 @@ public class ObjectService {
     })
     @Path("/add/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addObject(List<Object> o, @PathParam("id") int ID) {
+    public Response addObject(List<GameObject> o, @PathParam("id") int ID) {
         int res = gameInterface.addObject(o, ID);
 
         if(res == -1)
@@ -65,7 +65,7 @@ public class ObjectService {
     })
     @Path("/buy/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response buyObject(List<Object> o, @PathParam("id") int ID) {
+    public Response buyObject(List<GameObject> o, @PathParam("id") int ID) {
         int res = gameInterface.buyObject(o, ID);
 
         if(res == -1)
@@ -82,12 +82,12 @@ public class ObjectService {
     })
     @Path("/use/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response useObject(Object o, @PathParam("id") int ID) {
+    public Response useObject(GameObject o, @PathParam("id") int ID) {
         int res = gameInterface.useObject(o, ID);
 
         if(res == -1)
             return Response.status(404).build();
         else
             return Response.status(201).build();
-    }*/
+    }
 }

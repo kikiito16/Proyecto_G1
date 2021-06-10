@@ -1,12 +1,12 @@
 package edu.upc.dsa.models;
 
-public class Object {
+public class GameObject {
     int id;
     int quantity;
 
-    public Object() {}
+    public GameObject() {}
 
-    public Object(int id, int quantity) {
+    public GameObject(int id, int quantity) {
         this.id = id;
         this.quantity = quantity;
     }

@@ -2,7 +2,7 @@ package edu.upc.dsa.database;
 
 import edu.upc.dsa.models.FullObject;
 import edu.upc.dsa.models.Game;
-import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.User;
 
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +20,7 @@ public interface UserDAO {
     int updateUser(int id, String username, String fullName, String email, int money);
     int updateUserAttribute(int id, String attribute, java.lang.Object value);
 
-    int addToInventory(List<Object> objectList, int userId);
+    int addToInventory(List<GameObject> objectList, int userId);
     List<FullObject> getInventoryOf(int userId);
 
     int addGame(int playerId, int duration, int victory, int score);

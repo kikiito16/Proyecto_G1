@@ -1,7 +1,7 @@
 package edu.upc.dsa;
 
 import edu.upc.dsa.models.*;
-import edu.upc.dsa.models.Object;
+import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.api.CompleteCredentials;
 
 import java.security.NoSuchAlgorithmException;
@@ -21,9 +21,9 @@ public interface GameInterface {
     int updateUserAttribute(int id, String attribute, java.lang.Object value);
 
     //Related to objectService
-    int buyObject (List<Object> object, int id);
-    int addObject (List<Object> objectList, int userId);
-    int useObject (Object object, int id);
+    int buyObject (List<GameObject> object, int id);
+    int addObject (List<GameObject> objectList, int userId);
+    int useObject (GameObject object, int id);
     List<FullObject> getUserObjects (int id);
 
     //Related to gameService
@@ -37,6 +37,4 @@ public interface GameInterface {
     //Internal calls
     List<String> addConnected (String user);
     void Disconnect(int pos);
-    void clear();
-
 }
