@@ -30,7 +30,8 @@
 
       $(".btn-submit").click(function(){
         var auth = $(this).attr("id");
-        var url = "http://localhost:8080/dsaApp/auth/" + auth;
+        //var url = "http://localhost:8080/dsaApp/auth/" + auth;
+        var url = "http://192.168.1.41:8080/dsaApp/auth/" + auth;
         var CompleteCredentials = {};
 
         var selector = "." + auth + "-credential";
