@@ -14,11 +14,9 @@ import org.apache.log4j.Logger;
 public class GameImpl implements GameInterface{
     private static GameInterface instance;
     final static Logger logger = Logger.getLogger(GameImpl.class);
-    public List<String> connectedList;
     private final UserDAO dao;
 
     private GameImpl() {
-        this.connectedList = new LinkedList<>();
         this.dao = new UserDAOImpl();
     }
 
@@ -35,7 +33,6 @@ public class GameImpl implements GameInterface{
         int res = dao.logIn(username, password);
         if(res >= 0) {
             logger.info(username + " logged in successfully!");
-            addConnected(username);
         }
 
         return res;
@@ -48,32 +45,9 @@ public class GameImpl implements GameInterface{
         int res = dao.addUser(user.getUsername(), user.getPassword(), user.getFullName(), user.getEmail());
         if(res != -1) {
             logger.info(user.getUsername() + " signed up successfully!");
-            addConnected(user.getUsername());
         }
 
         return res;
-    }
-
-    @Override
-    public int logOut(String username) {
-        int error = -1;
-        int i = 0;
-        boolean found = false;
-        if (connectedList.size()>0) {
-            while (!found && i < connectedList.size()) {
-                if (username.equals(connectedList.get(i))) {
-                    logger.info(username + " successfully disconnected!");
-                    Disconnect(i);
-                    error = 0;
-                    found = true;
-                }
-                i++;
-            }
-        }
-        if (error==-1)
-            logger.info("Could not disconnect: " + username);
-
-        return error;
     }
 
     @Override
@@ -169,18 +143,5 @@ public class GameImpl implements GameInterface{
     @Override
     public Map getMap(int id_map) {
         return null;
-    }
-
-    @Override
-    public List<String> addConnected(String username) {
-        this.connectedList.add(username);
-        logger.info("Current users connected: " + this.connectedList);
-        return this.connectedList;
-    }
-
-    @Override
-    public void Disconnect (int pos) {
-        this.connectedList.remove(pos);
-
     }
 }

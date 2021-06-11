@@ -12,7 +12,6 @@ public interface GameInterface {
     //Related to authService
     int logIn  (String username, String password) throws NoSuchAlgorithmException;
     int signUp (CompleteCredentials newUsr);
-    int logOut(String username);
 
     //Related to userService
     User getUser (int ID);
@@ -33,8 +32,4 @@ public interface GameInterface {
 
     //Related to mapsService
     Map getMap (int idMap);
-
-    //Internal calls
-    List<String> addConnected (String user);
-    void Disconnect(int pos);
 }
