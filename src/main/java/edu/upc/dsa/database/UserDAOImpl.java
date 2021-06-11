@@ -326,7 +326,7 @@ public class UserDAOImpl implements UserDAO{
         {
             session = SessionFactory.openSession();
 
-            User user = new User(username, String.valueOf(session.getBy(User.class, "id", id).get("password")), fullName, email, money, id);
+            User user = new User(username, null, fullName, email, money, id);
 
             res = session.update(user);
         }

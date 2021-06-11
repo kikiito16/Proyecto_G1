@@ -64,6 +64,7 @@ public class QueryHelper {
         return query;
     }
 
+    //password not updated
     public static String createQueryUPDATE(Object object)
     {
         String query = "UPDATE " + object.getClass().getSimpleName() + " SET ";
@@ -71,11 +72,11 @@ public class QueryHelper {
 
         for(String f : fields)
         {
-            if(!f.equals("id"))
-            query = query + f + "=?, ";
+            if(!f.equals("id") && !f.equals("password"))
+                query = query + f + "=?, ";
         }
 
-        //erase the last ,
+        //erase the last ','
         query = query.substring(0,query.length()-2);
 
         query = query + " WHERE id=?;";
@@ -86,7 +87,10 @@ public class QueryHelper {
     public static String createQueryUPDATEAttribute(Class theClass, String attribute)
     {
         String query = "UPDATE " + theClass.getSimpleName() + " SET ";
-        query = query + attribute + "=? WHERE id=?;";
+        if(attribute == "password")
+            query = query + attribute + "=MD5(?) WHERE id=?;";
+        else
+            query = query + attribute + "=? WHERE id=?;";
 
         return query;
     }

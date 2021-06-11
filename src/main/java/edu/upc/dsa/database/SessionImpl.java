@@ -112,12 +112,12 @@ public class SessionImpl implements Session{
 
             for(String f : fields)
             {
-                if(!f.equals("id")) {
+                if(!f.equals("id") && !f.equals("password")) {
                     preparedStatement.setObject(i, ObjectHelper.getValue(entity, f));
                     i++;
                 }
             }
-            preparedStatement.setObject(fields.size(), ObjectHelper.getValue(entity, "id"));
+            preparedStatement.setObject(i, ObjectHelper.getValue(entity, "id"));
 
             boolean error = preparedStatement.execute();
             if(!error)

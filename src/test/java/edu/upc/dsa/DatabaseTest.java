@@ -40,17 +40,13 @@ public class DatabaseTest {
     @Test
     public void updateUserTest()
     {
-        User user = new User("martapm", "contra_marta", "Marta Pardo", "marta@gmail.com");
-        user.setId(36);
-        user.setMoney(125);
-
         UserDAO dao = new UserDAOImpl();
-        int res = dao.updateUser(36, "martapm", "Marta Pardo", "marta@gmail.com", 125);
-        User user1 = dao.getUser(36);
+        int res = dao.updateUser(2, "martapm2", "Marta Pardo", "marta@gmail.com", 125);
+        User user1 = dao.getUser(2);
 
-        Assert.assertEquals(36, user1.getId());
-        Assert.assertEquals("martapm", user1.getUsername());
-        Assert.assertEquals("contra_marta", user1.getPassword());
+        Assert.assertEquals(2, user1.getId());
+        Assert.assertEquals("martapm2", user1.getUsername());
+        Assert.assertEquals("4d186321c1a7f0f354b297e8914ab240", user1.getPassword());
         Assert.assertEquals("Marta Pardo", user1.getFullName());
         Assert.assertEquals("marta@gmail.com", user1.getEmail());
         Assert.assertEquals(125, user1.getMoney());
