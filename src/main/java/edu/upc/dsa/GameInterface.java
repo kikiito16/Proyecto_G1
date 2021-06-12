@@ -21,8 +21,9 @@ public interface GameInterface {
 
     //Related to objectService
     int buyObject (List<GameObject> object, int id);
+    int sellObject (List<GameObject> object, int id);
     int addObject (List<GameObject> objectList, int userId);
-    int useObject (GameObject object, int id);
+    int useObject (int idObject, int idUser);
     List<FullObject> getUserObjects (int id);
 
     //Related to gameService

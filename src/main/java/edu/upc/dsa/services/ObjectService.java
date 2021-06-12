@@ -74,16 +74,15 @@ public class ObjectService {
             return Response.status(201).build();
     }
 
-    @POST
+    @PUT
     @ApiOperation(value = "Use object", notes = "Use object for playerId")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful"),
-            @ApiResponse(code = 404, message = "User not found")
+            @ApiResponse(code = 404, message = "Error")
     })
-    @Path("/use/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response useObject(GameObject o, @PathParam("id") int ID) {
-        int res = gameInterface.useObject(o, ID);
+    @Path("/use/{idObject}/user/{idUser}")
+    public Response useObject(@PathParam("idObject") int idObject, @PathParam("idUser") int idUser) {
+        int res = gameInterface.useObject(idObject, idUser);
 
         if(res == -1)
             return Response.status(404).build();

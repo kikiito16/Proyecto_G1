@@ -45,6 +45,12 @@ public class GameImpl implements GameInterface{
         int res = dao.addUser(user.getUsername(), user.getPassword(), user.getFullName(), user.getEmail());
         if(res != -1) {
             logger.info(user.getUsername() + " signed up successfully!");
+            List<GameObject> list = new LinkedList<>();
+            list.add(new GameObject(6, 5));
+            list.add(new GameObject(4, 1));
+            list.add(new GameObject(10, 1));
+            int res2 = dao.addToInventory(list, res);
+            if (res2 == 0) logger.info("User ID " + res + ": Default objects added successfully!");
         }
 
         return res;
@@ -92,6 +98,12 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
+    public int sellObject(List<GameObject> object, int id) {
+        logger.info("User ID " + id + ": Objects sold successfully! (DEMO)");
+        return 0;
+    }
+
+    @Override
     public int addObject(List<GameObject> objectList, int userId) {
         //0 successful
         //-1 error
@@ -101,8 +113,8 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public int useObject(GameObject object, int id) {
-        logger.info("User ID " + id + ": Object used successfully! (DEMO)");
+    public int useObject(int idObject, int idUser) {
+        logger.info("User ID " + idUser + ": Object used successfully! (DEMO)");
         return 0;
     }
 

@@ -7,7 +7,6 @@ import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.Inventory;
 
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
