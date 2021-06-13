@@ -66,7 +66,7 @@ public class DatabaseTest {
     public void deleteUserTest()
     {
         UserDAO dao = new UserDAOImpl();
-        int res = dao.deleteUser(5);
+        int res = dao.deleteUser(1);
         Assert.assertEquals(0, res);
     }
 

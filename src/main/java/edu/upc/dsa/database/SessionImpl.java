@@ -94,6 +94,41 @@ public class SessionImpl implements Session{
         return 0;
     }
 
+    @Override
+    public int delete(Class theClass, Object... objects) {
+
+        //The name of the attributes are stored in a list
+        List<String> attributes = new ArrayList();
+        for(int i = 0; i < objects.length; i+=2)
+            attributes.add(objects[i].toString());
+
+        PreparedStatement preparedStatement = null;
+        String query = QueryHelper.createQueryDELETE(theClass, attributes);
+
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+
+            int i = 1;
+            for(int j = 1; j < objects.length; j += 2)
+                preparedStatement.setObject(i++, objects[j]);
+
+            preparedStatement.executeQuery();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
+
+        return 0;
+
+    }
+
     //0 successful
     //-1 error
     @Override

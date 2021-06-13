@@ -4,7 +4,7 @@ CREATE TABLE Inventory (
     objectId int not null,
     quantity int not null,
     FOREIGN KEY (userId) REFERENCES User(id),
-    FOREIGN KEY (objectId) REFERENCES Object(id),
+    FOREIGN KEY (objectId) REFERENCES GameObject(id),
     CONSTRAINT check_quantity CHECK (quantity>0)
 );
 insert into inventory values (1, 1, 1);

@@ -299,7 +299,21 @@ public class UserDAOImpl implements UserDAO{
         try
         {
             session = SessionFactory.openSession();
-            res = session.delete(User.class, id);
+            //We delete first all the inventory objects of the user
+            int res1 = session.delete(Inventory.class,
+                    "userId", id
+                    );
+
+            //We delete all the games of the player
+            int res2 = -1;
+            if(res1 == 0)
+                res2 = session.delete(Game.class,
+                        "playerId", id
+                        );
+
+            //We delete the player
+            if(res2 == 0)
+                res = session.delete(User.class, id);
         }
         catch (Exception e) {
             e.printStackTrace();

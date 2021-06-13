@@ -66,10 +66,10 @@ public class GameImpl implements GameInterface{
     @Override
     public int deleteUser(int id) {
         //0 successful
-        //-1 incorrect password
-        //-2 error
+        //-1 sql error
         int res = dao.deleteUser(id);
         if(res == 0) logger.info("User ID " + id + " deleted successfully!");
+        else logger.info("User ID " + id + " NOT deleted due to an error");
         return res;
     }
 

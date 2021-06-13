@@ -56,6 +56,18 @@ public class QueryHelper {
         return query;
     }
 
+    public static String createQueryDELETE(Class theClass, List<String> attributes)
+    {
+        String query = "DELETE FROM " + theClass.getSimpleName() + " WHERE ";
+        for(Object a : attributes)
+        {
+            query = query + a.toString() + "=? ";
+        }
+        query = query + ";";
+
+        return query;
+    }
+
     public static String createQuerySELECT(Class theClass, String field)
     {
         String query = "SELECT * from " + theClass.getSimpleName() + " WHERE " + field +

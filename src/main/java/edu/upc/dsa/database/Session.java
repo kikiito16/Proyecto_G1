@@ -10,6 +10,7 @@ public interface Session {
 
     int create(Object entity);
     int delete(Class theClass, int id);
+    int delete(Class theClass, Object... objects); //objects args: String attribute, value (for each WHERE condition)
     int customDelete(String query, Object ... objects);
     int update(Object entity);
     int update(Class theClass, int id, String attribute, Object value);
