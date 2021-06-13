@@ -113,9 +113,11 @@ public class GameImpl implements GameInterface{
     }
 
     @Override
-    public int useObject(int idObject, int idUser) {
-        logger.info("User ID " + idUser + ": Object used successfully! (DEMO)");
-        return 0;
+    public int useObject(int objectId, int userId) {
+        int res = dao.useObject(objectId, userId);
+        if(res == 0) logger.info("User ID " + userId + ": Object used successfully!");
+        else logger.info("User ID " + userId + ": Object " + objectId + " not used due to an error");
+        return res;
     }
 
     @Override

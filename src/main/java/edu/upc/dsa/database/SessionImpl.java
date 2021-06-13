@@ -94,6 +94,32 @@ public class SessionImpl implements Session{
         return 0;
     }
 
+    //0 successful
+    //-1 error
+    @Override
+    public int customDelete(String query, Object... objects) {
+
+        PreparedStatement preparedStatement = null;
+
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+
+            int i = 1;
+            for(Object o : objects)
+                preparedStatement.setObject(i++, o);
+
+            preparedStatement.executeQuery();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        return 0;
+    }
+
     //0 --> successful
     //-1 --> error
     @Override
@@ -258,7 +284,7 @@ public class SessionImpl implements Session{
     //It returns the number of updated rows
     //-1 --> error
     @Override
-    public int customUpdate(String query, Object... objects) {
+    public int customUpdate(String query, Object... objects) throws SQLIntegrityConstraintViolationException{
 
         //We prepare the query and execute it
         PreparedStatement preparedStatement = null;
@@ -274,6 +300,10 @@ public class SessionImpl implements Session{
 
             //We store the number of affectedRows
             affectedRows = preparedStatement.executeUpdate();
+        }
+        catch(SQLIntegrityConstraintViolationException e)
+        {
+            throw e;
         }
         catch (SQLException e) {
             e.printStackTrace();

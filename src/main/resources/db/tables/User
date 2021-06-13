@@ -8,3 +8,6 @@ CREATE TABLE User (
     money int not null,
     PRIMARY KEY(id)
 );
+
+INSERT INTO User (username, password, fullName, email, money) values ("arnauem", "holahola", "Arnau Esteban", "arnau@gmail.com", 25);
+INSERT INTO User (username, password, fullName, email, money) values ("pedrito", "1234", "Pedro Palacios", "pedro@gmail.com", 25);

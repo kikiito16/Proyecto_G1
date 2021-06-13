@@ -21,6 +21,7 @@ public interface UserDAO {
     int updateUserAttribute(int id, String attribute, java.lang.Object value);
 
     int addToInventory(List<GameObject> objectList, int userId);
+    int useObject(int objectId, int userId);
     List<FullObject> getInventoryOf(int userId);
 
     int addGame(int playerId, int duration, int victory, int score);

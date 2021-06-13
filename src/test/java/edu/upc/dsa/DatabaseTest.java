@@ -109,7 +109,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void customQuery()
+    public void customUpdate()
     {
         UserDAO dao = new UserDAOImpl();
         List<GameObject> objectList = new ArrayList<>();
@@ -118,4 +118,14 @@ public class DatabaseTest {
         int res = dao.addToInventory(objectList, 1);
         System.out.println(res);
     }
+
+    @Test
+    public void useObject()
+    {
+        UserDAO dao = new UserDAOImpl();
+        Assert.assertEquals(0, dao.useObject(1, 1));
+        Assert.assertEquals(0, dao.useObject(3, 2));
+        Assert.assertEquals(-1, dao.useObject(1, 3));
+    }
+
 }

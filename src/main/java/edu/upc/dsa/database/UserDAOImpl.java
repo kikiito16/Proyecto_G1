@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +80,36 @@ public class UserDAOImpl implements UserDAO{
             session.close();
         }
 
+        return res;
+    }
+
+    //0 successful
+    // -1 error
+    @Override
+    public int useObject(int objectId, int userId) {
+        int res = -1;
+        try {
+            session = SessionFactory.openSession();
+            int affectedRows = session.customUpdate(
+                    "UPDATE Inventory SET quantity=quantity-1 WHERE objectId=? AND userId=?;",
+                    objectId,
+                    userId
+            );
+            if(affectedRows == 1)
+                res = 0;
+        }
+        catch (SQLIntegrityConstraintViolationException e) {
+            //The quantity of the object in the inventory table is now 0, so we delete it from the table
+            res = session.customDelete(
+                    "DELETE FROM Inventory WHERE objectId=? AND userId=?;",
+                    objectId,
+                    userId
+            );
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return res;
     }
 
