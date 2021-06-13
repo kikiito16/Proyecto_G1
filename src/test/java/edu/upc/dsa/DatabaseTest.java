@@ -107,4 +107,15 @@ public class DatabaseTest {
 
         List<Game> gameList = dao.getAllGamesOf(1);
     }
+
+    @Test
+    public void customQuery()
+    {
+        UserDAO dao = new UserDAOImpl();
+        List<GameObject> objectList = new ArrayList<>();
+        objectList.add(new GameObject(1, 25));
+        objectList.add(new GameObject(2, 40));
+        int res = dao.addToInventory(objectList, 1);
+        System.out.println(res);
+    }
 }

@@ -18,7 +18,7 @@ public class SessionImpl implements Session{
     }
 
     //-2 --> error
-    //-1 --> username already exists or foreign key error
+    //-1 --> username already exists or foreign key error or SQLIntegrityConstraintViolationException
     //0 inserted correctly
     @Override
     public int create(Object entity) {
@@ -253,7 +253,33 @@ public class SessionImpl implements Session{
         }
 
         return list;
+    }
 
+    //It returns the number of updated rows
+    //-1 --> error
+    @Override
+    public int customUpdate(String query, Object... objects) {
+
+        //We prepare the query and execute it
+        PreparedStatement preparedStatement = null;
+        int affectedRows = -1;
+
+        try {
+            preparedStatement = conn.prepareStatement(query);
+
+            int i = 1;
+            for (Object o : objects) {
+                preparedStatement.setObject(i++, o);
+            }
+
+            //We store the number of affectedRows
+            affectedRows = preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return affectedRows;
     }
 
 

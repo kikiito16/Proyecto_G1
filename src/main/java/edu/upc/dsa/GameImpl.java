@@ -106,7 +106,7 @@ public class GameImpl implements GameInterface{
     @Override
     public int addObject(List<GameObject> objectList, int userId) {
         //0 successful
-        //-1 error
+        //-1 or -2 error
         int res = dao.addToInventory(objectList, userId);
         if (res == 0) logger.info("User ID " + userId + ": Objects added successfully!");
         return res;

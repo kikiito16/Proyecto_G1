@@ -1,5 +1,7 @@
 package edu.upc.dsa.database;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public interface Session {
     void close();
     HashMap getBy(Class theClass, String attr, Object value);
     List<HashMap<String, Object>> getAllBy(Class theClass, String attr, Object value);
+    int customUpdate(String query, Object ... objects);
 
 
 }

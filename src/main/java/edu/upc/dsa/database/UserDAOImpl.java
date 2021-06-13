@@ -5,10 +5,12 @@ import edu.upc.dsa.models.Game;
 import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.Inventory;
+import io.swagger.models.auth.In;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,19 +48,32 @@ public class UserDAOImpl implements UserDAO{
         return userId;
     }
 
+
+    //Returns 0 successfull
+    // -1 or -2 --> errors
     @Override
     public int addToInventory(List<GameObject> objectList, int userId)
     {
         int res = -1;
         try {
             session = SessionFactory.openSession();
-            for (GameObject o : objectList) {
-                Inventory inventory = new Inventory(userId, o.getId(), o.getQuantity());
-                res = session.create(inventory);
+
+            for(GameObject o : objectList)
+            {
+                //We try to update the inventory of the user
+                String query = "UPDATE Inventory SET quantity=quantity+? WHERE userId=? AND objectId=?;";
+                int affectedRows = session.customUpdate(query, o.getQuantity(), userId, o.getId());
+
+                //If the object does not already exists in the inventory of the user, we INSERT it
+                if(affectedRows == 0)
+                {
+                    Inventory inventory = new Inventory(userId, o.getId(), o.getQuantity());
+                    res = session.create(inventory);
+                }
+                else if(affectedRows == 1) res = 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
         }
         finally {
             session.close();
