@@ -1,5 +1,7 @@
 package edu.upc.dsa.models;
 
+import java.util.List;
+
 public class GameObject {
     int id;
     int quantity;
@@ -23,4 +25,5 @@ public class GameObject {
     public void setId(int id) { this.id = id; }
 
     public void setQuantity(int quantity) { this.quantity = quantity; }
+
 }

@@ -1,5 +1,6 @@
 package edu.upc.dsa;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import edu.upc.dsa.database.*;
 import edu.upc.dsa.models.FullObject;
 import edu.upc.dsa.models.Game;
@@ -137,6 +138,20 @@ public class DatabaseTest {
         List<FullObject> user2Objects = dao.getInventoryOf(2);
         List<FullObject> unknownObjects = dao.getInventoryOf(9);
 
+    }
+
+    @Test
+    public void buyObjectTest()
+    {
+        UserDAO dao =  new UserDAOImpl();
+        List<GameObject> list = new ArrayList<>();
+        list.add(new GameObject(6, 2)); //price per each = 1
+        list.add(new GameObject(7,1)); //price per each = 5
+        int res = dao.buyObject(1, list);
+
+        list = new ArrayList<>();
+        list.add(new GameObject(11, 1));
+        res = dao.buyObject(1, list);
     }
 
 }

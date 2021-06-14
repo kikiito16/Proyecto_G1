@@ -19,7 +19,7 @@ public interface Session {
     List<HashMap<String, Object>> getAllBy(Class theClass, String attr, Object value);
     List<HashMap<String, Object>> getAll(Class theClass);
     int customUpdate(String query, Object ... objects) throws SQLIntegrityConstraintViolationException;
-
-
+    ResultSet customQuery(String query, List<Object> objects);
+    ResultSet customQuery(String query, Object ... objects);
 
 }

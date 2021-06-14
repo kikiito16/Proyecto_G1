@@ -24,6 +24,7 @@ public interface UserDAO {
     int useObject(int objectId, int userId);
     List<FullObject> getInventoryOf(int userId);
     List<FullObject> getStoreObjects();
+    int buyObject(int userId, List<GameObject> objects);
 
     int addGame(int playerId, int duration, int victory, int score);
     Game getGame(int id);

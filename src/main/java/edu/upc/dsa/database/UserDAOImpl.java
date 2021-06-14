@@ -9,6 +9,7 @@ import edu.upc.dsa.models.api.Inventory;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,6 +175,88 @@ public class UserDAOImpl implements UserDAO{
         }
 
         return objects;
+    }
+
+    //-1 error
+    //-2 incorrect userId
+    //-3 not enough money
+    //0 successful
+    @Override
+    public int buyObject(int userId, List<GameObject> objects) {
+
+        try
+        {
+            //We create the sql
+            session = SessionFactory.openSession();
+            String sql = "SELECT id, price FROM GameObject WHERE ";
+            for(int i = 0; i < objects.size()-1; i++)
+                sql = sql + "id=? or ";
+            sql = sql + "id=?;";
+
+            //We create a list with all the GameObject ids
+            List<Object> idList = new ArrayList<>();
+            for(GameObject o : objects)
+                idList.add(o.getId());
+
+            //The query is executed
+            ResultSet resultSet = session.customQuery(sql, idList);
+
+            //We calculate the total price
+            int totalPrice = 0;
+            while(resultSet.next())
+            {
+                int id = (int)resultSet.getObject("id");
+                int price = (int)resultSet.getObject("price");
+                int quantity;
+
+                boolean found = false;
+                int i = 0;
+                while(i < objects.size() && !found)
+                {
+                    if(objects.get(i).getId() == id)
+                        found = true;
+                    else
+                        i++;
+                }
+                if(found)
+                    quantity = objects.get(i).getQuantity();
+                else
+                    return -1;
+
+                totalPrice += quantity * price;
+            }
+
+            //We check if the user has enough money
+            resultSet = session.customQuery("SELECT money FROM User WHERE id=?;", userId);
+            if(!resultSet.first())
+                return -2;  //incorrect userId
+
+            int money = (int)resultSet.getObject("money");
+
+            if(totalPrice > money)
+                //Not enough money
+                return -3;
+
+            //If we have enough money, we buy it
+            if(addToInventory(objects, userId) == 0)
+                session.customUpdate(
+                        "UPDATE User SET money=money-" + totalPrice + " WHERE id=?;",
+                        userId
+                );
+            else
+                return -1;
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        finally
+        {
+            session.close();
+        }
+
+        return 0;
     }
 
     //0 successful

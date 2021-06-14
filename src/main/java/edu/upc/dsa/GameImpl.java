@@ -134,6 +134,16 @@ public class GameImpl implements GameInterface{
         return dao.getStoreObjects();
     }
 
+    //-1 error
+    //-2 incorrect userId
+    //-3 not enough money
+    //0 successful
+    @Override
+    public int buyObject(int userId, List<GameObject> objects) {
+        int res = dao.buyObject(userId, objects);
+        return res;
+    }
+
     @Override
     public int addGame(int playerId, int duration, int victory, int score) {
         //0 successful

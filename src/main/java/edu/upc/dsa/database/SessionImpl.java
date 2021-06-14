@@ -385,5 +385,53 @@ public class SessionImpl implements Session{
         return affectedRows;
     }
 
+    @Override
+    public ResultSet customQuery(String query, List<Object> objects) {
+        //We prepare the query and execute it
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = conn.prepareStatement(query);
+
+            int i = 1;
+            for (Object o : objects) {
+                preparedStatement.setObject(i++, o);
+            }
+
+            //We store the number of affectedRows
+            resultSet = preparedStatement.executeQuery();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet;
+    }
+
+    @Override
+    public ResultSet customQuery(String query, Object ... objects) {
+        //We prepare the query and execute it
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = conn.prepareStatement(query);
+
+            int i = 1;
+            for (Object o : objects) {
+                preparedStatement.setObject(i++, o);
+            }
+
+            //We store the number of affectedRows
+            resultSet = preparedStatement.executeQuery();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet;
+    }
+
 
 }
