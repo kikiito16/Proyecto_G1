@@ -5,12 +5,10 @@ import edu.upc.dsa.models.Game;
 import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.api.Inventory;
-import io.swagger.models.auth.In;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,12 +47,10 @@ public class UserDAOImpl implements UserDAO{
         return userId;
     }
 
-
-    //Returns 0 successfull
+    //Returns 0 successful
     // -1 or -2 --> errors
     @Override
-    public int addToInventory(List<GameObject> objectList, int userId)
-    {
+    public int addToInventory(List<GameObject> objectList, int userId) {
         int res = -1;
         try {
             session = SessionFactory.openSession();
@@ -325,7 +321,6 @@ public class UserDAOImpl implements UserDAO{
         return user;
     }
 
-
     //-1 error
     //0 successful
     @Override
@@ -415,7 +410,7 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public int updateUser(int id, String username, String fullName,
                           String email, int money) {
-        int res = -1;
+        int res;
         try
         {
             session = SessionFactory.openSession();
@@ -435,13 +430,12 @@ public class UserDAOImpl implements UserDAO{
         return res;
     }
 
-
     //-1 --> error
     //0 successful
     @Override
     public int updateUserAttribute(int id, String attribute, java.lang.Object value) {
 
-        int res = -1;
+        int res;
         try
         {
             session = SessionFactory.openSession();
