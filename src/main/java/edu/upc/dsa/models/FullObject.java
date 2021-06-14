@@ -23,6 +23,18 @@ public class FullObject extends GameObject {
         this.price = price;
     }
 
+    public FullObject(int id, String name, int attack, int defense, int life, String imageURL, int price)
+    {
+        super.id = id;
+        super.quantity = -1;
+        this.name = name;
+        this.attack = attack;
+        this.defense = defense;
+        this.life = life;
+        this.imageURL = imageURL;
+        this.price = price;
+    }
+
     public int getAttack() {
         return attack;
     }

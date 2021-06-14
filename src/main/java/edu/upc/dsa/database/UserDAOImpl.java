@@ -164,8 +164,7 @@ public class UserDAOImpl implements UserDAO{
                         (int) h.get("defense"),
                         (int) h.get("life"),
                         (String) h.get("imageURL"),
-                        (int) h.get("price"),
-                        (int) h.get("quantity")
+                        (int) h.get("price")
                 ));
             }
         }
