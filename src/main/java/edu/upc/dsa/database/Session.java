@@ -17,6 +17,7 @@ public interface Session {
     void close();
     HashMap getBy(Class theClass, String attr, Object value);
     List<HashMap<String, Object>> getAllBy(Class theClass, String attr, Object value);
+    List<HashMap<String, Object>> getAll(Class theClass);
     int customUpdate(String query, Object ... objects) throws SQLIntegrityConstraintViolationException;
 
 

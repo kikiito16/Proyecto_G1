@@ -110,6 +110,9 @@ public class UserDAOImpl implements UserDAO{
         {
             e.printStackTrace();
         }
+        finally {
+            session.close();
+        }
         return res;
     }
 
@@ -124,7 +127,7 @@ public class UserDAOImpl implements UserDAO{
             if(inventoryTable != null)
                 for(HashMap<String, java.lang.Object> i : inventoryTable)
                 {
-                    HashMap objectHashmap = session.getBy(Object.class, "id", i.get("objectId"));
+                    HashMap objectHashmap = session.getBy(GameObject.class, "id", i.get("objectId"));
                     if(objectHashmap != null)
                         objectList.add(new FullObject(
                                 (int)objectHashmap.get("id"),
@@ -143,6 +146,39 @@ public class UserDAOImpl implements UserDAO{
             return null;
         }
         return objectList;
+    }
+
+    @Override
+    public List<FullObject> getStoreObjects() {
+        List<FullObject> objects = new ArrayList<>();
+
+        try {
+            session = SessionFactory.openSession();
+            List<HashMap<String, Object>> list = session.getAll(GameObject.class);
+
+            for (HashMap<String, Object> h : list) {
+                objects.add(new FullObject(
+                        (int) h.get("id"),
+                        (String) h.get("name"),
+                        (int) h.get("attack"),
+                        (int) h.get("defense"),
+                        (int) h.get("life"),
+                        (String) h.get("imageURL"),
+                        (int) h.get("price"),
+                        (int) h.get("quantity")
+                ));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            session.close();
+        }
+
+        return objects;
     }
 
     //0 successful

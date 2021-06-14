@@ -76,6 +76,11 @@ public class QueryHelper {
         return query;
     }
 
+    public static String createQuerySELECTAll(Class theClass)
+    {
+        return "SELECT * FROM " + theClass.getSimpleName() + ";";
+    }
+
     //password not updated
     public static String createQueryUPDATE(Object object)
     {

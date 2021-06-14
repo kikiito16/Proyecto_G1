@@ -127,6 +127,14 @@ public class GameImpl implements GameInterface{
         return res;
     }
 
+    //null --> error
+    //If successfull, it returns the list of the objects, including the max quantity available to buy
+    @Override
+    public List<FullObject> getStoreObjects() {
+        List<FullObject> list = dao.getStoreObjects();
+        return list;
+    }
+
     @Override
     public int addGame(int playerId, int duration, int victory, int score) {
         //0 successful

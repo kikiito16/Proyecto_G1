@@ -128,4 +128,15 @@ public class DatabaseTest {
         Assert.assertEquals(-1, dao.useObject(1, 3));
     }
 
+    @Test
+    public void getStoreObjectsTest()
+    {
+        UserDAO dao = new UserDAOImpl();
+        List<FullObject> storeObjects = dao.getStoreObjects();
+        List<FullObject> user1Objects = dao.getInventoryOf(1);
+        List<FullObject> user2Objects = dao.getInventoryOf(2);
+        List<FullObject> unknownObjects = dao.getInventoryOf(9);
+
+    }
+
 }

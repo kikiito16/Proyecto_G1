@@ -316,6 +316,44 @@ public class SessionImpl implements Session{
         return list;
     }
 
+    @Override
+    public List<HashMap<String, Object>> getAll(Class theClass) {
+        PreparedStatement preparedStatement = null;
+        String query = QueryHelper.createQuerySELECTAll(theClass);
+        List<HashMap<String, java.lang.Object>> list = new ArrayList<>();
+
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next())
+            {
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                HashMap<String, java.lang.Object> attributes = new HashMap<>();
+                for (int i = 0; i < resultSetMetaData.getColumnCount(); i++) {
+                    attributes.put(resultSetMetaData.getColumnName(i + 1), resultSet.getObject(i + 1));
+                }
+                list.add(attributes);
+            }
+
+            if(!resultSet.first())
+                return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+
+        return list;
+    }
+
     //It returns the number of updated rows
     //-1 --> error
     @Override

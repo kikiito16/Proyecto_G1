@@ -25,6 +25,7 @@ public interface GameInterface {
     int addObject (List<GameObject> objectList, int userId);
     int useObject (int objectId, int userId);
     List<FullObject> getUserObjects (int id);
+    List<FullObject> getStoreObjects();
 
     //Related to gameService
     int addGame(int playerId, int duration, int victory, int score);
