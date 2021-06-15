@@ -180,9 +180,12 @@ public class UserDAOImpl implements UserDAO{
     //-1 error
     //-2 incorrect userId
     //-3 not enough money
-    //0 successful
+    //>0 amount of money of the user after the purchase
     @Override
     public int buyObject(int userId, List<GameObject> objects) {
+
+        int money = -1;
+        int totalPrice = 0;
 
         try
         {
@@ -202,7 +205,6 @@ public class UserDAOImpl implements UserDAO{
             ResultSet resultSet = session.customQuery(sql, idList);
 
             //We calculate the total price
-            int totalPrice = 0;
             while(resultSet.next())
             {
                 int id = (int)resultSet.getObject("id");
@@ -231,7 +233,7 @@ public class UserDAOImpl implements UserDAO{
             if(!resultSet.first())
                 return -2;  //incorrect userId
 
-            int money = (int)resultSet.getObject("money");
+            money = (int)resultSet.getObject("money");
 
             if(totalPrice > money)
                 //Not enough money
@@ -256,7 +258,75 @@ public class UserDAOImpl implements UserDAO{
             session.close();
         }
 
-        return 0;
+        return money-totalPrice;
+    }
+
+    //-1 incorrect objectId or userId
+    //-2 --> the quantity of objects that the user wants to sell is higher than the quantity he actually has
+    //-3 error
+    //>0 amount of money of the user after the sale
+    @Override
+    public int sellObject(int userId, GameObject gameObject) {
+
+        int money = -3;
+
+        try
+        {
+            session = SessionFactory.openSession();
+
+            //We check if the user has enough objects to sell
+            ResultSet resultSet = session.getBy(Inventory.class, "quantity",
+                    "userId", userId,
+                    "objectId", gameObject.getId()
+                    );
+
+            if(!resultSet.first())
+                return -1;
+
+            int inventoryQuantity = (int)resultSet.getObject("quantity");
+
+            if(inventoryQuantity < gameObject.getQuantity())
+                return -2;
+
+            //Up to this point, the user has quantity enough to sell, so we sell the object(s)
+            //We calculate the total price
+            resultSet = session.getBy(GameObject.class, "price",
+                    "id", gameObject.getId());
+            if(!resultSet.first())
+                return -1;
+
+            int totalPrice = (int)resultSet.getObject("price")/2 * gameObject.getQuantity();
+
+            //We errase the objects from the Inventory
+            for(int i = 0; i < gameObject.getQuantity(); i++)
+                if(useObject(gameObject.getId(), userId) == -1)
+                    return -1;
+
+            //We pay the player
+            int updateRes = session.customUpdate(
+                    "UPDATE User SET money=money+" + totalPrice +
+                            " WHERE id=?;",
+                    userId
+            );
+
+            if(updateRes == -1)
+                return -1;
+
+            //We will return the money of the user
+            resultSet = session.getBy(User.class, "money", "id", userId);
+            resultSet.first();
+            money = (int)resultSet.getObject("money");
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -3;
+        }
+        finally {
+            session.close();
+        }
+
+        return money;
     }
 
     //0 successful

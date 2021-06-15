@@ -433,5 +433,39 @@ public class SessionImpl implements Session{
         return resultSet;
     }
 
+    //Args: class, "id, price", "id", 1, "name", "Charlie"...
+    //-1 --> error
+    @Override
+    public ResultSet getBy(Class theClass, String targetAttributes, Object... conditions) {
+
+        //We store the name of every attribute of each condition in a list attributes
+        String[] attributes = new String[conditions.length/2];
+        int j = 0;
+        for(int i = 0; i < conditions.length; i+=2)
+            attributes[j++] = conditions[i].toString();
+
+        //We create the query
+        String query = QueryHelper.createQuerySELECT(theClass, targetAttributes, attributes);
+        PreparedStatement preparedStatement = null;
+
+        ResultSet resultSet = null;
+
+        try
+        {
+            preparedStatement = conn.prepareStatement(query);
+            j = 1;
+            for(int i = 1; i < conditions.length; i+=2)
+                preparedStatement.setObject(j++, conditions[i]);
+
+            resultSet = preparedStatement.executeQuery();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet;
+
+    }
+
 
 }

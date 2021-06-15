@@ -21,5 +21,6 @@ public interface Session {
     int customUpdate(String query, Object ... objects) throws SQLIntegrityConstraintViolationException;
     ResultSet customQuery(String query, List<Object> objects);
     ResultSet customQuery(String query, Object ... objects);
+    ResultSet getBy(Class theClass, String targetAttributes, Object ... conditions);
 
 }

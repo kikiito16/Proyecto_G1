@@ -137,10 +137,20 @@ public class GameImpl implements GameInterface{
     //-1 error
     //-2 incorrect userId
     //-3 not enough money
-    //0 successful
+    //>0 amount of money of the user after the purchase
     @Override
     public int buyObject(int userId, List<GameObject> objects) {
         int res = dao.buyObject(userId, objects);
+        return res;
+    }
+
+    //-1 incorrect objectId or userId, or the user doesn't have the object he wants to sell
+    //-2 --> the quantity of objects that the user wants to sell is higher than the quantity he actually has
+    //-3 error
+    //>0 amount of money of the user after the sale
+    @Override
+    public int sellObject(int userId, GameObject gameObject) {
+        int res = dao.sellObject(userId, gameObject);
         return res;
     }
 

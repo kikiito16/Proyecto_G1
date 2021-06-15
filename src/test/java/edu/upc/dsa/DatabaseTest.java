@@ -154,4 +154,25 @@ public class DatabaseTest {
         res = dao.buyObject(1, list);
     }
 
+    @Test
+    public void sellObjectTest()
+    {
+        UserDAO dao = new UserDAOImpl();
+        int res = dao.sellObject(1, new GameObject(5, 2)); //-2
+        Assert.assertEquals(-2, res);
+
+        res = dao.sellObject(1, new GameObject(5,1));
+        Assert.assertEquals(32, res);
+
+        res = dao.sellObject(3, new GameObject(1,1));
+        Assert.assertEquals(-1, res);
+
+        res = dao.sellObject(2, new GameObject(10,2));
+        Assert.assertEquals(29, res);
+
+        res = dao.sellObject(2, new GameObject(3, 3));
+        Assert.assertEquals(59, res);
+
+    }
+
 }

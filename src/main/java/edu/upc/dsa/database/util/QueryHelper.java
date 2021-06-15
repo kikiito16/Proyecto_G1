@@ -76,6 +76,19 @@ public class QueryHelper {
         return query;
     }
 
+    public static String createQuerySELECT(Class theClass, String targetAttributes, String... conditions)
+    {
+        String query = "SELECT " + targetAttributes + " FROM " + theClass.getSimpleName() + " WHERE ";
+        for(String c : conditions)
+            query = query + c + "=? AND ";
+
+        query = query.substring(0, query.length()-5);
+
+        query = query + ";";
+
+        return query;
+    }
+
     public static String createQuerySELECTAll(Class theClass)
     {
         return "SELECT * FROM " + theClass.getSimpleName() + ";";
