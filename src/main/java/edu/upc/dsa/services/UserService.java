@@ -81,4 +81,19 @@ public class UserService {
         if (res != 0) return Response.status(404).build();
         else return Response.status(200).build();
     }
+
+
+
+    @GET
+    @ApiOperation(value = "Get money", notes = "Get user money")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = Integer.class),
+            @ApiResponse(code = 404, message = "User not found")
+    })
+    @Path("/money/{id}")
+    public Response getMoney(@PathParam("id") int ID) {
+        User t = this.gameInterface.getUser(ID);
+        if (t == null) return Response.status(404).build();
+        else return Response.status(200).entity(t.getMoney()).build();
+    }
 }

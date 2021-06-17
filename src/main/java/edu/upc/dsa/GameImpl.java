@@ -91,16 +91,28 @@ public class GameImpl implements GameInterface{
         return res;
     }
 
+    //-1 error
+    //-2 incorrect userId
+    //-3 not enough money
+    //>0 amount of money of the user after the purchase
     @Override
     public int buyObject(List<GameObject> object, int id) {
-        logger.info("User ID " + id + ": Objects bought successfully! (DEMO)");
-        return 0;
+        int res = dao.buyObject(id, object);
+        if(res >= 0)
+            logger.info("User ID " + id + ": Objects bought successfully!");
+        return res;
     }
 
+    //-1 incorrect objectId or userId
+    //-2 --> the quantity of objects that the user wants to sell is higher than the quantity he actually has
+    //-3 error
+    //>0 amount of money of the user after the sale
     @Override
-    public int sellObject(List<GameObject> object, int id) {
-        logger.info("User ID " + id + ": Objects sold successfully! (DEMO)");
-        return 0;
+    public int sellObject(int id, GameObject gameObject) {
+        int res = dao.sellObject(id, gameObject);
+        if(res > 0)
+            logger.info("User ID " + id + ": Objects sold successfully!");
+        return res;
     }
 
     @Override
@@ -130,28 +142,8 @@ public class GameImpl implements GameInterface{
     @Override
     public List<FullObject> getStoreObjects() {
         //null --> error
-        //If successful, it returns the list of the objects, including the max quantity available to buy
+        //If successful, it returns the list of the objects
         return dao.getStoreObjects();
-    }
-
-    //-1 error
-    //-2 incorrect userId
-    //-3 not enough money
-    //>0 amount of money of the user after the purchase
-    @Override
-    public int buyObject(int userId, List<GameObject> objects) {
-        int res = dao.buyObject(userId, objects);
-        return res;
-    }
-
-    //-1 incorrect objectId or userId, or the user doesn't have the object he wants to sell
-    //-2 --> the quantity of objects that the user wants to sell is higher than the quantity he actually has
-    //-3 error
-    //>0 amount of money of the user after the sale
-    @Override
-    public int sellObject(int userId, GameObject gameObject) {
-        int res = dao.sellObject(userId, gameObject);
-        return res;
     }
 
     @Override

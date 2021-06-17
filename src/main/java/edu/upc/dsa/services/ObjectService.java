@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.models.auth.In;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -60,8 +61,10 @@ public class ObjectService {
     @POST
     @ApiOperation(value = "Buy object", notes = "Buy object for playerId")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful"),
-            @ApiResponse(code = 404, message = "User not found")
+            @ApiResponse(code = 201, message = "Successful", response = Integer.class),
+            @ApiResponse(code = 404, message = "Unknown error"),
+            @ApiResponse(code = 405, message = "Incorrect user id"),
+            @ApiResponse(code = 409, message = "Not enough money")
     })
     @Path("/buy/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -70,8 +73,35 @@ public class ObjectService {
 
         if(res == -1)
             return Response.status(404).build();
+        else if(res == -2)
+            return Response.status(405).build();
+        else if(res == -3)
+            return Response.status(409).build();
         else
-            return Response.status(201).build();
+            return Response.status(201).entity(res).build();
+    }
+
+    @POST
+    @ApiOperation(value = "Sell object", notes = "Sell object of playerId")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Integer.class),
+            @ApiResponse(code = 404, message = "Unknown error"),
+            @ApiResponse(code = 405, message = "Incorrect user id or object id"),
+            @ApiResponse(code = 409, message = "the quantity of objects that the user wants to sell is higher than the quantity he actually has")
+    })
+    @Path("/sell/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response sellObject(GameObject o, @PathParam("id") int ID) {
+        int res = gameInterface.sellObject(ID, o);
+
+        if(res == -1)
+            return Response.status(405).build();
+        else if(res == -2)
+            return Response.status(409).build();
+        else if(res == -3)
+            return Response.status(404).build();
+        else
+            return Response.status(201).entity(res).build();
     }
 
     @PUT
@@ -88,5 +118,21 @@ public class ObjectService {
             return Response.status(404).build();
         else
             return Response.status(201).build();
+    }
+
+    @GET
+    @ApiOperation(value = "get objects from the store", notes = "Get all objects of the store")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = FullObject.class, responseContainer="List"),
+            @ApiResponse(code = 404, message = "Error")
+    })
+    @Path("/store")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStoreObjects() {
+
+        List<FullObject> objects = this.gameInterface.getStoreObjects();
+        GenericEntity<List<FullObject>> entity = new GenericEntity<List<FullObject>>(objects) {};
+        if (objects == null) return Response.status(404).build();
+        else return Response.status(200).entity(entity).build();
     }
 }

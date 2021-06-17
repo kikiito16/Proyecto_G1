@@ -10,6 +10,9 @@
 
   <script>
     $(document).ready(function(){
+
+      localStorage.clear();
+
       $(function() {
         $('#login-form-link').click(function(e) {
             $("#login-form").delay(100).fadeIn(100);
@@ -30,8 +33,8 @@
 
       $(".btn-submit").click(function(){
         var auth = $(this).attr("id");
-        //var url = "http://localhost:8080/dsaApp/auth/" + auth;
-        var url = "http://192.168.1.41:8080/dsaApp/auth/" + auth;
+        var url = "http://localhost:8080/dsaApp/auth/" + auth;
+        //var url = "http://192.168.1.41:8080/dsaApp/auth/" + auth;
         var CompleteCredentials = {};
 
         var selector = "." + auth + "-credential";
@@ -44,6 +47,15 @@
           data : JSON.stringify(CompleteCredentials),
           contentType : 'application/json',
           type : 'POST',
+          success: function(data){
+
+            if(auth == "login"){
+              localStorage.setItem("userId", data);
+              $("#login-error").text("");
+              window.location.replace("store/store.html");
+            }
+          },
+
           complete: function(jqXHR, textStatus)
           {
             if(auth === "signup")
@@ -60,14 +72,9 @@
             }
             else if(auth === "login")
             {
-              if(jqXHR.status == 200)
-              {
-                $("#login-error").text("");
-                alert("Log In successful!");
-              }
-              else if(jqXHR.status == 404 || jqXHR.status == 409)
+              if(jqXHR.status == 404 || jqXHR.status == 409)
                 $("#login-error").text("Error: Incorrect username or password");
-              else
+              else if(jqXHR.status != 200)
                 alert("Unexpected error.");
             }
           }

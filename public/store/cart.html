@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+
+            function loadItems(arr, html)
+            {
+                var totalPrice = 0;
+
+                $.each(arr, function(indexInArray, value){
+
+                    if(value != null){
+                        $("#list-objects").append(html);
+
+                        $(".object-item:last-of-type .object-image").attr("src", value.imageURL);
+                        $(".object-item:last-of-type .object-name").text(value.name);
+                        $(".object-item:last-of-type .object-price").text(value.price + "$");
+                        $(".object-item:last-of-type .remove-btn").attr("objectId", value.id);
+                        $(".object-item:last-of-type .remove-btn").attr("index", indexInArray);
+                        $(".object-item:last-of-type .quantity").text(value.quantity);
+                        totalPrice += value.price * value.quantity;
+                    }
+                });
+
+                $(".total-price").text("Price: " + totalPrice + "$");
+
+            }
+
+            $(document).ready(function(){
+
+                var list_item;
+                $.ajax({url: "cart-item.html",
+                    async: false,
+                    success: function(code){
+                        list_item=code;
+                    }});
+
+                var userId = localStorage.getItem('userId');
+                var objects = [];
+                if(localStorage.getItem("objects") != null)
+                    objects = JSON.parse(localStorage.getItem("objects"));
+                $(".money").text("Your Money: " + localStorage.getItem("money") + " $");
+
+                $(".rounded-pill").text(objects.length);
+
+                loadItems(objects, list_item);
+
+
+                $(".remove-btn").click(function(){
+
+                    var index = $(this).attr("index");
+                    objects.splice(index);
+                    localStorage.setItem("objects", JSON.stringify(objects));
+
+                    location.reload();
+
+                });
+
+                $(".buy-btn").click(function(){
+
+                    var arr = [];
+
+                    $.each(objects, function(indexInArray, value){
+                        var GameObject = {id: value.id, quantity: value.quantity};
+                        arr[arr.length] = GameObject;
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "http://localhost:8080/dsaApp/object/buy/" + userId,
+                        data: JSON.stringify(arr),
+                        contentType: 'application/json',
+                        success: function(data){
+
+                            alert("Purchase completed!");
+                            localStorage.removeItem("objects");
+                            console.log(data);
+                            localStorage.setItem("money", data);
+                            window.location = "store.html";
+
+                        },
+                        complete: function(jqXHR, textStatus){
+
+                            if(jqXHR.status == 409)
+                                alert("You have not enough money");
+                            else if(jqXHR.status == 404 || jqXHR.status == 405 || jqXHR.status != 201)
+                                alert("Unexpected error");
+
+                        }
+                    });
+
+                });
+
+
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="inventory.html">Inventory</a></li>
+                        <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
+                    </ul>
+
+                    <b style="margin: auto 30px;"><p style="margin: auto 30px;" class="money">Your money: 0</p></b>
+                    <button onclick="window.location = 'cart.html';" class="btn btn-outline-dark cart-btn">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </button>
+
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Your cart</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Here is your cart</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div id="list-objects" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                </div>
+            </div>
+        </section>
+        <div class="container-fluid py-5">
+            <center>
+                <h1 class="display-5 fw-bold total-price">0</h1>
+                <br>
+                <button class="btn btn-primary btn-lg buy-btn" type="button">Buy</button>
+            </center>
+        </div>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
