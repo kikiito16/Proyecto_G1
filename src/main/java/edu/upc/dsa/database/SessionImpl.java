@@ -267,7 +267,7 @@ public class SessionImpl implements Session{
         catch (Exception e)
         {
             e.printStackTrace();
-            return null;
+            throw e;
         }
 
         return attributes;

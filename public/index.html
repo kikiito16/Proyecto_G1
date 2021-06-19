@@ -84,9 +84,9 @@
             }
             else if(auth === "login")
             {
-              if(jqXHR.status == 404 || jqXHR.status == 409)
+              if(jqXHR.status == 404)
                 $("#login-error").text("Error: Incorrect username or password");
-              else if(jqXHR.status != 200)
+              else if(jqXHR.status == 409 || jqXHR.status != 200)
                 alert("Unexpected error.");
             }
           }
