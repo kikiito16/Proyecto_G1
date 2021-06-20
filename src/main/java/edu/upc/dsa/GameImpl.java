@@ -173,8 +173,10 @@ public class GameImpl implements GameInterface{
         return res;
     }
 
+    //null --> error or id doesn't exist
     @Override
-    public Map getMap(int id_map) {
-        return null;
+    public Map getMap(int id) {
+        Map map = dao.getMap(id);
+        return map;
     }
 }

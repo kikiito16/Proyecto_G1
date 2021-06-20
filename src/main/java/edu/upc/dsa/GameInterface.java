@@ -34,5 +34,5 @@ public interface GameInterface {
     List<Game> getAllGamesOf(int playerId);
 
     //Related to mapsService
-    Map getMap (int idMap);
+    Map getMap (int id);
 }

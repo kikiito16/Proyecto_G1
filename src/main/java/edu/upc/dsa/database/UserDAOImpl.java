@@ -1,9 +1,6 @@
 package edu.upc.dsa.database;
 
-import edu.upc.dsa.models.FullObject;
-import edu.upc.dsa.models.Game;
-import edu.upc.dsa.models.GameObject;
-import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.*;
 import edu.upc.dsa.models.api.Inventory;
 
 import java.math.BigInteger;
@@ -412,6 +409,35 @@ public class UserDAOImpl implements UserDAO{
         }
 
         return gameList;
+    }
+
+    //null --> id doesn't exist, or any other error
+    @Override
+    public Map getMap(int id) {
+        Map map = new Map();
+        try
+        {
+            session = SessionFactory.openSession();
+            HashMap<String, Object> hashMap = session.getBy(Map.class, "id", id);
+            if(hashMap == null)
+                return null;
+
+            map.setLine1(hashMap.get("line1").toString());
+            map.setLine2(hashMap.get("line2").toString());
+            map.setLine3(hashMap.get("line3").toString());
+            map.setLine4(hashMap.get("line4").toString());
+            map.setLine5(hashMap.get("line5").toString());
+            map.setLine6(hashMap.get("line6").toString());
+            map.setLine7(hashMap.get("line7").toString());
+            map.setLine8(hashMap.get("line8").toString());
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return map;
     }
 
     @Override

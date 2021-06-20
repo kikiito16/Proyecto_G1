@@ -1,9 +1,6 @@
 package edu.upc.dsa.database;
 
-import edu.upc.dsa.models.FullObject;
-import edu.upc.dsa.models.Game;
-import edu.upc.dsa.models.GameObject;
-import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -30,5 +27,7 @@ public interface UserDAO {
     int addGame(int playerId, int duration, int victory, int score);
     Game getGame(int id);
     List<Game> getAllGamesOf(int playerId);
+
+    Map getMap(int id);
 
 }

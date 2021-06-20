@@ -2,10 +2,7 @@ package edu.upc.dsa;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import edu.upc.dsa.database.*;
-import edu.upc.dsa.models.FullObject;
-import edu.upc.dsa.models.Game;
-import edu.upc.dsa.models.GameObject;
-import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -173,6 +170,13 @@ public class DatabaseTest {
         res = dao.sellObject(2, new GameObject(3, 3));
         Assert.assertEquals(59, res);
 
+    }
+
+    @Test
+    public void mapTest()
+    {
+        UserDAO dao = new UserDAOImpl();
+        Map map = dao.getMap(2);
     }
 
 }

@@ -32,8 +32,8 @@ public class Main {
 
         BeanConfig beanConfig = new BeanConfig();
 
-        //beanConfig.setHost("localhost:8080");
-        beanConfig.setHost("192.168.1.41:8080");
+        beanConfig.setHost("localhost:8080");
+        //beanConfig.setHost("192.168.1.41:8080");
         beanConfig.setBasePath("/dsaApp");
         beanConfig.setContact("support@example.com");
         beanConfig.setDescription("REST API for UPC Rush");

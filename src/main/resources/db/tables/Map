@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS Map;
+CREATE TABLE Map (
+    id int not null auto_increment,
+    line1 varchar(8) not null,
+    line2 varchar(8) not null,
+    line3 varchar(8) not null,
+    line4 varchar(8) not null,
+    line5 varchar(8) not null,
+    line6 varchar(8) not null,
+    line7 varchar(8) not null,
+    line8 varchar(8) not null,
+    PRIMARY KEY(id)
+);
+
+INSERT INTO Map (line1, line2, line3, line4, line5, line6, line7, line8) VALUES (
+    "########",
+    "#1     #",
+    "#2     #",
+    "#3     #",
+    "#4     #",
+    "#5     #",
+    "#6     #",
+    "########"
+    );
