@@ -54,7 +54,7 @@ public class GameService {
     }
 
     @POST
-    @ApiOperation(value = "Add object", notes = "Add object for playerId")
+    @ApiOperation(value = "Add game", notes = "Add game for playerId")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful"),
             @ApiResponse(code = 404, message = "User not found"),
